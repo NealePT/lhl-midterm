@@ -87,6 +87,6 @@ app.get('/search/:id', searchRoutes);
 app.listen(PORT, () => {
   console.log(`Resource Haven is listening on http://localhost:${PORT}/`);
 
-  console.log('usersDB:', usersDB);
-  console.log('resourcesDB:', resourcesDB);
+  // console.log('usersDB:', usersDB);
+  // console.log('resourcesDB:', resourcesDB);
 });

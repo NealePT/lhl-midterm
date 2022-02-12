@@ -1,6 +1,8 @@
 // Dependencies
 const express = require('express');
 const router  = express.Router();
+// Temp database
+const { usersDB, resourcesDB } = require('../db/temp/temp_db.js');
 
 // 1. GET /collection - The end user wants to see all collections.
 router.get('/collections', (req, res) => {
@@ -20,7 +22,6 @@ router.get('/collections/new', (req, res) => {
 
 // 3. GET /collections/:id - The end-user wants to see a particular resource.
 router.get('/collections/:id', (req, res) => {
-  // REMINDER: Need to replace with collections_show.
   res.render('collections_show');
 });
 
