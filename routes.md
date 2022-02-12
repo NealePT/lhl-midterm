@@ -25,22 +25,34 @@
 
 ## Routes
 
-* The end user wants to see all collections: GET /collections
-  * GET /collections  -->  Renders collections_index.ejs
-* The end-user wants to see a particular resource
-  * GET/collections/:id  -->  Renders collections_show.ejs
-* The end-user wants to save a new resource: POST /collections
-  * GET /collections/new  -->  Renders collections_new.ejs
-  * POST POST /collections
+* The end user wants to see all collections:
+  * [DONE] GET /collections  -->  Renders collections_index.ejs
+
+* The end-user wants to see a particular resource:
+  * [DONE] GET /collections/:id  -->  Renders collections_show.ejs
+
+* The end-user wants to save a new resource:
+  * [DONE] GET /collections/new  -->  Renders collections_new.ejs
+  * [IN PROGRESS] POST /collections
+
 * The end-user wants to update an existing resource:
-  * GET /collections/:id/update  -->  Renders collections_edit.ejs
-  * PUT /collections/:id
+  * [DONE] GET /collections/:id/update  -->  Renders collections_edit.ejs
+  * [IN PROGRESS] PUT /collections/:id
+
 * The end-user wants to delete an existing resource:
-  * DELETE /collections/:id/delete
-* The end-user wants to see a specific profile:
-  * GET /user/:id  -->  Renders users_index.ejs
+  * [IN PROGRESS] DELETE /collections/:id/delete
 
+* The end-user wants to see the collection for a specific profile:
+  * [DONE] GET /users/:id  -->  Renders users_index.ejs
 
-Need to update:
-- The end-user wants to see a list of the photos for a specific profile: GET /users/:id/resource/
-- The end-user wants to see one particular resource of a particular user GET /users/:user_id/resource/:id
+* The end-user wants to find a resource using a specific search phrase:
+  * [DONE] GET /search/:id
+  * [IN PROGRESS] POST /search
+
+* The end-user wants to register an account:
+  * [DONE] GET /register  -->  Renders register.ejs
+  * [IN PROGRESS] POST /register
+
+* The end-user wants to log into their account:
+  * [DONE] GET /login  -->  Renders login.ejs
+  * [IN PROGRESS] POST /login
