@@ -78,6 +78,7 @@ app.get('/register', registerRoutes);
 
 // 7. GET /login
 app.get('/login', loginRoutes);
+app.post('/login', loginRoutes);
 
 // 8. GET /search/:id
 app.get('/search/:id', searchRoutes);
