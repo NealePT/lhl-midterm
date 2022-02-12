@@ -20,7 +20,6 @@ router.get('/collections/new', (req, res) => {
 
 // 3. GET /collections/:id - The end-user wants to see a particular resource.
 router.get('/collections/:id', (req, res) => {
-  // REMINDER: Need to replace with collections_show.
   res.render('collections_show');
 });
 
