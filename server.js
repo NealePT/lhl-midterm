@@ -54,8 +54,17 @@ app.get("/", (req, res) => {
   res.redirect('/collections');
 });
 
-// GET /collections
+// 1. GET /collections
 app.get("/collections", collectionsRoutes);
+
+// 2. GET /collections/new
+app.get('/collections/new', collectionsRoutes);
+
+// 3. GET /collections/:id
+app.get('/collections/:id', collectionsRoutes);
+
+// 4. GET /collections/:id/update
+app.get('/collections/:id/update', collectionsRoutes);
 
 app.listen(PORT, () => {
   console.log(`Resource Haven is listening on http://localhost:${PORT}/`);
