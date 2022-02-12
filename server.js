@@ -37,6 +37,7 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
+const collectionsRoutes = require("./routes/collections")
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -48,10 +49,14 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+// GET /
 app.get("/", (req, res) => {
-  res.render("index");
+  res.redirect('/collections');
 });
 
+// GET /collections
+app.get("/collections", collectionsRoutes);
+
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`Resource Haven is listening on http://localhost:${PORT}/`);
 });
