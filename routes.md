@@ -43,4 +43,4 @@
   * [IN PROGRESS] DELETE /collections/:id/delete
 
 * The end-user wants to see the collection for a specific profile:
-  * [IN PROGRESS] GET /user/:id  -->  Renders users_index.ejs
+  * [DONE] GET /users/:id  -->  Renders users_index.ejs
