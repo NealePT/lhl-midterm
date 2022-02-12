@@ -54,6 +54,12 @@ article {
   margin-top: -10px;
 }
 
+#rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #comments {
   border: 2px solid rgb(103, 103, 103);;
   display: flex;
