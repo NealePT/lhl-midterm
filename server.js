@@ -70,7 +70,7 @@ app.get('/collections/:id', collectionsRoutes);
 // 4. GET /collections/:id/update
 app.get('/collections/:id/update', collectionsRoutes);
 
-// 5. GET /user/:id
+// 5. GET /users/:id
 app.get('/users/:id', users2Routes);
 
 // 6. GET /register
