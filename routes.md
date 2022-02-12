@@ -2,20 +2,20 @@
 
 ## Views (tentative)
 
-- collections_index.ejs
-  - Homepage display resources from all users
-- collections_new.ejs
-  - Contains a form to add a new resource
-- collections_show.ejs
-  - Displays the resource details, rating, likes, & comments.
-- collections_edit.ejs
-  - Contains a form to edit or delete a specific resource
-- collections_search.ejs
-  - Search results page displaying multiple resources as rows
-- users_index.ejs
-  - Displays resources for a specific users
-- register.ejs
-- login.ejs
+1. collections_index.ejs
+    * Homepage display resources from all users
+2. collections_new.ejs
+    * Contains a form to add a new resource
+3. collections_show.ejs
+    * Displays the resource details, rating, likes, & comments.
+4. collections_edit.ejs
+    * Contains a form to edit or delete a specific resource
+5. search.ejs
+    * Search results page displaying multiple resources as rows
+6. users_index.ejs
+    * Displays resources for a specific users
+7. register.ejs
+8. login.ejs
 
 ## HTTP Methods
 - GET = browse/read
