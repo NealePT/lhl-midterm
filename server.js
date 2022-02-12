@@ -13,8 +13,6 @@ const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
-// Temp database
-const { usersDB, resourcesDB } = require('./db/temp/temp_db.js');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -86,7 +84,4 @@ app.get('/search/:id', searchRoutes);
 
 app.listen(PORT, () => {
   console.log(`Resource Haven is listening on http://localhost:${PORT}/`);
-
-  console.log('usersDB:', usersDB);
-  console.log('resourcesDB:', resourcesDB);
 });
