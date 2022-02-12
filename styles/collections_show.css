@@ -1,0 +1,87 @@
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#header {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#resource-title {
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#rating-likes {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: -25px;
+}
+
+#rating {
+  margin-right: 10px;
+}
+
+#likes {
+  margin-left: 10px;
+}
+
+#description {
+  margin-top: -10px;
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#url {
+  font-size: 20px;
+}
+
+#dates {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#date-modified {
+  margin-top: -10px;
+}
+
+#comments {
+  border: 2px solid rgb(103, 103, 103);;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#comments-title {
+  border: 2px solid rgb(103, 103, 103);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: -1px;
+  background-color: gainsboro;
+}
+
+.comment-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.user-name {
+  margin-left: 5px;
+}
+
+.comment-body {
+  margin-top: -15px;
+  margin-left: 10px;
+}
