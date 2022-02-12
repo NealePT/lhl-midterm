@@ -44,3 +44,11 @@
 
 * The end-user wants to see the collection for a specific profile:
   * [DONE] GET /users/:id  -->  Renders users_index.ejs
+
+* The end-user wants to register an account:
+  * [DONE] GET /register  -->  Renders register.ejs
+  * [IN PROGRESS] POST /register
+
+* The end-user wants to log into their account:
+  * [DONE] GET /login  -->  Renders login.ejs
+  * [IN PROGRESS] POST /login
