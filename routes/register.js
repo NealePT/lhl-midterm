@@ -4,7 +4,7 @@ const router  = express.Router();
 
 // 6. GET /register - The end-user wants to register an account.
 router.get('/register', (req, res) => {
-  // REMINDER: Need to replace with register.ejs before merging with -b master.
+  // REMINDER: Need to replace with register.ejs.
   res.render('temp_register');
 });
 

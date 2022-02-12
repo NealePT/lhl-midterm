@@ -4,7 +4,7 @@ const router  = express.Router();
 
 // 8. GET /search/:id - The end-user wants to find a resource using a specific search phrase.
 router.get('/search/:id', (req, res) => {
-  // REMINDER: Need to replace with search.ejs before merging with -b master.
+  // REMINDER: Need to replace with search.ejs.
   res.render('temp_search');
 });
 
