@@ -1,3 +1,5 @@
+<!-- REMINDER: Change extension to .ejs before pushing to -b master. -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,34 +14,40 @@
   <main id="container">
 
     <header id="header">
-        <h1 id="resource-title">(ITS FRIDAY THEN, ITS SATURDAY, SUNDAY! GO MUFASA!)</h1>
-        <div id="rating-likes">
-          <p id="rating">(4.8/5 Rating)</p>
-          <p id="likes">(319 Likes)</p>
-        </div>
+      <div id="publication-info">
+        <span id="owner-name">Posted by Owner</span>
+        <span id="dates">
+          <p id="date-published">2 Feb 2022</p>
+          <p id="date-modified">(Edited: 11 Feb 2022)</p>
+        </span>
+      </div>
+      <h1 id="resource-title">(ITS FRIDAY THEN, ITS SATURDAY, SUNDAY! GO MUFASA!)</h1>
+      <div id="rating-likes">
+        <p id="rating-score">(4.8/5 Rating)</p>
+        <p id="likes">(319 Likes)</p>
+      </div>
     </header>
 
     <article>
 
+      <!-- Description section -->
       <section id="description">
         <p>Description text description text description text description text description text description text description text</p>
       </section>
 
+      <!-- URL section -->
       <section id="url">
         <p><strong>(<a href="https://www.youtube.com/watch?v=1TewCPi92ro">https://www.youtube.com/watch?v=1TewCPi92ro</a>)</strong></p>
       </section>
 
-      <section id="dates">
-        <p id="date-added">(Date Added: 2 Feb 2022)</p>
-        <p id="date-modified">(Date Modified: 11 Feb 2022)</p>
-      </section>
-
-      <section>
+      <!-- Edit section -->
+      <section id="edit-button">
         <button type="button">Edit</button>
       </section>
 
-      <section id="rating">
-        <h3>Rating</h3>
+      <!-- Ratings section -->
+      <section id="rating-buttons">
+        <span id="rating-title">Rating</span>
         <div>
           1<input type="radio" name="rating">
           2<input type="radio" name="rating">
@@ -49,6 +57,7 @@
         </div>
       </section>
 
+      <!-- Comments section -->
       <section>
         <h2 id="comments-title">Comments</h2>
         <div id="comments">

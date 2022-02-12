@@ -14,14 +14,14 @@ router.get('/collections', (req, res) => {
 router.get('/collections/new', (req, res) => {
   // REMINDER: Need to replace with collections_new.
   console.log('Successfully Loaded - GET /collections/new');
-  res.render('temp_collections_new');
+  res.render('collections_new');
 });
 
 
 // 3. GET /collections/:id - The end-user wants to see a particular resource.
 router.get('/collections/:id', (req, res) => {
   // REMINDER: Need to replace with collections_show.
-  res.render('temp_collections_show');
+  res.render('collections_show');
 });
 
 
