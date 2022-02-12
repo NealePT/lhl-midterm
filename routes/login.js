@@ -23,6 +23,8 @@ const getUserWithEmail = function(email) {
     })
 }
 
+exports.getUserWithEmail = getUserWithEmail;
+
 router.post('/login', (req, res) => {
   console.log(req.body);
   res.render('temp_collections_index');
