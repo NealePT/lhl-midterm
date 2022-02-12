@@ -39,6 +39,7 @@ const usersRoutes = require('./routes/users');
 const users2Routes = require('./routes/users2'); // TEMPORARY: Need to merge with './routes/users'.
 const widgetsRoutes = require('./routes/widgets');
 const collectionsRoutes = require('./routes/collections');
+const searchRoutes = require('./routes/search');
 const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
 
@@ -77,6 +78,9 @@ app.get('/register', registerRoutes);
 
 // 7. GET /login
 app.get('/login', loginRoutes);
+
+// 8. GET /search/:id
+app.get('/search/:id', searchRoutes);
 
 app.listen(PORT, () => {
   console.log(`Resource Haven is listening on http://localhost:${PORT}/`);
