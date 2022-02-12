@@ -25,17 +25,22 @@
 
 ## Routes
 
-* The end user wants to see all collections: GET /collections
+* The end user wants to see all collections:
   * [DONE] GET /collections  -->  Renders collections_index.ejs
-* The end-user wants to see a particular resource
-  * GET/collections/:id  -->  Renders collections_show.ejs
+
+* The end-user wants to see a particular resource:
+  * [DONE] GET /collections/:id  -->  Renders collections_show.ejs
+
 * The end-user wants to save a new resource:
-  * GET /collections/new  -->  Renders collections_new.ejs
-  * POST /collections
+  * [DONE] GET /collections/new  -->  Renders collections_new.ejs
+  * [IN PROGRESS] POST /collections
+
 * The end-user wants to update an existing resource:
-  * GET /collections/:id/update  -->  Renders collections_edit.ejs
-  * PUT /collections/:id
+  * [DONE] GET /collections/:id/update  -->  Renders collections_edit.ejs
+  * [IN PROGRESS] PUT /collections/:id
+
 * The end-user wants to delete an existing resource:
-  * DELETE /collections/:id/delete
+  * [IN PROGRESS] DELETE /collections/:id/delete
+
 * The end-user wants to see the collection for a specific profile:
-  * GET /user/:id  -->  Renders users_index.ejs
+  * [IN PROGRESS] GET /user/:id  -->  Renders users_index.ejs
