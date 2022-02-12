@@ -45,6 +45,10 @@
 * The end-user wants to see the collection for a specific profile:
   * [DONE] GET /users/:id  -->  Renders users_index.ejs
 
+* The end-user wants to find a resource using a specific search phrase:
+  * [DONE] GET /search/:id
+  * [IN PROGRESS] POST /search
+
 * The end-user wants to register an account:
   * [DONE] GET /register  -->  Renders register.ejs
   * [IN PROGRESS] POST /register
