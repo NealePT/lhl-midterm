@@ -36,6 +36,7 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
+const users2Routes = require('./routes/users2');
 const widgetsRoutes = require("./routes/widgets");
 const collectionsRoutes = require("./routes/collections")
 
@@ -65,6 +66,9 @@ app.get('/collections/:id', collectionsRoutes);
 
 // 4. GET /collections/:id/update
 app.get('/collections/:id/update', collectionsRoutes);
+
+// 5. GET /user/:id
+app.get('/users/:id', users2Routes);
 
 app.listen(PORT, () => {
   console.log(`Resource Haven is listening on http://localhost:${PORT}/`);
