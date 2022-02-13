@@ -64,6 +64,7 @@ const getComments = resourceID => {
   FROM users
   JOIN resource_comments ON owner_id = users.id
   WHERE resource_id = $1
+  ORDER BY date DESC
   LIMIT 10;
   `;
   return db.query(query, values)
@@ -76,8 +77,8 @@ exports.getComments = getComments;
 const addComment = (ownerID, resourceID, comment) => {
   const values = [ownerID, resourceID, comment];
   const query = `
-  INSERT INTO resource_comments (owner_id, resource_id, comment)
-  VALUES ($1, $2, $3)
+  INSERT INTO resource_comments (owner_id, resource_id, date, comment)
+  VALUES ($1, $2, CURRENT_TIMESTAMP, $3)
   RETURNING *;
   `;
   return db.query(query, values)
