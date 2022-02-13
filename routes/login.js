@@ -11,7 +11,6 @@ db.connect();
 // 7. GET /login - The end-user wants to log into their account.
 router.get('/login', (req, res) => {
   // REMINDER: Need to replace with login.ejs.
-  console.log(req.body);
   res.render('temp_login');
 });
 
@@ -34,8 +33,9 @@ router.post('/login', (req, res) => {
   const user = req.body;
 
   // if no email is entered
+  // NEEDS TO BE UPDATED TO CHECK USERID AGAINST COOKIES
   if (!user) {
-    return console.log("💩");
+    return res.send("💩");
   }
 
   // queries the db to check if user exists, then redirects back to temp index page
