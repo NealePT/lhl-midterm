@@ -1,6 +1,7 @@
 // Dependencies
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("../lib/db.js");
@@ -14,13 +15,13 @@ router.get('/login', (req, res) => {
   res.render('temp_login');
 });
 
-const getUserWithEmail = function(db, user) {
+const getUserWithEmail = function(user) {
   const queryString = `SELECT * FROM users WHERE email = $1 AND password = $2`;
   const values = [user.email, user.password];
 
   return db.query(queryString, values)
     .then((res) => {
-      console.log("I WORK??", res.rows);
+      console.log("I WORK??", res.rows[0]);
       return res.rows[0];
     })
     .catch((err) => {
@@ -29,11 +30,11 @@ const getUserWithEmail = function(db, user) {
 }
 
 const login = function(email, password) {
-  return db.getUserWithEmail(email)
+  return getUserWithEmail(email)
     .then(user => {
-      console.log(user);
+      console.log("USER:", user);
       // WILL NEED BCRYPT HERE TO COMPARE IF PASSWORDS MATCH
-      if (password === user.password) {
+      if (bcrypt.compareSync(password, user.password)) {
         return user;
       }
       return null;
