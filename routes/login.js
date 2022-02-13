@@ -20,25 +20,39 @@ const getUserWithEmail = function(db, user) {
 
   return db.query(queryString, values)
     .then((res) => {
-      console.log(res.rows[0]);
-      return res.rows;
+      console.log("I WORK??", res.rows);
+      return res.rows[0];
     })
     .catch((err) => {
       return console.log(err.message);
     })
 }
 
+const login = function(email, password) {
+  return db.getUserWithEmail(email)
+    .then(user => {
+      console.log(user);
+      // WILL NEED BCRYPT HERE TO COMPARE IF PASSWORDS MATCH
+      if (password === user.password) {
+        return user;
+      }
+      return null;
+    });
+}
+
 router.post('/login', (req, res) => {
-  console.log(req.body);
-  const user = req.body;
+  // console.log(req.body);
+  const { email, password } = req.body;
 
-  // if no email is entered
-  // NEEDS TO BE UPDATED TO CHECK USERID AGAINST COOKIES
-  if (!user) {
-    return res.send("💩");
-  }
-
-  // queries the db to check if user exists, then redirects back to temp index page
-  getUserWithEmail(db, user).then(res.redirect('/collections'));
+  login(email, password)
+    .then(user => {
+      if (!user) {
+        //if user doesn't exist
+        return res.send("💩");
+      }
+      //WILL NEED TO CREATE A COOKIE ID FOR EXISTING USERS (user.id)
+      res.send({ users: { id: user.id, name: user.name, email: user.email } });
+    })
+    .catch(err => res.send(err.message));
 })
 module.exports = router;
