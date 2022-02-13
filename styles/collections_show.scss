@@ -9,12 +9,13 @@
   align-items: center;
 }
 
-#container {
+main {
   @include flex-column();
+  min-width: 850px;
 }
 
-#header {
-  width: 100%;
+header {
+  width: 95%;
 }
 
 #publication-info {
@@ -45,9 +46,9 @@
 
 #rating-likes {
   @include flex-row();
-    justify-content: center;
-    align-items: center;
-    margin-top: -25px;
+  justify-content: center;
+  align-items: center;
+  margin-top: -25px;
 }
 
 #rating-score {
@@ -60,6 +61,7 @@
 
 article {
   @include flex-column();
+  width: 95%;
 }
 
 #description {
@@ -88,21 +90,51 @@ article {
   font-weight: bold;
 }
 
-#comments-title {
-  border: 2px solid rgb(103, 103, 103);
+////////// Comments Section - START //////////
+#comments-section {
+  border: 2px solid rgb(199, 199, 199); // Testing - Remove when completed
+  border-radius: 10px;
   @include flex-column();
-  align-items: center;
-  background-color: gainsboro;
-  margin-bottom: -1px;
+  width: 100%;
+  min-width: 850px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  background-color: rgb(240, 240, 240);
 }
 
-#comments {
-  border: 2px solid rgb(103, 103, 103);;
+#comment-textbox {
   @include flex-column();
-  align-items: flex-start;
+  justify-content: center;
+  margin-top: 5px;
 }
 
-.comments-details {
+#comment-textarea {
+  background-color: inherit;
+}
+
+::placeholder {
+  color: black;
+}
+
+#comment-button {
+  background-color: rgb(218, 216, 216);
+  border-radius: 10px;
+  border: 1px solid rgb(0, 0, 0, 0.1);
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 15px;
+  transition-duration: 0.2s;
+}
+
+#comment-button:hover {
+  background-color: white;
+}
+
+#comments-all {
+  width: 100%;
+}
+
+.comment-details {
   @include flex-column();
   align-items: flex-start;
   width: 100%;
@@ -113,6 +145,6 @@ article {
 }
 
 .comment-body {
-  margin-top: -15px;
-  margin-left: 10px;
+  margin: -15px 10px 0 10px;
 }
+////////// Comments Section - END //////////

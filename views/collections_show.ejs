@@ -11,9 +11,9 @@
 </head>
 <body>
 
-  <main id="container">
+  <main>
 
-    <header id="header">
+    <header>
       <div id="publication-info">
         <span id="owner-name">Posted by <%= name %></span>
         <span id="dates">
@@ -49,7 +49,7 @@
 
       <!-- Ratings section -->
       <section id="rating-buttons">
-        <span id="rating-title">Rating</span>
+        <span id="rating-title">Rate This Page</span>
         <div>
           1<input type="radio" name="rating">
           2<input type="radio" name="rating">
@@ -60,13 +60,20 @@
       </section>
 
       <!-- Comments section -->
-      <section>
-        <h2 id="comments-title">Comments</h2>
-        <div id="comments">
+      <section id="comments-section">
 
+        <div>
+          <form id="comment-textbox" action="/collections/<%= resourceID  %>/comment" method="POST">
+            <label for="comment-text"></label>
+            <textarea id="comment-textarea" name="comment-text" rows="5" cols="100" placeholder="What are your thoughts?"></textarea>
+            <button id="comment-button" type="submit">Comment</button>
+          </form>
+        </div>
+
+        <div id="comments-all">
           <% if (comments.length === 0) { %>
             <span class="comment-details">
-              <p class="comment-body">No comments yet.</p>
+              <p class="comment-body">Leave the first comment!</p>
             </span>
           <% } %>
 

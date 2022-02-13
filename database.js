@@ -64,9 +64,24 @@ const getComments = resourceID => {
   FROM users
   JOIN resource_comments ON owner_id = users.id
   WHERE resource_id = $1
+  ORDER BY date DESC
   LIMIT 10;
   `;
   return db.query(query, values)
   .then(res => res.rows);
 };
 exports.getComments = getComments;
+
+// Helper function for POST /collections/:id/comment - Need to modify after implementing user cookies to track owner_id
+// users table id 4 = Guest (for testing purposes)
+const addComment = (ownerID, resourceID, comment) => {
+  const values = [ownerID, resourceID, comment];
+  const query = `
+  INSERT INTO resource_comments (owner_id, resource_id, date, comment)
+  VALUES ($1, $2, CURRENT_TIMESTAMP, $3)
+  RETURNING *;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows[0]);
+};
+exports.addComment = addComment;
