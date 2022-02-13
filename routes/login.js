@@ -15,12 +15,13 @@ router.get('/login', (req, res) => {
   res.render('temp_login');
 });
 
-const getUserWithEmail = function(email password) {
+const getUserWithEmail = function(db, user) {
   const queryString = `SELECT * FROM users WHERE email = $1 AND password = $2`;
   const values = [user.email, user.password];
+
   return db.query(queryString, values)
     .then((res) => {
-      console.log(res.rows);
+      console.log(res.rows[0]);
       return res.rows;
     })
     .catch((err) => {
@@ -28,17 +29,16 @@ const getUserWithEmail = function(email password) {
     })
 }
 
-// exports.getUserWithEmail = getUserWithEmail;
-
 router.post('/login', (req, res) => {
   console.log(req.body);
-  const userEmail = req.body.email;
+  const user = req.body;
 
   // if no email is entered
-  if (!userEmail) {
+  if (!user) {
     return console.log("💩");
   }
 
-  res.render('temp_collections_index');
+  // queries the db to check if user exists, then redirects back to temp index page
+  getUserWithEmail(db, user).then(res.redirect('/collections'));
 })
 module.exports = router;
