@@ -18,31 +18,45 @@ router.get('/collections/new', (req, res) => {
   res.render('collections_new');
 });
 
-/////////////////////////////// CODE BLOCK - START ///////////////////////////////
-
 
 // 3. GET /collections/:id - The end-user wants to see a particular resource.
 router.get('/collections/:id', (req, res) => {
   const resourcesID = req.params.id;
   const resParams = {};
 
-  // Add relevant properties from the resources & users tables.
+  // Get most of the relevant properties from the resources & users tables.
   database.getResourceDetails(resourcesID)
   .then(data => {
     resParams.title = data.title;
     resParams.description = data.description;
     resParams.category = data.category;
     resParams.url = data.url;
-    resParams.date_created = data.date_created;
-    resParams.date_modified = data.date_modified;
     resParams.name = data.name;
   })
-  .then(() => console.log('resParams =', resParams))
+
+  // Get the two dates from the resources table.
+  .then(() => database.getResourceDates(resourcesID))
+  .then(data => {
+    resParams.date_created = data.date_created;
+    resParams.date_modified = data.date_modified;
+  })
+
+  // Get the average rating.
+  .then(() => database.getRating(resourcesID))
+  .then(data => resParams.rating = data.rating)
+
+  // Get the total number of likes.
+  .then(() => database.getLikes(resourcesID))
+  .then(data => resParams.likes = data.likes)
+
+  // Get all the comments.
+  .then(() => database.getComments(resourcesID))
+  .then(data => resParams.comments = data)
+
+  // Pass in the relevant data (resParams) and render the page.
   .then(() => res.render('collections_show', resParams));
 });
 
-
-/////////////////////////////// CODE BLOCK - END ///////////////////////////////
 
 // 4. GET /collections/:id/update - The end-user wants to update an existing resource.
 router.get('/collections/:id/update', (req, res) => {
