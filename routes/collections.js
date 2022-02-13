@@ -4,6 +4,11 @@ const router  = express.Router();
 // Temp database
 const { usersDB, resourcesDB } = require('../db/temp/temp_db.js');
 
+// PG database client/connection setup
+const { Pool } = require("pg");
+const dbParams = require("../lib/db.js");
+const db = new Pool(dbParams);
+
 // 1. GET /collection - The end user wants to see all collections.
 router.get('/collections', (req, res) => {
   // REMINDER: Need to replace with collections_index before merging with -b master.
@@ -30,6 +35,32 @@ router.get('/collections/:id', (req, res) => {
 router.get('/collections/:id/update', (req, res) => {
   // REMINDER: Need to replace with collections_edit.
   res.render('temp_collections_edit');
+});
+
+// NEED TO FIGURE OUT OWNER ID WITH COOKIES BEFORE IMPLEMENTING THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+const addResource = (db, resource) => {
+  const queryString = `
+  INSERT INTO resources (title, description, category, url, date_created)
+  VALUES ($1, $2, $3, $4, $5)
+  RETURNING *;
+  `;
+  const values = [resource.title, resource.description, resource.category, resource.url, new Date()];
+
+  return db.query(queryString, values)
+    .then(res => {
+      console.log(values);
+      return res.rows[0];
+
+    })
+    .catch(err => {
+      console.log(values);
+      return console.log('query error:', err);
+    });
+};
+
+router.post("/collections", (req, res) => {
+  const newResourceParams = req.body;
+  addResource(db, newResourceParams).then(res.redirect("/collections"));
 });
 
 module.exports = router;
