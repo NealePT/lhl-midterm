@@ -14,3 +14,4 @@ const getResourceDetails = resourceID => {
   .then(res => res.rows[0]);
 };
 exports.getResourceDetails = getResourceDetails;
+

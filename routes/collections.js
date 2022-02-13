@@ -17,8 +17,8 @@ router.get('/collections/new', (req, res) => {
   console.log('Successfully Loaded - GET /collections/new');
   res.render('collections_new');
 });
-/////////////////////////////// CODE BLOCK ///////////////////////////////
-/////////////////////////////// CODE BLOCK ///////////////////////////////
+
+/////////////////////////////// CODE BLOCK - START ///////////////////////////////
 
 
 // 3. GET /collections/:id - The end-user wants to see a particular resource.
@@ -26,6 +26,7 @@ router.get('/collections/:id', (req, res) => {
   const resourcesID = req.params.id;
   const resParams = {};
 
+  // Add relevant properties from the resources & users tables.
   database.getResourceDetails(resourcesID)
   .then(data => {
     resParams.title = data.title;
@@ -40,8 +41,8 @@ router.get('/collections/:id', (req, res) => {
   .then(() => res.render('collections_show', resParams));
 });
 
-/////////////////////////////// CODE BLOCK ///////////////////////////////
-/////////////////////////////// CODE BLOCK ///////////////////////////////
+
+/////////////////////////////// CODE BLOCK - END ///////////////////////////////
 
 // 4. GET /collections/:id/update - The end-user wants to update an existing resource.
 router.get('/collections/:id/update', (req, res) => {
