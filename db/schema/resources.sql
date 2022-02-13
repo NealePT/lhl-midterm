@@ -1,16 +1,5 @@
--- ## resources
-
--- * id
--- * owner_id
--- * title
--- * description
--- * category
--- * url
--- * date_created
--- * date_modified
-
-
 DROP TABLE IF EXISTS resources CASCADE;
+
 CREATE TABLE resources (
   id SERIAL PRIMARY KEY NOT NULL,
   owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,

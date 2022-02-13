@@ -1,11 +1,7 @@
 // Dependencies
 const express = require('express');
 const router  = express.Router();
-
-// PG database client/connection setup
-const { Pool } = require("pg");
-const dbParams = require("../lib/db.js");
-const db = new Pool(dbParams);
+const database = require('../database');
 
 // 1. GET /collection - The end user wants to see all collections.
 router.get('/collections', (req, res) => {
@@ -25,8 +21,40 @@ router.get('/collections/new', (req, res) => {
 
 // 3. GET /collections/:id - The end-user wants to see a particular resource.
 router.get('/collections/:id', (req, res) => {
-  // REMINDER: Need to replace with collections_show.
-  res.render('collections_show');
+  const resourcesID = req.params.id;
+  const resParams = {};
+
+  // Get most of the relevant properties from the resources & users tables.
+  database.getResourceDetails(resourcesID)
+  .then(data => {
+    resParams.title = data.title;
+    resParams.description = data.description;
+    resParams.category = data.category;
+    resParams.url = data.url;
+    resParams.name = data.name;
+  })
+
+  // Get the two dates from the resources table.
+  .then(() => database.getResourceDates(resourcesID))
+  .then(data => {
+    resParams.date_created = data.date_created;
+    resParams.date_modified = data.date_modified;
+  })
+
+  // Get the average rating.
+  .then(() => database.getRating(resourcesID))
+  .then(data => resParams.rating = data.rating)
+
+  // Get the total number of likes.
+  .then(() => database.getLikes(resourcesID))
+  .then(data => resParams.likes = data.likes)
+
+  // Get all the comments.
+  .then(() => database.getComments(resourcesID))
+  .then(data => resParams.comments = data)
+
+  // Pass in the relevant data (resParams) and render the page.
+  .then(() => res.render('collections_show', resParams));
 });
 
 
@@ -35,6 +63,12 @@ router.get('/collections/:id/update', (req, res) => {
   // REMINDER: Need to replace with collections_edit.
   res.render('temp_collections_edit');
 });
+
+// PG database client/connection setup
+const { Pool } = require("pg");
+const dbParams = require("../lib/db.js");
+const db = new Pool(dbParams);
+db.connect();
 
 // NEED TO FIGURE OUT OWNER ID WITH COOKIES BEFORE IMPLEMENTING THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const addResource = (db, resource) => {
@@ -49,7 +83,6 @@ const addResource = (db, resource) => {
     .then(res => {
       console.log(values);
       return res.rows[0];
-
     })
     .catch(err => {
       console.log(values);
