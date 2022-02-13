@@ -86,3 +86,7 @@ app.get('/search/:id', searchRoutes);
 app.listen(PORT, () => {
   console.log(`Resource Haven is listening on http://localhost:${PORT}/`);
 });
+
+app.post('/register', registerRoutes);
+
+app.post('/collections', collectionsRoutes);
