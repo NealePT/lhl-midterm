@@ -18,14 +18,15 @@
         <span id="owner-name">Posted by <%= name %></span>
         <span id="dates">
           <p id="date-published"><%= date_created %></p>
-          <p id="date-modified"><%= date_modified ? 'Edited: ' + date_modified : ''  %>
+          <p id="date-modified">
+            <%= date_modified ? `(Edited: ${date_modified})`: ''  %>
           </p>
         </span>
       </div>
       <h1 id="resource-title"><%= title %></h1>
       <div id="rating-likes">
-        <p id="rating-score">(4.8/5 Rating)</p>
-        <p id="likes">(319 Likes)</p>
+        <p id="rating-score"><%= rating ? `${rating}/5 Rating` : '(No ratings yet)' %></p>
+        <p id="likes"><%= likes ? likes : 0 %> Likes</p>
       </div>
     </header>
 
@@ -62,18 +63,21 @@
       <section>
         <h2 id="comments-title">Comments</h2>
         <div id="comments">
-          <span class="comment-details">
-            <p class="user-name"><b>John:</b></p>
-            <p class="comment-body">It's not Friday in our family until we watch this at least twice!</p>
-          </span>
-          <span class="comment-details">
-            <p class="user-name"><b>Neale:</b></p>
-            <p class="comment-body">This is so positive. The music is up. The brightly colored clothes. Thanks Mufasa!</p>
-          </span>
-          <span class="comment-details">
-            <p class="user-name"><b>Vivian:</b></p>
-            <p class="comment-body">keep doing what ur doing this is awesome!</p>
-          </span>
+
+          <% if (comments.length === 0) { %>
+            <span class="comment-details">
+              <p class="comment-body">No comments yet.</p>
+            </span>
+          <% } %>
+
+          <% if (comments.length > 0) { %>
+            <% for (const obj of comments) { %>
+              <span class="comment-details">
+                <p class="user-name"><b><%= obj.name %></b></p>
+                <p class="comment-body"><%= obj.comment %></p>
+              </span>
+            <% } %>
+          <% } %>
         </div>
       </section>
 
