@@ -70,3 +70,17 @@ const getComments = resourceID => {
   .then(res => res.rows);
 };
 exports.getComments = getComments;
+
+// Helper function for POST /collections/:id/comment - Need to modify after implementing user cookies to track owner_id
+// users table id 4 = Guest (for testing purposes)
+const addComment = (ownerID, resourceID, comment) => {
+  const values = [ownerID, resourceID, comment];
+  const query = `
+  INSERT INTO resource_comments (owner_id, resource_id, comment)
+  VALUES ($1, $2, $3)
+  RETURNING *;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows[0]);
+};
+exports.addComment = addComment;
