@@ -104,8 +104,7 @@ router.post('/collections/:id/comment', (req, res) => {
   const comment = req.body['comment-text'];
 
   database.addComment(ownerID, resourceID, comment)
-  .then(data => console.log(data))
-  .then(() => res.send(`Success - POST /collections/${resourceID}/comment`));
+  .then(() => res.redirect(`/collections/${resourceID}`));
 });
 
 module.exports = router;
