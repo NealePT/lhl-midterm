@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const { Pool } = require("pg");
 const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
+const database = require('../database');
 db.connect();
 
 
@@ -30,7 +31,7 @@ const getUserWithEmail = function(user) {
 }
 
 const login = function(email, password) {
-  return getUserWithEmail(email)
+  return database.getUserWithEmail(email)
     .then(user => {
       console.log("USER:", user);
       // WILL NEED BCRYPT HERE TO COMPARE IF PASSWORDS MATCH
