@@ -22,7 +22,7 @@ router.get('/collections/new', (req, res) => {
 // 3. GET /collections/:id - The end-user wants to see a particular resource.
 router.get('/collections/:id', (req, res) => {
   const resourcesID = req.params.id;
-  const resParams = {};
+  const resParams = { resourceID: resourcesID };
 
   // Get most of the relevant properties from the resources & users tables.
   database.getResourceDetails(resourcesID)
@@ -90,9 +90,22 @@ const addResource = (db, resource) => {
     });
 };
 
+// POST /collections
 router.post("/collections", (req, res) => {
   const newResourceParams = req.body;
   addResource(db, newResourceParams).then(res.redirect("/collections"));
+});
+
+
+// POST /collections/:id/comment
+router.post('/collections/:id/comment', (req, res) => {
+  const ownerID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
+  const resourceID = req.params.id;
+  const comment = req.body['comment-text'];
+
+  database.addComment(ownerID, resourceID, comment)
+  .then(data => console.log(data))
+  .then(() => res.send(`Success - POST /collections/${resourceID}/comment`));
 });
 
 module.exports = router;
