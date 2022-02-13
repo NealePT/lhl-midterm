@@ -63,7 +63,7 @@
       <section id="comments-section">
 
         <div>
-          <form id="comment-textbox" action="/comment" method="POST">
+          <form id="comment-textbox" action="/collections/<%= resourceID  %>/comment" method="POST">
             <label for="comment-text"></label>
             <textarea id="comment-textarea" name="comment-text" rows="5" cols="100" placeholder="What are your thoughts?"></textarea>
             <button id="comment-button" type="submit">Comment</button>
