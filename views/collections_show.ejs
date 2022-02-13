@@ -15,13 +15,14 @@
 
     <header id="header">
       <div id="publication-info">
-        <span id="owner-name">Posted by Owner</span>
+        <span id="owner-name">Posted by <%= name %></span>
         <span id="dates">
-          <p id="date-published">2 Feb 2022</p>
-          <p id="date-modified">(Edited: 11 Feb 2022)</p>
+          <p id="date-published"><%= date_created %></p>
+          <p id="date-modified"><%= date_modified ? 'Edited: ' + date_modified : ''  %>
+          </p>
         </span>
       </div>
-      <h1 id="resource-title">(ITS FRIDAY THEN, ITS SATURDAY, SUNDAY! GO MUFASA!)</h1>
+      <h1 id="resource-title"><%= title %></h1>
       <div id="rating-likes">
         <p id="rating-score">(4.8/5 Rating)</p>
         <p id="likes">(319 Likes)</p>
@@ -32,12 +33,12 @@
 
       <!-- Description section -->
       <section id="description">
-        <p>Description text description text description text description text description text description text description text</p>
+        <p><%= description %></p>
       </section>
 
       <!-- URL section -->
       <section id="url">
-        <p><strong>(<a href="https://www.youtube.com/watch?v=1TewCPi92ro">https://www.youtube.com/watch?v=1TewCPi92ro</a>)</strong></p>
+        <p><strong><a href="<%= url %>"><%= url %></a></strong></p>
       </section>
 
       <!-- Edit section -->

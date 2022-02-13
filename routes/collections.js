@@ -1,13 +1,7 @@
 // Dependencies
 const express = require('express');
 const router  = express.Router();
-// Temp database
-const { usersDB, resourcesDB } = require('../db/temp/temp_db.js');
-
-// PG database client/connection setup
-const { Pool } = require("pg");
-const dbParams = require("../lib/db.js");
-const db = new Pool(dbParams);
+const database = require('../database');
 
 // 1. GET /collection - The end user wants to see all collections.
 router.get('/collections', (req, res) => {
@@ -23,13 +17,31 @@ router.get('/collections/new', (req, res) => {
   console.log('Successfully Loaded - GET /collections/new');
   res.render('collections_new');
 });
+/////////////////////////////// CODE BLOCK ///////////////////////////////
+/////////////////////////////// CODE BLOCK ///////////////////////////////
 
 
 // 3. GET /collections/:id - The end-user wants to see a particular resource.
 router.get('/collections/:id', (req, res) => {
-  res.render('collections_show');
+  const resourcesID = req.params.id;
+  const resParams = {};
+
+  database.getResourceDetails(resourcesID)
+  .then(data => {
+    resParams.title = data.title;
+    resParams.description = data.description;
+    resParams.category = data.category;
+    resParams.url = data.url;
+    resParams.date_created = data.date_created;
+    resParams.date_modified = data.date_modified;
+    resParams.name = data.name;
+  })
+  .then(() => console.log('resParams =', resParams))
+  .then(() => res.render('collections_show', resParams));
 });
 
+/////////////////////////////// CODE BLOCK ///////////////////////////////
+/////////////////////////////// CODE BLOCK ///////////////////////////////
 
 // 4. GET /collections/:id/update - The end-user wants to update an existing resource.
 router.get('/collections/:id/update', (req, res) => {
@@ -48,12 +60,11 @@ const addResource = (db, resource) => {
 
   return db.query(queryString, values)
     .then(res => {
-      console.log(values);
+      // console.log(values);
       return res.rows[0];
-
     })
     .catch(err => {
-      console.log(values);
+      // console.log(values);
       return console.log('query error:', err);
     });
 };
