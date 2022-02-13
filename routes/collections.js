@@ -64,6 +64,12 @@ router.get('/collections/:id/update', (req, res) => {
   res.render('temp_collections_edit');
 });
 
+// PG database client/connection setup
+const { Pool } = require("pg");
+const dbParams = require("../lib/db.js");
+const db = new Pool(dbParams);
+db.connect();
+
 // NEED TO FIGURE OUT OWNER ID WITH COOKIES BEFORE IMPLEMENTING THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const addResource = (db, resource) => {
   const queryString = `
@@ -75,11 +81,11 @@ const addResource = (db, resource) => {
 
   return db.query(queryString, values)
     .then(res => {
-      // console.log(values);
+      console.log(values);
       return res.rows[0];
     })
     .catch(err => {
-      // console.log(values);
+      console.log(values);
       return console.log('query error:', err);
     });
 };
