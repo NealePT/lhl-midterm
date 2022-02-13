@@ -87,3 +87,5 @@ app.listen(PORT, () => {
 });
 
 app.post('/register', registerRoutes);
+
+app.post('/collections', collectionsRoutes);
