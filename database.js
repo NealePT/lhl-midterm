@@ -66,6 +66,17 @@ const addLike = (resourceID, ownerID) => {
 };
 exports.addLike = addLike;
 
+const removeLike = (resourceID, ownerID) => {
+  const values = [ownerID, resourceID];
+  const query = `
+  DELETE FROM resource_likes
+  WHERE owner_id = $1
+   AND resource_id = $2;
+  `;
+  return db.query(query, values);
+};
+exports.removeLike = removeLike;
+
 const checkLike = (resourceID, ownerID) => {
   const values = [ownerID, resourceID];
   const query =`
