@@ -56,8 +56,17 @@ router.get('/collections/:id', (req, res) => {
 
 // 4. GET /collections/:id/update - The end-user wants to update an existing resource.
 router.get('/collections/:id/update', (req, res) => {
-  // REMINDER: Need to eventually replace with collections_edit.
-  res.render('temp_collections_edit');
+  const resourceID = req.params.id;
+  const resParams = { resourceID: resourceID };
+
+  database.getResourceDetails(resourceID)
+  .then(data => {
+    resParams.title = data.title;
+    resParams.description = data.description;
+    resParams.category = data.category;
+    resParams.url = data.url;
+  })
+  .then(() => res.render('collections_update', resParams));
 });
 
 // POST /collections
@@ -71,6 +80,18 @@ router.post('/collections', (req, res) => {
 
   database.addResource(ownerID, title, description, url, category)
   .then(data => resourceID = data.id)
+  .then(() => res.redirect(`/collections/${resourceID}`));
+});
+
+// POST /collections/:id/update
+router.post('/collections/:id/update', (req, res) => {
+  const resourceID = req.params.id;
+  const newTitle = req.body.title;
+  const newDescription = req.body.description;
+  const newCategory = req.body.category;
+  const newURL = req.body.url;
+
+  database.updateResource(resourceID, newTitle, newDescription, newCategory, newURL)
   .then(() => res.redirect(`/collections/${resourceID}`));
 });
 
