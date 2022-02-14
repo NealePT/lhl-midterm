@@ -95,6 +95,13 @@ router.post('/collections/:id/update', (req, res) => {
   .then(() => res.redirect(`/collections/${resourceID}`));
 });
 
+// POST /collections/:id/like
+router.post('/collections/:id/like', (req, res) => {
+  const ownerID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
+  const resourceID = req.params.id;
+  res.send(`Success - POST /collections/${resourceID}/like`);
+});
+
 // POST /collections/:id/comment
 router.post('/collections/:id/comment', (req, res) => {
   const ownerID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
