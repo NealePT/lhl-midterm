@@ -98,6 +98,14 @@ article {
   cursor:pointer;
 }
 
+// Temporary
+.star-buttons-disabled {
+  background-color: transparent;
+  color: rgb(199, 199, 199);
+  border: none;
+  font-size: 20px;
+}
+
 #star-1:hover {
   color: gold;
 }
