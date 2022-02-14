@@ -118,3 +118,6 @@ app.post('/collections/:id/rating', collectionsRoutes);
 
 // POST /collections/:id/comment
 app.post('/collections/:id/comment', collectionsRoutes);
+
+// POST /login
+app.post('/login', collectionsRoutes);
