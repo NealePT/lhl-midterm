@@ -11,6 +11,7 @@ db.connect();
 
 // 7. GET /login - The end-user wants to log into their account.
 router.get('/login', (req, res) => {
+  console.log("BODY:", req.body);
   // REMINDER: Need to replace with login.ejs.
   res.render('temp_login');
 });
@@ -36,6 +37,7 @@ const login = function(email, password) {
     .then(user => {
       // WILL NEED BCRYPT HERE TO COMPARE IF PASSWORDS MATCH
       if (bcrypt.compareSync(password, user.password)) {
+        // console.log("USER:", user);
         return user;
       }
       return null;
@@ -53,7 +55,7 @@ router.post('/login', (req, res) => {
         return res.send("💩");
       }
       //WILL NEED TO CREATE A COOKIE ID FOR EXISTING USERS (user.id)
-      // res.send({ users: { id: user.id, name: user.name, email: user.email } });
+      // res.send({ user: { name: user.name, email: user.email } });
       res.redirect("/collections");
     })
     .catch(err => res.send(err.message));
