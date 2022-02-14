@@ -52,7 +52,6 @@ router.get('/collections/:id', (req, res) => {
   // Check if the user has already liked the page
   .then(() => database.checkLike(resourcesID, userID))
   .then(data => data ? resParams.checkLike = true : resParams.checkLike = false)
-  .then(() => console.log('resParams =', resParams)) // TEMP - Need to remove
 
   // Get all the comments.
   .then(() => database.getComments(resourcesID))
@@ -110,6 +109,15 @@ router.post('/collections/:id/like', (req, res) => {
   const resourceID = req.params.id;
 
   database.addLike(resourceID, ownerID)
+  .then(() => res.redirect(`/collections/${resourceID}`));
+});
+
+// POST /collections/:id/unlike
+router.post('/collections/:id/unlike', (req, res) => {
+  const ownerID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
+  const resourceID = req.params.id;
+
+  database.removeLike(resourceID, ownerID)
   .then(() => res.redirect(`/collections/${resourceID}`));
 });
 
