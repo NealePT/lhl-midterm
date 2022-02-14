@@ -1,7 +1,7 @@
 // Dependencies
 const express = require('express');
-const router  = express.Router();
-
+const router = express.Router();
+const bcrypt = require('bcrypt');
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -15,7 +15,7 @@ router.get('/register', (req, res) => {
 });
 
 
-const addUser =  (db, user) => {
+const addUser = (db, user) => {
   const queryString = `
   INSERT INTO users (name, email, password)
   VALUES ($1, $2, $3)
@@ -32,8 +32,10 @@ const addUser =  (db, user) => {
 };
 
 router.post("/register", (req, res) => {
-  const newUserParams = req.body;
-  addUser(db, newUserParams).then(res.redirect("/collections"));
+  const newUser = req.body;
+  newUser.password = bcrypt.hashSync(newUser.password, 10);
+
+  addUser(db, newUser).then(res.redirect("/collections"));
 });
 
 
