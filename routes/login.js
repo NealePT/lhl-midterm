@@ -39,7 +39,7 @@ exports.getUserWithEmail = getUserWithEmail;
 const login = function(email, password) {
   return getUserWithEmail(email)
     .then(user => {
-      // WILL NEED BCRYPT HERE TO COMPARE IF PASSWORDS MATCH
+      // using bcrypt to check if the password matches the one saved in the database
       if (bcrypt.compareSync(password, user.password)) {
         // console.log("USER:", user);
         return user;
@@ -58,9 +58,8 @@ router.post('/login', (req, res) => {
         //if user doesn't exist
         return res.send("💩");
       }
-      //WILL NEED TO CREATE A COOKIE ID FOR EXISTING USERS (user.id)
       // res.send({ user: { name: user.name, email: user.email } });
-      req.session.user_id = user.id;
+      req.session.user_id = user.id; //saves the cookie session to the user.id
       console.log(req.session);
       res.redirect("/collections");
     })
