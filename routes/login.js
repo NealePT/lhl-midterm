@@ -53,7 +53,8 @@ router.post('/login', (req, res) => {
         return res.send("💩");
       }
       //WILL NEED TO CREATE A COOKIE ID FOR EXISTING USERS (user.id)
-      res.send({ users: { id: user.id, name: user.name, email: user.email } });
+      // res.send({ users: { id: user.id, name: user.name, email: user.email } });
+      res.redirect("/collections");
     })
     .catch(err => res.send(err.message));
 })
