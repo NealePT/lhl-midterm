@@ -17,6 +17,10 @@
     <header>
       <div id="publication-info">
         <span id="owner-name">Posted by <%= name %></span>
+
+        <!-- Temporary implementation - need to style properly. -->
+        <span><%= category %></span>
+
         <span id="dates">
           <p id="date-published"><%= date_created %></p>
           <p id="date-modified">
@@ -46,6 +50,12 @@
       <!-- Edit section -->
       <section id="edit-button">
         <a href="/collections/<%= resourceID %>/update"><button type="button">Edit</button></a>
+      </section>
+
+      <section">
+        <form action="/collections/<%= resourceID  %>/like" method="POST">
+          <a><button type="button">Like this Page</button></a>
+        </form>
       </section>
 
       <!-- Ratings section -->
