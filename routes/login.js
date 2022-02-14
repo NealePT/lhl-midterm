@@ -34,6 +34,8 @@ const getUserWithEmail = function(email) {
     })
 }
 
+exports.getUserWithEmail = getUserWithEmail;
+
 const login = function(email, password) {
   return getUserWithEmail(email)
     .then(user => {

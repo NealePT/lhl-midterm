@@ -2,12 +2,13 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const cookieSession = require('cookie-session');
+// const cookieSession = require('cookie-session');
 
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
+const login = require("./login");
 
 // 6. GET /register - The end-user wants to register an account.
 router.get('/register', (req, res) => {
@@ -34,11 +35,13 @@ const addUser = (db, user) => {
 
 router.post("/register", (req, res) => {
   const newUser = req.body;
+  //encrypt user's password and save to database
   newUser.password = bcrypt.hashSync(newUser.password, 10);
-  newUser.cookie_id = req.session.user_id;
-  console.log(req.session);
+  newUser.cookie_id = req.session.user_id; //save the cookie session
+  // console.log(req.session);
 
-  addUser(db, newUser).then(res.redirect("/collections"));
+  login.getUserWithEmail =
+    addUser(db, newUser).then(res.redirect("/collections"));
 });
 
 
