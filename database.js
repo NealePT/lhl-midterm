@@ -43,6 +43,28 @@ const getRating = resourceID => {
 };
 exports.getRating = getRating;
 
+const addRating = (ownerID, resourceID, rating) => {
+  const values = [ownerID, resourceID, rating];
+  const query = `
+  INSERT INTO resource_ratings (owner_id, resource_id, rating)
+  VALUES ($1, $2, $3);
+  `;
+  return db.query(query, values);
+};
+exports.addRating = addRating;
+
+const checkRating = (ownerID, resourceID) => {
+  const values = [ownerID, resourceID];
+  const query = `
+  SELECT * FROM resource_ratings
+  WHERE owner_id = $1
+    AND resource_id = $2;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows[0]);
+};
+exports.checkRating = checkRating;
+
 // Get the total number of likes from the resource_likes table for a specific resources id.
 const getLikes = resourceID => {
   const values = [resourceID];
