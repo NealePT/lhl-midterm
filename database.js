@@ -63,8 +63,20 @@ const addLike = (resourceID, ownerID) => {
   VALUES ($1, $2);
   `;
   return db.query(query, values);
-}
+};
 exports.addLike = addLike;
+
+const checkLike = (resourceID, ownerID) => {
+  const values = [ownerID, resourceID];
+  const query =`
+  SELECT * FROM resource_likes
+  WHERE owner_id = $1
+    AND resource_id = $2;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows[0]);
+};
+exports.checkLike = checkLike;
 
 // Get all the comments from the resource_comments table for a specific resource id.
 const getComments = resourceID => {
