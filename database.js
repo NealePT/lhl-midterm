@@ -97,3 +97,18 @@ const addResource = (ownerID, title, description, url, category) => {
   .then(res => res.rows[0]);
 }
 exports.addResource = addResource;
+
+const updateResource = (resourceID, newTitle, newDescription, newCategory, newURL) => {
+  const values = [resourceID, newTitle, newDescription, newCategory, newURL];
+  const query = `
+  UPDATE resources
+  SET title = $2,
+    description = $3,
+    category = $4,
+    url = $5,
+    date_modified = CURRENT_DATE
+  WHERE id = $1
+  `;
+  return db.query(query, values);
+};
+exports.updateResource = updateResource;
