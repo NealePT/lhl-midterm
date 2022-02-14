@@ -64,38 +64,19 @@ router.get('/collections/:id/update', (req, res) => {
   res.render('temp_collections_edit');
 });
 
-// PG database client/connection setup
-const { Pool } = require("pg");
-const dbParams = require("../lib/db.js");
-const db = new Pool(dbParams);
-db.connect();
-
-// NEED TO FIGURE OUT OWNER ID WITH COOKIES BEFORE IMPLEMENTING THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const addResource = (db, resource) => {
-  const queryString = `
-  INSERT INTO resources (title, description, category, url, date_created)
-  VALUES ($1, $2, $3, $4, $5)
-  RETURNING *;
-  `;
-  const values = [resource.title, resource.description, resource.category, resource.url, new Date()];
-
-  return db.query(queryString, values)
-    .then(res => {
-      console.log(values);
-      return res.rows[0];
-    })
-    .catch(err => {
-      console.log(values);
-      return console.log('query error:', err);
-    });
-};
-
 // POST /collections
-router.post("/collections", (req, res) => {
-  const newResourceParams = req.body;
-  addResource(db, newResourceParams).then(res.redirect("/collections"));
-});
+router.post('/collections', (req, res) => {
+  const ownerID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
+  const title = req.body.title;
+  const description = req.body.description;
+  const url = req.body.url;
+  const category = req.body.category;
+  let resourceID;
 
+  database.addResource(ownerID, title, description, url, category)
+  .then(data => resourceID = data.id)
+  .then(() => res.redirect(`/collections/${resourceID}`));
+});
 
 // POST /collections/:id/comment
 router.post('/collections/:id/comment', (req, res) => {
