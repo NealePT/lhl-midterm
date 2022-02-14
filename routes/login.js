@@ -11,15 +11,18 @@ db.connect();
 
 // 7. GET /login - The end-user wants to log into their account.
 router.get('/login', (req, res) => {
+  const userCookieId = req.session.user_id;
+  console.log("Cookie:", userCookieId);
+
   // REMINDER: Need to replace with login.ejs.
   res.render('temp_login');
 });
 
-const getUserWithEmail = function(email) {
+const getUserWithEmail = (email) => {
   const queryString = `SELECT * FROM users WHERE email = $1`;
   // const values = [user.email, user.password];
 
-  console.log("email:", email);
+  // console.log("email:", email);
   // console.log("db", db);
   return db.query(queryString, [email])
     .then((res) => {
@@ -27,19 +30,25 @@ const getUserWithEmail = function(email) {
       return res.rows[0];
     })
     .catch((err) => {
-      return console.log(err.message);
+      return console.log(err.message, "No user exists");
     })
 }
+
+// exports.getUserWithEmail = getUserWithEmail;
 
 const login = function(email, password) {
   return getUserWithEmail(email)
     .then(user => {
-      // WILL NEED BCRYPT HERE TO COMPARE IF PASSWORDS MATCH
+      // using bcrypt to check if the password matches the one saved in the database
       if (bcrypt.compareSync(password, user.password)) {
+        // console.log("USER:", user);
         return user;
       }
       return null;
-    });
+    })
+    .catch((err) => {
+      return console.log(err.message, "!no user exists!");
+    })
 }
 
 router.post('/login', (req, res) => {
@@ -49,13 +58,14 @@ router.post('/login', (req, res) => {
   login(email, password)
     .then(user => {
       if (!user) {
-        //if user doesn't exist
-        return res.send("💩");
+        //if nothing is entered and if no user exists
+        return res.send("💩  Please check your login info again!");
       }
-      //WILL NEED TO CREATE A COOKIE ID FOR EXISTING USERS (user.id)
-      // res.send({ users: { id: user.id, name: user.name, email: user.email } });
+      // res.send({ user: { name: user.name, email: user.email } });
+      req.session.user_id = user.id; //saves the cookie session to the user.id
+      console.log(req.session);
       res.redirect("/collections");
     })
-    .catch(err => res.send(err.message));
+    .catch(err => res.send(err));
 })
-module.exports = router;
+module.exports = router, getUserWithEmail;
