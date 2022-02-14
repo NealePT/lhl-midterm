@@ -18,11 +18,11 @@ router.get('/login', (req, res) => {
   res.render('temp_login');
 });
 
-const getUserWithEmail = function(email) {
+const getUserWithEmail = (email) => {
   const queryString = `SELECT * FROM users WHERE email = $1`;
   // const values = [user.email, user.password];
 
-  console.log("email:", email);
+  // console.log("email:", email);
   // console.log("db", db);
   return db.query(queryString, [email])
     .then((res) => {
