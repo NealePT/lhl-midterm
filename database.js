@@ -85,3 +85,15 @@ const addComment = (ownerID, resourceID, comment) => {
   .then(res => res.rows[0]);
 };
 exports.addComment = addComment;
+
+const addResource = (ownerID, title, description, url, category) => {
+  const values = [ownerID, title, description, url, category];
+  const query = `
+  INSERT INTO resources (owner_id, title, description, url, category, date_created)
+  VALUES ($1, $2, $3, $4, $5, CURRENT_DATE)
+  RETURNING *;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows[0]);
+}
+exports.addResource = addResource;
