@@ -43,7 +43,11 @@ router.get('/collections/:id', (req, res) => {
 
   // Get the average rating.
   .then(() => database.getRating(resourcesID))
-  .then(data => resParams.rating = data.rating)
+  .then(data => resParams.avgRating = data.rating)
+
+  // Get the user's rating.
+  .then(() => database.checkRating(userID, resourcesID))
+  .then(data => data ? resParams.userRating = data.rating : resParams.userRating = 0)
 
   // Get the total number of likes.
   .then(() => database.getLikes(resourcesID))
