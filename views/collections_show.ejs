@@ -69,12 +69,24 @@
       <!-- Ratings section -->
       <section id="rating-buttons">
         <span id="rating-title">Rate This Page</span>
-        <div>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
+        <div id="rating-stars" >
+          <form action="collections/<%= resourceID  %>/rating" method="POST">
+            <button class="star-buttons" name="rating" type="submit" value="1">
+              <i id="star-1" class="fa-solid fa-star"></i>
+            </button>
+            <button class="star-buttons" name="rating" type="submit" value="2">
+              <i id="star-2" class="fa-solid fa-star"></i>
+            </button>
+            <button class="star-buttons" name="rating" type="submit" value="3">
+              <i id="star-3" class="fa-solid fa-star"></i>
+            </button>
+            <button class="star-buttons" name="rating" type="submit" value="4">
+              <i id="star-4" class="fa-solid fa-star"></i>
+            </button>
+            <button class="star-buttons" name="rating" type="submit" value="5">
+              <i id="star-5" class="fa-solid fa-star"></i>
+            </button>
+          </form>
         </div>
       </section>
 
