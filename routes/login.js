@@ -30,11 +30,11 @@ const getUserWithEmail = (email) => {
       return res.rows[0];
     })
     .catch((err) => {
-      return console.log(err.message);
+      return console.log(err.message, "No user exists");
     })
 }
 
-exports.getUserWithEmail = getUserWithEmail;
+// exports.getUserWithEmail = getUserWithEmail;
 
 const login = function(email, password) {
   return getUserWithEmail(email)
@@ -45,7 +45,10 @@ const login = function(email, password) {
         return user;
       }
       return null;
-    });
+    })
+    .catch((err) => {
+      return console.log(err.message, "!no user exists!");
+    })
 }
 
 router.post('/login', (req, res) => {
@@ -55,14 +58,14 @@ router.post('/login', (req, res) => {
   login(email, password)
     .then(user => {
       if (!user) {
-        //if user doesn't exist
-        return res.send("💩");
+        //if nothing is entered and if no user exists
+        return res.send("💩  Please check your login info again!");
       }
       // res.send({ user: { name: user.name, email: user.email } });
       req.session.user_id = user.id; //saves the cookie session to the user.id
       console.log(req.session);
       res.redirect("/collections");
     })
-    .catch(err => res.send(err.message));
+    .catch(err => res.send(err));
 })
-module.exports = router;
+module.exports = router, getUserWithEmail;
