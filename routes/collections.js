@@ -1,5 +1,7 @@
 // Dependencies
+const { use } = require('bcrypt/promises');
 const express = require('express');
+const { user } = require('pg/lib/defaults');
 const router  = express.Router();
 const database = require('../database'); // Contains all SQL query functions.
 
@@ -105,6 +107,15 @@ router.post('/collections/:id/update', (req, res) => {
 
   database.updateResource(resourceID, newTitle, newDescription, newCategory, newURL)
   .then(() => res.redirect(`/collections/${resourceID}`));
+});
+
+// POST /collections/:id/delete
+router.post('/collections/:id/delete', (req, res) => {
+  const userID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
+  const resourceID = req.params.id;
+
+  database.deleteResource(resourceID)
+  .then(() => res.redirect(`/users/${userID}`))
 });
 
 // POST /collections/:id/like
