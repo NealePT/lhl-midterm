@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 const { Pool } = require("pg");
 const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
-const { getUserWithEmail } = require("./login.js");
+const getUserWithEmail = require("./login.js");
 
 // 6. GET /register - The end-user wants to register an account.
 router.get('/register', (req, res) => {
@@ -36,18 +36,15 @@ const addUser = (db, user) => {
 router.post("/register", (req, res) => {
   const newUser = req.body;
   const email = req.body.email;
+  let userCookieId;
   //encrypt user's password and save to database
   newUser.password = bcrypt.hashSync(newUser.password, 10);
-  newUser.cookie_id = req.session.user_id; //save the cookie session
-  // console.log(req.session);
+  req.session.user_id = userCookieId; //save the cookie session
+  console.log(userCookieId);
 
-  if (getUserWithEmail(email)) {
-    // if user already exists
-    return res.sendStatus(400).send("Sorry, that email is already registered!");
-  } else {
-    // new users will get added to the database
-    addUser(db, newUser).then(res.redirect("/collections"));
-  }
+  // new users will get added to the database
+  addUser(db, newUser).then(res.redirect("/collections"));
+
 });
 
 
