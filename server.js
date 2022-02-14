@@ -96,6 +96,9 @@ app.post('/collections', collectionsRoutes);
 // POST /collections/:id/update
 app.post('/collections/:id/update', collectionsRoutes);
 
+// POST /collections/:id/delete
+app.post('/collections/:id/delete', collectionsRoutes);
+
 // POST /collections/:id/like
 app.post('/collections/:id/like', collectionsRoutes);
 
