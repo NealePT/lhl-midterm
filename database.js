@@ -177,3 +177,14 @@ const deleteResource = resourceID => {
   return db.query(query, values);
 };
 exports.deleteResource = deleteResource;
+
+const getUserWithEmail = (email) => {
+  const values = [email];
+  const query = `
+  SELECT * FROM users
+  WHERE email = $1
+  `;
+  return db.query(query, values)
+    .then(res = res.rows[0]);
+}
+exports.getUserWithEmail = getUserWithEmail;
