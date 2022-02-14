@@ -90,6 +90,43 @@ article {
   font-weight: bold;
 }
 
+.star-buttons {
+  background-color: transparent;
+  color: rgb(199, 199, 199);
+  border: none;
+  font-size: 20px;
+  cursor:pointer;
+}
+
+// Temporary
+.star-buttons-disabled {
+  background-color: transparent;
+  color: rgb(199, 199, 199);
+  border: none;
+  font-size: 20px;
+}
+
+#star-1:hover {
+  color: gold;
+}
+
+#star-2:hover {
+  color: gold;
+}
+
+#star-3:hover {
+  color: gold;
+}
+
+#star-4:hover {
+  color: gold;
+}
+
+#star-5:hover {
+  color: gold;
+}
+
+
 ////////// Comments Section - START //////////
 #comments-section {
   border: 2px solid rgb(199, 199, 199); // Testing - Remove when completed
@@ -124,6 +161,7 @@ article {
   margin-bottom: 5px;
   font-size: 15px;
   transition-duration: 0.2s;
+  cursor:pointer;
 }
 
 #comment-button:hover {

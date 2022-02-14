@@ -43,6 +43,28 @@ const getRating = resourceID => {
 };
 exports.getRating = getRating;
 
+const addRating = (ownerID, resourceID, rating) => {
+  const values = [ownerID, resourceID, rating];
+  const query = `
+  INSERT INTO resource_ratings (owner_id, resource_id, rating)
+  VALUES ($1, $2, $3);
+  `;
+  return db.query(query, values);
+};
+exports.addRating = addRating;
+
+const checkRating = (ownerID, resourceID) => {
+  const values = [ownerID, resourceID];
+  const query = `
+  SELECT * FROM resource_ratings
+  WHERE owner_id = $1
+    AND resource_id = $2;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows[0]);
+};
+exports.checkRating = checkRating;
+
 // Get the total number of likes from the resource_likes table for a specific resources id.
 const getLikes = resourceID => {
   const values = [resourceID];
@@ -55,6 +77,39 @@ const getLikes = resourceID => {
   .then(res => res.rows[0]);
 };
 exports.getLikes = getLikes;
+
+const addLike = (resourceID, ownerID) => {
+  const values = [ownerID, resourceID];
+  const query = `
+  INSERT INTO resource_likes (owner_id, resource_id)
+  VALUES ($1, $2);
+  `;
+  return db.query(query, values);
+};
+exports.addLike = addLike;
+
+const removeLike = (resourceID, ownerID) => {
+  const values = [ownerID, resourceID];
+  const query = `
+  DELETE FROM resource_likes
+  WHERE owner_id = $1
+   AND resource_id = $2;
+  `;
+  return db.query(query, values);
+};
+exports.removeLike = removeLike;
+
+const checkLike = (resourceID, ownerID) => {
+  const values = [ownerID, resourceID];
+  const query =`
+  SELECT * FROM resource_likes
+  WHERE owner_id = $1
+    AND resource_id = $2;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows[0]);
+};
+exports.checkLike = checkLike;
 
 // Get all the comments from the resource_comments table for a specific resource id.
 const getComments = resourceID => {
@@ -112,3 +167,13 @@ const updateResource = (resourceID, newTitle, newDescription, newCategory, newUR
   return db.query(query, values);
 };
 exports.updateResource = updateResource;
+
+const deleteResource = resourceID => {
+  const values = [resourceID];
+  const query = `
+  DELETE FROM resources
+  WHERE id = $1;
+  `;
+  return db.query(query, values);
+};
+exports.deleteResource = deleteResource;

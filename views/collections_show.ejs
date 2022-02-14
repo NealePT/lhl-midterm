@@ -17,6 +17,10 @@
     <header>
       <div id="publication-info">
         <span id="owner-name">Posted by <%= name %></span>
+
+        <!-- Temporary implementation - need to style properly. -->
+        <span><%= category %></span>
+
         <span id="dates">
           <p id="date-published"><%= date_created %></p>
           <p id="date-modified">
@@ -26,7 +30,7 @@
       </div>
       <h1 id="resource-title"><%= title %></h1>
       <div id="rating-likes">
-        <p id="rating-score"><%= rating ? `${rating}/5 Rating` : '(No ratings yet)' %></p>
+        <p id="rating-score"><%= avgRating ? `${avgRating}/5 Rating` : '(No ratings yet)' %></p>
         <p id="likes"><%= likes ? likes : 0 %> Likes</p>
       </div>
     </header>
@@ -48,16 +52,101 @@
         <a href="/collections/<%= resourceID %>/update"><button type="button">Edit</button></a>
       </section>
 
+      <% if(!checkLike) { %>
+        <section>
+          <form action="/collections/<%= resourceID  %>/like" method="POST">
+            <button type="submit">Like this Page</button>
+          </form>
+        </section>
+      <% } else { %>
+        <section>
+          <form action="/collections/<%= resourceID  %>/unlike" method="POST">
+            <button type="submit">Unlike this Page</button>
+          </form>
+        </section>
+      <% } %>
+
       <!-- Ratings section -->
       <section id="rating-buttons">
-        <span id="rating-title">Rate This Page</span>
-        <div>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
+        <% if(!userRating) { %>
+          <span id="rating-title">Rate This Page</span>
+          <div>
+            <form action="/collections/<%= resourceID  %>/rating" method="POST">
+              <button class="star-buttons" name="rating" type="submit" value="1">
+                <i id="star-1" class="fa-solid fa-star"></i>
+              </button>
+              <button class="star-buttons" name="rating" type="submit" value="2">
+                <i id="star-2" class="fa-solid fa-star"></i>
+              </button>
+              <button class="star-buttons" name="rating" type="submit" value="3">
+                <i id="star-3" class="fa-solid fa-star"></i>
+              </button>
+              <button class="star-buttons" name="rating" type="submit" value="4">
+                <i id="star-4" class="fa-solid fa-star"></i>
+              </button>
+              <button class="star-buttons" name="rating" type="submit" value="5">
+                <i id="star-5" class="fa-solid fa-star"></i>
+              </button>
+            </form>
+        <% } else { %>
+          <span id="rating-title">Your Rating</span>
+          <div>
+          <% if (userRating === 1) { %>
+            <button class="star-buttons-disabled" name="rating" type="submit" value="1">
+              <i class="fa-solid fa-star" style="color: gold;"></i>
+            </button>
+          <% } else { %>
+            <button class="star-buttons-disabled" name="rating" type="submit" value="1">
+              <i class="fa-solid fa-star"></i>
+            </button>
+          <% } %>
+
+          <% if (userRating === 2) { %>
+            <button class="star-buttons-disabled" name="rating" type="submit" value="2">
+              <i class="fa-solid fa-star" style="color: gold;"></i>
+            </button>
+          <% } else { %>
+            <button class="star-buttons-disabled" name="rating" type="submit" value="2">
+              <i class="fa-solid fa-star"></i>
+            </button>
+          <% } %>
+
+          <% if (userRating === 3) { %>
+            <button class="star-buttons-disabled" name="rating" type="submit" value="3">
+              <i class="fa-solid fa-star" style="color: gold;"></i>
+            </button>
+          <% } else { %>
+            <button class="star-buttons-disabled" name="rating" type="submit" value="3">
+              <i class="fa-solid fa-star"></i>
+            </button>
+          <% } %>
+
+          <% if (userRating === 4) { %>
+            <button class="star-buttons-disabled" name="rating" type="submit" value="4">
+              <i class="fa-solid fa-star" style="color: gold;"></i>
+            </button>
+          <% } else { %>
+            <button class="star-buttons-disabled" name="rating" type="submit" value="4">
+              <i class="fa-solid fa-star"></i>
+            </button>
+          <% } %>
+
+          <% if (userRating === 5) { %>
+            <button class="star-buttons-disabled" name="rating" type="submit" value="1">
+              <i class="fa-solid fa-star" style="color: gold;"></i>
+            </button>
+          <% } else { %>
+            <button class="star-buttons-disabled" name="rating" type="submit" value="1">
+              <i class="fa-solid fa-star"></i>
+            </button>
+          <% } %>
+          </div>
+        <% } %>
+
+
+
         </div>
+
       </section>
 
       <!-- Comments section -->

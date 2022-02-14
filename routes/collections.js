@@ -1,5 +1,7 @@
 // Dependencies
+const { use } = require('bcrypt/promises');
 const express = require('express');
+const { user } = require('pg/lib/defaults');
 const router  = express.Router();
 const database = require('../database'); // Contains all SQL query functions.
 
@@ -18,7 +20,11 @@ router.get('/collections/new', (req, res) => res.render('collections_new'));
 // 3. GET /collections/:id - The end-user wants to see a particular resource.
 router.get('/collections/:id', (req, res) => {
   const resourcesID = req.params.id;
-  const resParams = { resourceID: resourcesID };
+  const userID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
+  const resParams = {
+    resourceID: resourcesID,
+    userID: userID
+  };
 
   // Get most of the relevant properties from the resources & users tables.
   database.getResourceDetails(resourcesID)
@@ -39,11 +45,19 @@ router.get('/collections/:id', (req, res) => {
 
   // Get the average rating.
   .then(() => database.getRating(resourcesID))
-  .then(data => resParams.rating = data.rating)
+  .then(data => resParams.avgRating = data.rating)
+
+  // Get the user's rating.
+  .then(() => database.checkRating(userID, resourcesID))
+  .then(data => data ? resParams.userRating = data.rating : resParams.userRating = 0)
 
   // Get the total number of likes.
   .then(() => database.getLikes(resourcesID))
   .then(data => resParams.likes = data.likes)
+
+  // Check if the user has already liked the page
+  .then(() => database.checkLike(resourcesID, userID))
+  .then(data => data ? resParams.checkLike = true : resParams.checkLike = false)
 
   // Get all the comments.
   .then(() => database.getComments(resourcesID))
@@ -92,6 +106,43 @@ router.post('/collections/:id/update', (req, res) => {
   const newURL = req.body.url;
 
   database.updateResource(resourceID, newTitle, newDescription, newCategory, newURL)
+  .then(() => res.redirect(`/collections/${resourceID}`));
+});
+
+// POST /collections/:id/delete
+router.post('/collections/:id/delete', (req, res) => {
+  const userID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
+  const resourceID = req.params.id;
+
+  database.deleteResource(resourceID)
+  .then(() => res.redirect(`/users/${userID}`))
+});
+
+// POST /collections/:id/like
+router.post('/collections/:id/like', (req, res) => {
+  const ownerID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
+  const resourceID = req.params.id;
+
+  database.addLike(resourceID, ownerID)
+  .then(() => res.redirect(`/collections/${resourceID}`));
+});
+
+// POST /collections/:id/unlike
+router.post('/collections/:id/unlike', (req, res) => {
+  const ownerID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
+  const resourceID = req.params.id;
+
+  database.removeLike(resourceID, ownerID)
+  .then(() => res.redirect(`/collections/${resourceID}`));
+});
+
+// POST /collections/:id/rating
+router.post('/collections/:id/rating' ,(req, res) => {
+  const ownerID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
+  const resourceID = req.params.id;
+  const rating = Number(req.body.rating);
+
+  database.addRating(ownerID, resourceID, rating)
   .then(() => res.redirect(`/collections/${resourceID}`));
 });
 
