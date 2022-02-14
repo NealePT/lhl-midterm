@@ -18,7 +18,11 @@ router.get('/collections/new', (req, res) => res.render('collections_new'));
 // 3. GET /collections/:id - The end-user wants to see a particular resource.
 router.get('/collections/:id', (req, res) => {
   const resourcesID = req.params.id;
-  const resParams = { resourceID: resourcesID };
+  const userID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
+  const resParams = {
+    resourceID: resourcesID,
+    userID: userID
+  };
 
   // Get most of the relevant properties from the resources & users tables.
   database.getResourceDetails(resourcesID)
@@ -44,6 +48,11 @@ router.get('/collections/:id', (req, res) => {
   // Get the total number of likes.
   .then(() => database.getLikes(resourcesID))
   .then(data => resParams.likes = data.likes)
+
+  // Check if the user has already liked the page
+  .then(() => database.checkLike(resourcesID, userID))
+  .then(data => data ? resParams.checkLike = true : resParams.checkLike = false)
+  .then(() => console.log('resParams =', resParams)) // TEMP - Need to remove
 
   // Get all the comments.
   .then(() => database.getComments(resourcesID))
@@ -99,7 +108,9 @@ router.post('/collections/:id/update', (req, res) => {
 router.post('/collections/:id/like', (req, res) => {
   const ownerID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
   const resourceID = req.params.id;
-  res.send(`Success - POST /collections/${resourceID}/like`);
+
+  database.addLike(resourceID, ownerID)
+  .then(() => res.redirect(`/collections/${resourceID}`));
 });
 
 // POST /collections/:id/comment

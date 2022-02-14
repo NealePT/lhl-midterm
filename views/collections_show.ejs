@@ -52,11 +52,19 @@
         <a href="/collections/<%= resourceID %>/update"><button type="button">Edit</button></a>
       </section>
 
-      <section>
-        <form action="/collections/<%= resourceID  %>/like" method="POST">
-          <button type="submit">Like this Page</button>
-        </form>
-      </section>
+      <% if(!checkLike) { %>
+        <section>
+          <form action="/collections/<%= resourceID  %>/like" method="POST">
+            <button type="submit">Like this Page</button>
+          </form>
+        </section>
+      <% } else { %>
+        <section>
+          <form action="/collections/<%= resourceID  %>/unlike" method="POST">
+            <button type="submit">Unlike this Page</button>
+          </form>
+        </section>
+      <% } %>
 
       <!-- Ratings section -->
       <section id="rating-buttons">
