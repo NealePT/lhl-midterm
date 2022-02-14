@@ -11,7 +11,9 @@ db.connect();
 
 // 7. GET /login - The end-user wants to log into their account.
 router.get('/login', (req, res) => {
-  console.log("BODY:", req.body);
+  const userCookieId = req.session.user_id;
+  console.log("Cookie:", userCookieId);
+
   // REMINDER: Need to replace with login.ejs.
   res.render('temp_login');
 });
@@ -56,6 +58,8 @@ router.post('/login', (req, res) => {
       }
       //WILL NEED TO CREATE A COOKIE ID FOR EXISTING USERS (user.id)
       // res.send({ user: { name: user.name, email: user.email } });
+      req.session.user_id = user.id;
+      console.log(req.session);
       res.redirect("/collections");
     })
     .catch(err => res.send(err.message));

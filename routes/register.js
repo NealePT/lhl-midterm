@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const cookieSession = require('cookie-session');
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -34,6 +35,8 @@ const addUser = (db, user) => {
 router.post("/register", (req, res) => {
   const newUser = req.body;
   newUser.password = bcrypt.hashSync(newUser.password, 10);
+  newUser.cookie_id = req.session.user_id;
+  console.log(req.session);
 
   addUser(db, newUser).then(res.redirect("/collections"));
 });
