@@ -90,8 +90,12 @@ article {
   font-weight: bold;
 }
 
-#rating-stars{
+.star-buttons {
+  background-color: transparent;
   color: rgb(199, 199, 199);
+  border: none;
+  font-size: 20px;
+  cursor:pointer;
 }
 
 #star-1:hover {
@@ -149,6 +153,7 @@ article {
   margin-bottom: 5px;
   font-size: 15px;
   transition-duration: 0.2s;
+  cursor:pointer;
 }
 
 #comment-button:hover {
