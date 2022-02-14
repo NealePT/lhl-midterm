@@ -167,3 +167,13 @@ const updateResource = (resourceID, newTitle, newDescription, newCategory, newUR
   return db.query(query, values);
 };
 exports.updateResource = updateResource;
+
+const deleteResource = resourceID => {
+  const values = [resourceID];
+  const query = `
+  DELETE FROM resources
+  WHERE id = $1;
+  `;
+  return db.query(query, values);
+};
+exports.deleteResource = deleteResource;
