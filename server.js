@@ -93,5 +93,8 @@ app.post('/register', registerRoutes);
 // POST /collections
 app.post('/collections', collectionsRoutes);
 
+// POST /collections/:id/update
+app.post('/collections/:id/update', collectionsRoutes);
+
 // POST /collections/:id/comment
 app.post('/collections/:id/comment', collectionsRoutes);
