@@ -56,6 +56,16 @@ const getLikes = resourceID => {
 };
 exports.getLikes = getLikes;
 
+const addLike = (resourceID, ownerID) => {
+  const values = [ownerID, resourceID];
+  const query = `
+  INSERT INTO resource_likes (owner_id, resource_id)
+  VALUES ($1, $2);
+  `;
+  return db.query(query, values);
+}
+exports.addLike = addLike;
+
 // Get all the comments from the resource_comments table for a specific resource id.
 const getComments = resourceID => {
   const values = [resourceID];
