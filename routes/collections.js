@@ -121,6 +121,16 @@ router.post('/collections/:id/unlike', (req, res) => {
   .then(() => res.redirect(`/collections/${resourceID}`));
 });
 
+// POST /collections/:id/rating
+router.post('/collections/:id/rating' ,(req, res) => {
+  const ownerID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
+  const resourceID = req.params.id;
+  const rating = Number(req.body.rating);
+
+  database.addRating(ownerID, resourceID, rating)
+  .then(() => res.redirect(`/collections/${resourceID}`));
+});
+
 // POST /collections/:id/comment
 router.post('/collections/:id/comment', (req, res) => {
   const ownerID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
