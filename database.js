@@ -175,7 +175,7 @@ const deleteResource = (resourceID) => {
 };
 exports.deleteResource = deleteResource;
 
-
+// get all of a user's resources
 const getAllResources = (resourceID) => {
   const value = [resourceID];
   const query = `
@@ -184,6 +184,7 @@ const getAllResources = (resourceID) => {
   WHERE owner_id = $1;`;
   return db.query(query, value).then((res) => res.rows);
 };
+
 exports.getAllResources = getAllResources;
 
 // gets all of a user's liked resources
@@ -197,3 +198,5 @@ const getAllLikedResources = (resourceID) => {
 
   return db.query(query, value).then((res) => res.rows);
 };
+
+exports.getAllLikedResources = getAllLikedResources;
