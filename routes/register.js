@@ -2,50 +2,53 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-// const cookieSession = require('cookie-session');
+const database = require('../database'); // Contains all SQL query functions.
 
-// PG database client/connection setup
-const { Pool } = require("pg");
-const dbParams = require("../lib/db.js");
-const db = new Pool(dbParams);
-
-// 6. GET /register - The end-user wants to register an account.
+// GET /register
 router.get('/register', (req, res) => {
-  // REMINDER: Need to replace with register.ejs.
+  // REMINDER: Need to rename to register.ejs.
   res.render('temp_register');
 });
 
-// Helper function for POST /register
-const addUser = (db, user) => {
-  const queryString = `
-  INSERT INTO users (name, email, password)
-  VALUES ($1, $2, $3)
-  RETURNING *;
-  `;
-  const values = [user.name, user.email, user.password];
-  return db.query(queryString, values)
-    .then(res => {
-      return res.rows[0];
-    })
-    .catch(err => {
-      console.log(err.message);
-    });
-};
 
 // POST /register
 router.post("/register", (req, res) => {
-  const newUser = req.body;
+  const name = req.body.name;
   const email = req.body.email;
-  let userCookieId;
-  //encrypt user's password and save to database
-  newUser.password = bcrypt.hashSync(newUser.password, 10);
-  req.session.user_id = userCookieId; //save the cookie session
-  console.log(userCookieId);
+  const password = req.body.password;
+  let hashedPassword = '';
+  let sessionID;
 
-  // new users will get added to the database
-  addUser(db, newUser).then(res.redirect("/collections"));
+  // If any of the fields are empty, display a 400 error.
+  if (name === '' || email === '' || password === '') {
+    return res.status(400).send(`
+    Empty name, email, and/or password field. <a href="/register">Please try again</a>
+    `);
+  }
+  database.getUserByEmail(email)
+  .then(data => {
 
+    // If the email has already been registered, display a 400 error.
+    if (data) {
+      return res.status(400).send(`
+      ${email} has already been registered. <a href="/login">Click here to login</a>
+      `);
+    } else {
+
+      // Encrypt the password.
+      hashedPassword = bcrypt.hashSync(password, 10);
+    }
+  })
+
+  // Add the new user to the users SQL table.
+  .then(() => database.addUser(name, email, hashedPassword))
+  .then(data => {
+
+    // Set the session cookie to the user id.
+    req.session.user_id = data.id;
+    sessionID = req.session.user_id;
+  })
+  .then(() => res.redirect('/collections'));
 });
-
 
 module.exports = router;
