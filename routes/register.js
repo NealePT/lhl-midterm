@@ -8,7 +8,6 @@ const bcrypt = require('bcrypt');
 const { Pool } = require("pg");
 const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
-const getUserWithEmail = require("./login.js");
 
 // 6. GET /register - The end-user wants to register an account.
 router.get('/register', (req, res) => {
