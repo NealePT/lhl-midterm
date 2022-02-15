@@ -6,77 +6,88 @@
 @mixin flex-column {
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+body {
+  background-color: rgb(175, 175, 175) !important;
+  min-height: 1000px;
 }
 
 main {
-  @include flex-column();
-  min-width: 850px;
+  border: 10px solid white;
+  background-color: white;
+  border-radius: 10px;
+  width: 1024px;
+  margin: 75px auto 0 auto;
 }
 
 header {
-  width: 95%;
+  @include flex-column();
 }
 
 #publication-info {
   @include flex-row();
-  justify-content: space-between;
-  margin-left: 10px;
-  margin-right: 10px;
-
-}
-#owner-name {
-  @include flex-row();
-  align-items: center;
-}
-
-#dates {
-  @include flex-row();
-
-  #date-modified {
-    margin-left: 5px;
-  }
-}
-
-#resource-title {
-  @include flex-row();
-  justify-content: center;
-  font-size: 20px;
-}
-
-#rating-likes {
-  @include flex-row();
-  justify-content: center;
-  align-items: center;
-  margin-top: -25px;
-}
-
-#rating-score {
-  margin-right: 5px;
-}
-
-#likes {
-  margin-left: 5px;
-}
-
-article {
-  @include flex-column();
-  width: 95%;
-}
-
-#description {
-  margin-top: -10px;
-}
-
-#url {
-  @include flex-column();
-  align-items: center;
-  font-size: 20px;
+  justify-content: space-between ;
+  font-size: 14px;
 }
 
 #edit-button {
+  font-size: 10px;
+}
+
+#resource-info {
+  margin-top: 10px;
   @include flex-column();
-  align-items: center;
+}
+
+#like-button {
+  background-color: transparent;
+  border: none;
+}
+
+#like-heart {
+  color: rgb(175, 175, 175);
+  transition-duration: 0.3s;
+  cursor:pointer;
+}
+
+#like-heart:hover {
+  color: red;
+  font-size: 15px;
+}
+
+#unlike-heart {
+  background-color: transparent;
+  border: none;
+  color: red;
+  font-size: 15px;
+  transition-duration: 0.3s;
+  cursor:pointer;
+}
+
+#unlike-heart:hover {
+  color: rgb(175, 175, 175);
+  font-size: 14px;
+}
+
+#resource-title {
+  font-size: 25px;
+}
+
+#resource-category {
+  border: 2px solid rgb(175, 175, 175);
+  border-radius: 5px;
+  background-color: rgb(175, 175, 175);
+  font-weight: bold;
+}
+
+#description {
+  margin-top: 20px;
+}
+
+#url {
+  font-size: 15px;
+  margin: -5px 0 -5px 0;
 }
 
 #rating-buttons {
@@ -92,7 +103,7 @@ article {
 
 .star-buttons {
   background-color: transparent;
-  color: rgb(199, 199, 199);
+  color: rgb(175, 175, 175);
   border: none;
   font-size: 20px;
   cursor:pointer;
@@ -101,7 +112,7 @@ article {
 // Temporary
 .star-buttons-disabled {
   background-color: transparent;
-  color: rgb(199, 199, 199);
+  color: rgb(175, 175, 175);
   border: none;
   font-size: 20px;
 }
@@ -126,46 +137,45 @@ article {
   color: gold;
 }
 
-
-////////// Comments Section - START //////////
 #comments-section {
-  border: 2px solid rgb(199, 199, 199); // Testing - Remove when completed
+  border: 1px solid rgb(175, 175, 175);
+  background-color: white;
   border-radius: 10px;
   @include flex-column();
   width: 100%;
   min-width: 850px;
   margin-top: 10px;
   padding-bottom: 10px;
-  background-color: rgb(240, 240, 240);
 }
 
 #comment-textbox {
   @include flex-column();
   justify-content: center;
-  margin-top: 5px;
 }
 
 #comment-textarea {
   background-color: inherit;
+  width: 99%;
+  margin: auto;
 }
 
 ::placeholder {
-  color: black;
+  color: rgb(175, 175, 175);
 }
 
 #comment-button {
-  background-color: rgb(218, 216, 216);
+  background-color: rgb(220, 220, 220);
   border-radius: 10px;
   border: 1px solid rgb(0, 0, 0, 0.1);
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 5px auto 5px auto;
+  width: 100px;
   font-size: 15px;
   transition-duration: 0.2s;
   cursor:pointer;
 }
 
 #comment-button:hover {
-  background-color: white;
+  background-color: rgb(240, 240, 240);
 }
 
 #comments-all {

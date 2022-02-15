@@ -15,32 +15,53 @@
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <title>Resource Page</title>
 </head>
 <body>
   <%- include('partials/_header') %>
   <main>
 
+    <!-- Header section - START -->
     <header>
       <div id="publication-info">
-        <span id="owner-name">Posted by <%= name %></span>
-
-        <!-- Temporary implementation - need to style properly. -->
-        <span><%= category %></span>
-
-        <span id="dates">
-          <p id="date-published"><%= date_created %></p>
-          <p id="date-modified">
-            <%= date_modified ? `(Edited: ${date_modified})`: ''  %>
-          </p>
-        </span>
+        <div>
+          <span>Posted by <%= name %> | </span>
+          <span><%= date_created %><%= date_modified ? ` (Edited: ${date_modified})`: ''  %></span>
+          <span><a href="/collections/<%= resourceID %>/update">Update</a></span>
+        </div>
+        <div>
+          <% if(!checkLike) { %>
+            <form action="/collections/<%= resourceID  %>/like" method="POST">
+              <span><%= avgRating ? `${avgRating}/5 Rating` : '(No ratings yet)' %> | </span>
+              <span><%= likes ? likes : 0 %> Likes</span>
+              <button id="like-button" type="submit"><i id="like-heart" class="fa-solid fa-heart"></i></button>
+            </form>
+          <% } else { %>
+            <form action="/collections/<%= resourceID  %>/unlike" method="POST">
+              <span><%= avgRating ? `${avgRating}/5 Rating` : '(No ratings yet)' %> | </span>
+              <span><%= likes ? likes : 0 %> Likes</span>
+              <button id="like-button" type="submit"><i id="unlike-heart" class="fa-solid fa-heart"></i></button>
+            </form>
+          <% } %>
+        </div>
       </div>
-      <h1 id="resource-title"><%= title %></h1>
-      <div id="rating-likes">
-        <p id="rating-score"><%= avgRating ? `${avgRating}/5 Rating` : '(No ratings yet)' %></p>
-        <p id="likes"><%= likes ? likes : 0 %> Likes</p>
+      <div id="resource-info">
+
+        <div>
+          <h1 id="resource-title"><%= title %></h1>
+        </div>
+
+        <div id="url">
+          <p><a href="<%= url %>"><%= url %></a></p>
+        </div>
+
+        <div>
+          <span id="resource-category"> <%= category %> </span>
+        </div>
       </div>
     </header>
+    <!-- Header section - END -->
 
     <article>
 
@@ -48,30 +69,6 @@
       <section id="description">
         <p><%= description %></p>
       </section>
-
-      <!-- URL section -->
-      <section id="url">
-        <p><strong><a href="<%= url %>"><%= url %></a></strong></p>
-      </section>
-
-      <!-- Edit section -->
-      <section id="edit-button">
-        <a href="/collections/<%= resourceID %>/update"><button type="button">Edit</button></a>
-      </section>
-
-      <% if(!checkLike) { %>
-        <section>
-          <form action="/collections/<%= resourceID  %>/like" method="POST">
-            <button type="submit">Like this Page</button>
-          </form>
-        </section>
-      <% } else { %>
-        <section>
-          <form action="/collections/<%= resourceID  %>/unlike" method="POST">
-            <button type="submit">Unlike this Page</button>
-          </form>
-        </section>
-      <% } %>
 
       <!-- Ratings section -->
       <section id="rating-buttons">
@@ -149,11 +146,6 @@
           <% } %>
           </div>
         <% } %>
-
-
-
-        </div>
-
       </section>
 
       <!-- Comments section -->
