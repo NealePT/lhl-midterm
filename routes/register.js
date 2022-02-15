@@ -17,7 +17,6 @@ router.post("/register", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   let hashedPassword = '';
-  let sessionID;
 
   // If any of the fields are empty, display a 400 error.
   if (name === '' || email === '' || password === '') {
@@ -46,7 +45,6 @@ router.post("/register", (req, res) => {
 
     // Set the session cookie to the user id.
     req.session.user_id = data.id;
-    sessionID = req.session.user_id;
   })
   .then(() => res.redirect('/collections'));
 });
