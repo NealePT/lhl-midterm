@@ -54,12 +54,11 @@ router.get('/collections/new', (req, res) => {
 router.get('/collections/:id', (req, res) => {
   const sessionID = req.session.user_id; // sessionID = userID
   const resourcesID = req.params.id;
-
-  // const userID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
   const resParams = {
     resourceID: resourcesID,
     userID: sessionID
   };
+
 
   // Get most of the relevant properties from the resources & users tables.
   database.getResourceDetails(resourcesID)

@@ -216,7 +216,7 @@
           <% if (comments.length > 0) { %>
             <% for (const obj of comments) { %>
               <span class="comment-details">
-                <p class="user-name"><b><%= obj.name %></b></p>
+                <p class="user-name"><b><%= obj.commenter %></b></p>
                 <p class="comment-body"><%= obj.comment %></p>
               </span>
             <% } %>
