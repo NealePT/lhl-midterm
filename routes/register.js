@@ -11,7 +11,7 @@ router.get('/register', (req, res) => {
 
   // If there is a session cookie, pass the cookie and matching user name before rendering the page.
   if (!sessionID) {
-    res.render('temp_login', { sessionID: null });
+    res.render('register', { sessionID: null });
   } else {
     database.getNameByUserID(sessionID)
     .then(data => {
