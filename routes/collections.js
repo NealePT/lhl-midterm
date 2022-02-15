@@ -5,14 +5,16 @@ const { user } = require('pg/lib/defaults');
 const router  = express.Router();
 const database = require('../database'); // Contains all SQL query functions.
 
-// 1. GET /collection - The end user wants to see all collections.
+// 1. GET /collections - The end user wants to see all collections.
 router.get('/collections', (req, res) => {
   const sessionID = req.session.user_id;
   const resParams = {};
 
   // If there is a session cookie, pass the cookie and matching user name before rendering the page.
   if (!sessionID) {
-    res.render('temp_login', { sessionID: null });
+
+    // REMINDER: Need to eventually replace with collections_index.
+    res.render('temp_collections_index', { sessionID: null });
   } else {
     database.getNameByUserID(sessionID)
     .then(data => {
@@ -20,17 +22,18 @@ router.get('/collections', (req, res) => {
       resParams.sessionID = sessionID;
       console.log('resParams =', resParams)
     })
-    .then(() => res.render('temp_login', resParams));
-  }
 
-  // REMINDER: Need to eventually replace with collections_index.
-  res.render('temp_collections_index');
+    // REMINDER: Need to eventually replace with collections_index.
+    .then(() => res.render('temp_collections_index', resParams));
+  }
 });
 
 
 // 2. GET /collections/new - The end-user wants to save a new resource.
 // NOTE: GET /collections/new must go before GET collections/:id, otherwise, '/new' will be misinterpreted as a '/:id' variable.
-router.get('/collections/new', (req, res) => res.render('collections_new'));
+router.get('/collections/new', (req, res) => {
+  res.render('collections_new');
+});
 
 
 // 3. GET /collections/:id - The end-user wants to see a particular resource.
