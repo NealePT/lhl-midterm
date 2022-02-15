@@ -126,5 +126,5 @@ app.post('/login', loginRoutes);
 // POST /logout
 app.post('/logout', logoutRoutes);
 
-// POST /search/:id
-app.post('/search/:id', searchRoutes);
+// POST /search
+app.post('/search', searchRoutes);
