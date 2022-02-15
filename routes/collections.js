@@ -4,7 +4,6 @@ const express = require('express');
 const { user } = require('pg/lib/defaults');
 const router  = express.Router();
 const database = require('../database'); // Contains all SQL query functions.
-const addStars = require('../public/scripts/ratings');
 
 // 1. GET /collection - The end user wants to see all collections.
 router.get('/collections', (req, res) => {
@@ -63,10 +62,6 @@ router.get('/collections/:id', (req, res) => {
   // Get all the comments.
   .then(() => database.getComments(resourcesID))
   .then(data => resParams.comments = data)
-
-
-  .then(() => addStars())
-
 
   // Pass in the relevant data (resParams) and render the page.
   .then(() => {res.render('collections_show2', resParams)});
