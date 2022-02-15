@@ -3,7 +3,7 @@
 // Dependencies
 const express = require('express');
 const router = express.Router();
-const database = require('../database');
+const database = require('../database'); //contains all SQL query functions
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -16,7 +16,7 @@ router.get('/users/:id', (req, res) => {
 
   const resourceID = req.params.id;
   console.log("PARAMS", req.params.id);
-  const userID = 1; //id = 4 is a guest id (for testing)
+  const userID = 4; //id = 4 is a guest id (for testing)
   const resParams = { resourceID: resourceID, userID: userID };
   res.render('temp_users_index', resParams);
 });
