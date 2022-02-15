@@ -15,7 +15,7 @@ router.get('/register', (req, res) => {
   } else {
     database.getNameByUserID(sessionID)
     .then(data => {
-      resParams.name = data.name;
+      resParams.username = data.name;
       resParams.sessionID = sessionID;
     })
     .then(() => res.render('register', resParams));

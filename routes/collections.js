@@ -18,7 +18,7 @@ router.get('/collections', (req, res) => {
   } else {
     database.getNameByUserID(sessionID)
     .then(data => {
-      resParams.name = data.name;
+      resParams.username = data.name;
       resParams.sessionID = sessionID;
     })
 
@@ -42,7 +42,7 @@ router.get('/collections/new', (req, res) => {
   } else {
     database.getNameByUserID(sessionID)
     .then(data => {
-      resParams.name = data.name;
+      resParams.username = data.name;
       resParams.sessionID = sessionID;
     })
     .then(() => res.render('collections_new', resParams));
@@ -67,7 +67,7 @@ router.get('/collections/:id', (req, res) => {
     resParams.description = data.description;
     resParams.category = data.category;
     resParams.url = data.url;
-    resParams.name = data.name;
+    resParams.publisher = data.name;
   })
 
   // Get the two dates from the resources table.
