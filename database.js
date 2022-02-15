@@ -12,7 +12,7 @@ const getResourceDetails = resourceID => {
   WHERE resources.id = $1;
   `;
   return db.query(query, values)
-  .then(res => res.rows[0]);
+    .then(res => res.rows[0]);
 };
 exports.getResourceDetails = getResourceDetails;
 
@@ -26,7 +26,7 @@ const getResourceDates = resourceID => {
   WHERE id = $1;
   `;
   return db.query(query, values)
-  .then(res => res.rows[0]);
+    .then(res => res.rows[0]);
 };
 exports.getResourceDates = getResourceDates;
 
@@ -39,7 +39,7 @@ const getRating = resourceID => {
   WHERE resource_id = $1;
   `;
   return db.query(query, values)
-  .then(res => res.rows[0]);
+    .then(res => res.rows[0]);
 };
 exports.getRating = getRating;
 
@@ -61,7 +61,7 @@ const checkRating = (ownerID, resourceID) => {
     AND resource_id = $2;
   `;
   return db.query(query, values)
-  .then(res => res.rows[0]);
+    .then(res => res.rows[0]);
 };
 exports.checkRating = checkRating;
 
@@ -74,7 +74,7 @@ const getLikes = resourceID => {
   WHERE resource_id = $1;
   `;
   return db.query(query, values)
-  .then(res => res.rows[0]);
+    .then(res => res.rows[0]);
 };
 exports.getLikes = getLikes;
 
@@ -93,7 +93,7 @@ const removeLike = (resourceID, ownerID) => {
   const query = `
   DELETE FROM resource_likes
   WHERE owner_id = $1
-   AND resource_id = $2;
+  AND resource_id = $2;
   `;
   return db.query(query, values);
 };
@@ -101,13 +101,13 @@ exports.removeLike = removeLike;
 
 const checkLike = (resourceID, ownerID) => {
   const values = [ownerID, resourceID];
-  const query =`
+  const query = `
   SELECT * FROM resource_likes
   WHERE owner_id = $1
     AND resource_id = $2;
   `;
   return db.query(query, values)
-  .then(res => res.rows[0]);
+    .then(res => res.rows[0]);
 };
 exports.checkLike = checkLike;
 
@@ -123,7 +123,7 @@ const getComments = resourceID => {
   LIMIT 10;
   `;
   return db.query(query, values)
-  .then(res => res.rows);
+    .then(res => res.rows);
 };
 exports.getComments = getComments;
 
@@ -137,7 +137,7 @@ const addComment = (ownerID, resourceID, comment) => {
   RETURNING *;
   `;
   return db.query(query, values)
-  .then(res => res.rows[0]);
+    .then(res => res.rows[0]);
 };
 exports.addComment = addComment;
 
@@ -149,8 +149,8 @@ const addResource = (ownerID, title, description, url, category) => {
   RETURNING *;
   `;
   return db.query(query, values)
-  .then(res => res.rows[0]);
-}
+    .then(res => res.rows[0]);
+};
 exports.addResource = addResource;
 
 const updateResource = (resourceID, newTitle, newDescription, newCategory, newURL) => {
@@ -186,7 +186,7 @@ const getUserByEmail = (email) => {
   `;
   return db.query(query, values)
     .then(res => res.rows[0]);
-}
+};
 exports.getUserByEmail = getUserByEmail;
 
 const getNameBySessionID = sessionID => {
@@ -196,7 +196,7 @@ const getNameBySessionID = sessionID => {
   WHERE id = $1;
   `;
   return db.query(query, values)
-  .then(res => res.rows[0]);
+    .then(res => res.rows[0]);
 };
 exports.getNameBySessionID = getNameBySessionID;
 
@@ -213,7 +213,7 @@ const getSearchResults = searchPhrase => {
     LIMIT 20;
   `;
   return db.query(query, values)
-  .then(res => res.rows);
-}
+    .then(res => res.rows);
+};
 exports.getSearchResults = getSearchResults;
 
