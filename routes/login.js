@@ -40,10 +40,11 @@ router.post('/login', (req, res) => {
       if (bcrypt.compareSync(password, hashedPassword)) {
         req.session.user_id = data.id;
         const sessionID = req.session.user_id;
+        res.redirect('/login');
+      } else {
+        res.status(400).send('Incorrect password. <a href="/login">Please try again.</a>');
       }
-      res.redirect('/login');
     }
-
   });
 });
 
