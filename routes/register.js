@@ -6,10 +6,20 @@ const database = require('../database'); // Contains all SQL query functions.
 
 // GET /register
 router.get('/register', (req, res) => {
+  const sessionID = req.session.user_id;
+  const resParams = {};
 
-
-
-  res.render('register');
+  // If there is a session cookie, pass the cookie and matching user name before rendering the page.
+  if (!sessionID) {
+    res.render('temp_login', { sessionID: null });
+  } else {
+    database.getNameByUserID(sessionID)
+    .then(data => {
+      resParams.name = data.name;
+      resParams.sessionID = sessionID;
+    })
+    .then(() => res.render('register', resParams));
+  }
 });
 
 
