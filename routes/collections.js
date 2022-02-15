@@ -7,6 +7,22 @@ const database = require('../database'); // Contains all SQL query functions.
 
 // 1. GET /collection - The end user wants to see all collections.
 router.get('/collections', (req, res) => {
+  const sessionID = req.session.user_id;
+  const resParams = {};
+
+  // If there is a session cookie, pass the cookie and matching user name before rendering the page.
+  if (!sessionID) {
+    res.render('temp_login', { sessionID: null });
+  } else {
+    database.getNameByUserID(sessionID)
+    .then(data => {
+      resParams.name = data.name;
+      resParams.sessionID = sessionID;
+      console.log('resParams =', resParams)
+    })
+    .then(() => res.render('temp_login', resParams));
+  }
+
   // REMINDER: Need to eventually replace with collections_index.
   res.render('temp_collections_index');
 });
