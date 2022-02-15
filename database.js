@@ -221,3 +221,16 @@ const getSearchResults = searchPhrase => {
     .then(res => res.rows);
 };
 exports.getSearchResults = getSearchResults;
+
+const addUser = (name, email, hashedPassword) => {
+  const values = [name, email, hashedPassword];
+  const query = `
+  INSERT INTO users (name, email, password)
+  VALUES ($1, $2, $3)
+  RETURNING *;
+  `;
+
+  return db.query(query, values)
+  .then(res => res.rows[0]);
+};
+exports.addUser = addUser;
