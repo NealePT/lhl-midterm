@@ -1,0 +1,116 @@
+<!-- REMINDER: Change extension to .ejs before pushing to -b master. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" type="text/css">
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="../styles/collections_show.css">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/scripts/ratings.js"></script>
+
+  <title>Resource Page</title>
+</head>
+<body>
+  <%- include('partials/_header') %>
+  <main>
+
+    <!-- Header section - START -->
+    <header>
+      <div id="publication-info">
+        <div>
+          <span>Posted by <%= name %> | </span>
+          <span><%= date_created %><%= date_modified ? ` (Edited: ${date_modified})`: ''  %></span>
+          <span><a href="/collections/<%= resourceID %>/update">Update</a></span>
+        </div>
+        <div>
+          <% if(!checkLike) { %>
+            <form action="/collections/<%= resourceID  %>/like" method="POST">
+              <span><%= avgRating ? `${avgRating}/5 Rating` : '(No ratings yet)' %> | </span>
+              <span><%= likes ? likes : 0 %> Likes</span>
+              <button id="like-button" type="submit"><i id="like-heart" class="fa-solid fa-heart"></i></button>
+            </form>
+          <% } else { %>
+            <form action="/collections/<%= resourceID  %>/unlike" method="POST">
+              <span><%= avgRating ? `${avgRating}/5 Rating` : '(No ratings yet)' %> | </span>
+              <span><%= likes ? likes : 0 %> Likes</span>
+              <button id="like-button" type="submit"><i id="unlike-heart" class="fa-solid fa-heart"></i></button>
+            </form>
+          <% } %>
+        </div>
+      </div>
+      <div id="resource-info">
+
+        <div>
+          <h1 id="resource-title"><%= title %></h1>
+        </div>
+
+        <div id="url">
+          <p><a href="<%= url %>"><%= url %></a></p>
+        </div>
+
+        <div>
+          <span id="resource-category"> <%= category %> </span>
+        </div>
+      </div>
+    </header>
+    <!-- Header section - END -->
+
+    <article>
+
+      <!-- Description section -->
+      <section id="description">
+        <p><%= description %></p>
+      </section>
+
+      <!-- Ratings section -->
+      <section id="rating-buttons">
+
+        <div id="jQuery-stars"></div>
+
+      </section>
+
+      <!-- Comments section -->
+      <section id="comments-section">
+
+        <div>
+          <form id="comment-textbox" action="/collections/<%= resourceID  %>/comment" method="POST">
+            <label for="comment-text"></label>
+            <textarea id="comment-textarea" name="comment-text" rows="5" cols="100" placeholder="What are your thoughts?"></textarea>
+            <button id="comment-button" type="submit">Comment</button>
+          </form>
+        </div>
+
+        <div id="comments-all">
+          <% if (comments.length === 0) { %>
+            <span class="comment-details">
+              <p class="comment-body">Leave the first comment!</p>
+            </span>
+          <% } %>
+
+          <% if (comments.length > 0) { %>
+            <% for (const obj of comments) { %>
+              <span class="comment-details">
+                <p class="user-name"><b><%= obj.name %></b></p>
+                <p class="comment-body"><%= obj.comment %></p>
+              </span>
+            <% } %>
+          <% } %>
+        </div>
+      </section>
+
+    </article>
+  </main>
+</body>
+</html>
