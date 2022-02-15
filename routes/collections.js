@@ -64,7 +64,7 @@ router.get('/collections/:id', (req, res) => {
   .then(data => resParams.comments = data)
 
   // Pass in the relevant data (resParams) and render the page.
-  .then(() => {res.render('collections_show2', resParams)});
+  .then(() => {res.render('collections_show', resParams)});
 });
 
 
