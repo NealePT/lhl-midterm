@@ -189,8 +189,8 @@ const getUserByEmail = (email) => {
 };
 exports.getUserByEmail = getUserByEmail;
 
-const getNameBySessionID = sessionID => {
-  const values = [sessionID];
+const getNameByUserID = userID => {
+  const values = [userID];
   const query = `
   SELECT name FROM users
   WHERE id = $1;
@@ -198,7 +198,7 @@ const getNameBySessionID = sessionID => {
   return db.query(query, values)
     .then(res => res.rows[0]);
 };
-exports.getNameBySessionID = getNameBySessionID;
+exports.getNameByUserID = getNameByUserID;
 
 const getSearchResults = searchPhrase => {
   const values = [searchPhrase];

@@ -14,7 +14,7 @@ router.get('/login', (req, res) => {
   }
 
   if (sessionID) {
-    database.getNameBySessionID(sessionID)
+    database.getNameByUserID(sessionID)
     .then(data => {
       resParams.name = data.name;
       resParams.sessionID = sessionID;
