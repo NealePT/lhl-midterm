@@ -209,9 +209,11 @@ const getSearchResults = searchPhrase => {
     OR description LIKE '%' || $1 || '%'
     OR category LIKE '%' || $1 || '%'
     OR url LIKE '%' || $1 || '%'
-    ORDER BY title;
+    ORDER BY title
+    LIMIT 20;
   `;
   return db.query(query, values)
   .then(res => res.rows);
 }
 exports.getSearchResults = getSearchResults;
+
