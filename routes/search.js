@@ -3,6 +3,12 @@ const express = require('express');
 const router  = express.Router();
 const database = require('../database'); // Contains all SQL query functions.
 
+// 1. GET /collection - The end user wants to see all collections.
+router.get('/search', (req, res) => {
+  // REMINDER: Need to eventually replace with collections_index.
+  res.render('defaultSearchPage');
+});
+
 // 8. GET /search/:id - The end-user wants to find a resource using a specific search phrase.
 router.get('/search/:id', (req, res) => {
   const searchPhrase = req.params.id;

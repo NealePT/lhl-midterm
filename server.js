@@ -37,7 +37,7 @@ app.use(
 app.use(cookieSession({
   name: 'session',
   keys: ["10402653-0874-4a4c-8651-d371cb67ef89", "c6643aa1-fa8e-414b-9208-2c69c6254623"]
-}))
+}));
 
 app.use(express.static("public"));
 
@@ -89,8 +89,10 @@ app.get('/register', registerRoutes);
 app.get('/login', loginRoutes);
 app.post('/login', loginRoutes);
 
-// 8. GET /search/:id
+// 8. GET /search/
+app.get('/search', searchRoutes);
 app.get('/search/:id', searchRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`Resource Haven is listening on http://localhost:${PORT}/`);
