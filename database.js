@@ -199,3 +199,19 @@ const getNameBySessionID = sessionID => {
   .then(res => res.rows[0]);
 };
 exports.getNameBySessionID = getNameBySessionID;
+
+const getSearchResults = searchPhrase => {
+  const values = [searchPhrase];
+  const query = `
+  SELECT title, url
+  FROM resources
+  WHERE title LIKE '%' || $1 || '%'
+    OR description LIKE '%' || $1 || '%'
+    OR category LIKE '%' || $1 || '%'
+    OR url LIKE '%' || $1 || '%'
+    ORDER BY title;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows);
+}
+exports.getSearchResults = getSearchResults;
