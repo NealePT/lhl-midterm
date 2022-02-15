@@ -27,16 +27,23 @@ router.get('/login', (req, res) => {
 // POST /login
 router.post('/login', (req, res) => {
   const email = req.body.email;
+  const password = req.body.password;
 
   database.getUserByEmail(email)
   .then(data => {
     if (!data) {
-      res.status(400).send('Incorrect email or password. <a href="/login">Please try again</a>');
+      res.status(400).send(`
+      ${email} is not a registered email.\n <a href="/register">Click here to register.</a>
+      `);
     } else {
-      req.session.user_id = data.id;
-      const sessionID = req.session.user_id;
+      const hashedPassword = data.password;
+      if (bcrypt.compareSync(password, hashedPassword)) {
+        req.session.user_id = data.id;
+        const sessionID = req.session.user_id;
+      }
       res.redirect('/login');
     }
+
   });
 });
 
