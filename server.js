@@ -50,6 +50,7 @@ const collectionsRoutes = require('./routes/collections');
 const searchRoutes = require('./routes/search');
 const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
+const logoutRoutes = require('./routes/logout');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -120,4 +121,7 @@ app.post('/collections/:id/rating', collectionsRoutes);
 app.post('/collections/:id/comment', collectionsRoutes);
 
 // POST /login
-app.post('/login', collectionsRoutes);
+app.post('/login', loginRoutes);
+
+// POST /logout
+app.post('/logout', logoutRoutes);
