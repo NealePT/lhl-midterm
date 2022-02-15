@@ -17,10 +17,12 @@ router.get('/login', (req, res) => {
     .then(data => {
       resParams.name = data.name;
       resParams.sessionID = sessionID;
-      console.log('resParams =', resParams)
+      console.log('resParams =', resParams) // Remove test code.
     })
     .then(() => res.render('login', resParams));
   }
+
+
 });
 
 
