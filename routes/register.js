@@ -6,8 +6,10 @@ const database = require('../database'); // Contains all SQL query functions.
 
 // GET /register
 router.get('/register', (req, res) => {
-  // REMINDER: Need to rename to register.ejs.
-  res.render('temp_register');
+
+
+
+  res.render('register');
 });
 
 
