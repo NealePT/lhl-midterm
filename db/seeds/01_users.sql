@@ -1,6 +1,3 @@
--- Fake data
--- password = $2b$10$cLKCIcK26YHzcp4rM8MucOdi37M7U3rr7qH/pV.TsJn
-
 INSERT INTO users (name, email, password)
 VALUES ('Guest', 'guest@gmail.com', 'password'),
 ('Neale Taylor', 'ntaylor@gmail.com', 'password'),
