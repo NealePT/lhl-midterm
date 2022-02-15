@@ -203,6 +203,43 @@ exports.getNameBySessionID = getNameBySessionID;
 const getSearchResults = searchPhrase => {
   const values = [searchPhrase];
   const query = `
+  SELECT title, url, category, description, date_created, users.name as username, ROUND( AVG(resource_ratings.rating)::numeric, 1 ) as avgrating, count(resource_likes.id) as numlikes, count(resource_comments.comment) as numcomments
+  FROM resources
+  LEFT JOIN users ON owner_id = users.id
+  LEFT JOIN resource_ratings ON resources.id = resource_ratings.resource_id
+  LEFT JOIN resource_likes ON resources.id = resource_likes.resource_id
+  LEFT JOIN resource_comments ON resources.id = resource_comments.resource_id
+  WHERE title LIKE '%' || $1 || '%'
+    OR description LIKE '%' || $1 || '%'
+    OR category LIKE '%' || $1 || '%'
+    OR url LIKE '%' || $1 || '%'
+  GROUP BY title, url, description, date_created, category, users.name
+  ORDER BY title
+  LIMIT 10
+  `;
+  return db.query(query, values)
+    .then(res => res.rows);
+};
+exports.getSearchResults = getSearchResults;
+
+/*
+SELECT title, url, category, description, date_created, users.name, AVG(resource_ratings.rating) as avgRating, count(resource_likes.id) as numLikes, count(resource_comments.comment) as numComments
+FROM resources
+LEFT JOIN users ON owner_id = users.id
+LEFT JOIN resource_ratings ON resources.id = resource_ratings.resource_id
+LEFT JOIN resource_likes ON resources.id = resource_likes.resource_id
+LEFT JOIN resource_comments ON resources.id = resource_comments.resource_id
+WHERE title LIKE '%' || $1 || '%'
+  OR description LIKE '%' || $1 || '%'
+  OR category LIKE '%' || $1 || '%'
+  OR url LIKE '%' || $1 || '%'
+GROUP BY title, url, description, date_created, category, users.name
+ORDER BY title
+LIMIT 10
+;
+*/
+
+/*
   SELECT title, url
   FROM resources
   WHERE title LIKE '%' || $1 || '%'
@@ -210,10 +247,6 @@ const getSearchResults = searchPhrase => {
     OR category LIKE '%' || $1 || '%'
     OR url LIKE '%' || $1 || '%'
     ORDER BY title
-    LIMIT 20;
+    LIMIT 10;
   `;
-  return db.query(query, values)
-    .then(res => res.rows);
-};
-exports.getSearchResults = getSearchResults;
-
+  */

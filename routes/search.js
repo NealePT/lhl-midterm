@@ -9,10 +9,10 @@ router.get('/search/:id', (req, res) => {
   const resParams = {};
 
   database.getSearchResults(searchPhrase)
-  .then(data => {
-    resParams.searchResults = data;
-  })
-  .then(() => res.render('temp_search', resParams));
+    .then(data => {
+      resParams.searchResults = data;
+    })
+    .then(() => res.render('temp_search', resParams));
 });
 
 // POST /search
