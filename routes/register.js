@@ -16,7 +16,7 @@ router.get('/register', (req, res) => {
   res.render('temp_register');
 });
 
-
+// Helper function for POST /register
 const addUser = (db, user) => {
   const queryString = `
   INSERT INTO users (name, email, password)
@@ -33,6 +33,7 @@ const addUser = (db, user) => {
     });
 };
 
+// POST /register
 router.post("/register", (req, res) => {
   const newUser = req.body;
   const email = req.body.email;
