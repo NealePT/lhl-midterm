@@ -16,10 +16,13 @@
         <a class="nav-link" href="/collections/new">Add to Collection</a>
       </li>
     </ul>
-    <form action="/search" method="GET" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+
+    <form action="/search" method="POST" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" name="search-phrase"  placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
     </form>
+
+
     <form action="/login" method="GET" style="margin: auto 5px;">
       <button type="submit" class="btn btn-outline-secondary">Login</button>
     </form>
