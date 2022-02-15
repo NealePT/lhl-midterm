@@ -9,8 +9,9 @@ router.get('/login', (req, res) => {
   const sessionID = req.session.user_id;
   const resParams = {};
 
+  // If there is a session cookie, pass the cookie and matching user name before rendering the page.
   if (!sessionID) {
-    res.render('temp_login', { sessionID: null });
+    res.render('login', { sessionID: null });
   } else {
     database.getNameByUserID(sessionID)
     .then(data => {
@@ -18,7 +19,7 @@ router.get('/login', (req, res) => {
       resParams.sessionID = sessionID;
       console.log('resParams =', resParams)
     })
-    .then(() => res.render('temp_login', resParams));
+    .then(() => res.render('login', resParams));
   }
 });
 
