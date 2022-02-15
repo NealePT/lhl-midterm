@@ -47,24 +47,22 @@
   </nav>
 
 <main>
-  <form action="/search" method="POST" class="form-inline my-2 my-lg-0">
+  <form class="searchBar" action="/search" method="POST" class="form-inline my-2 my-lg-0">
     <input class="form-control mr-sm-2" type="search" name="search-phrase"  placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+    <button class="btn btn-light" type="submit">Search</button>
   </form>
   <h2>Search Results: </h2>
   <div class="resultsContainer">
     <% for (const result of searchResults) { %>
     <article class="result">
       <header class="resultHeader">
-        <div class="headerLeft">
-          <p class="resultAuthor"><%= result.username %></p>
-        </div>
-        <div class="headerRight">
-        <p class="resultCreatedAt"><%= result["date_created"] %></p>
-        </div>
+        <span>Posted by <%= result.username %> | </span>
+        <span><%= result['date_created'] %><%= result['date_modified'] ? ` (Edited: ${result['date_modified']})`: ''  %></span>
       </header>
       <section class="resultMain">
+        <a href="/collections/<%= result.id %>">
         <h4 class="resultTitle"><%= result.title %></h4>
+        </a>
         <a class="resultURL" href="<%= result.url %>"><%= result.url%></a>
       </section>
       <footer class="resultFooter">
