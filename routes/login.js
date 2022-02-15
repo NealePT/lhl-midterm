@@ -11,13 +11,12 @@ router.get('/login', (req, res) => {
 
   if (!sessionID) {
     res.render('temp_login', { sessionID: null });
-  }
-
-  if (sessionID) {
+  } else {
     database.getNameByUserID(sessionID)
     .then(data => {
       resParams.name = data.name;
       resParams.sessionID = sessionID;
+      console.log('resParams =', resParams)
     })
     .then(() => res.render('temp_login', resParams));
   }
