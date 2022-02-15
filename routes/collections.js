@@ -20,7 +20,6 @@ router.get('/collections', (req, res) => {
     .then(data => {
       resParams.name = data.name;
       resParams.sessionID = sessionID;
-      console.log('resParams =', resParams)
     })
 
     // REMINDER: Need to eventually replace with collections_index.
@@ -32,7 +31,21 @@ router.get('/collections', (req, res) => {
 // 2. GET /collections/new - The end-user wants to save a new resource.
 // NOTE: GET /collections/new must go before GET collections/:id, otherwise, '/new' will be misinterpreted as a '/:id' variable.
 router.get('/collections/new', (req, res) => {
-  res.render('collections_new');
+  const sessionID = req.session.user_id;
+  const resParams = {};
+
+  // If there is a session cookie, pass the cookie and matching user name before rendering the page.
+  if (!sessionID) {
+    res.render('collections_new', { sessionID: null });
+  } else {
+    database.getNameByUserID(sessionID)
+    .then(data => {
+      resParams.name = data.name;
+      resParams.sessionID = sessionID;
+      console.log('resParams =', resParams) // Need to remove.
+    })
+    .then(() => res.render('collections_new', resParams));
+  }
 });
 
 
