@@ -87,14 +87,12 @@ app.get('/register', registerRoutes);
 
 // 7. GET /login
 app.get('/login', loginRoutes);
+
+// POST /login
 app.post('/login', loginRoutes);
 
 // 8. GET /search/:id
 app.get('/search/:id', searchRoutes);
-
-app.listen(PORT, () => {
-  console.log(`Resource Haven is listening on http://localhost:${PORT}/`);
-});
 
 // POST /register
 app.post('/register', registerRoutes);
@@ -128,3 +126,7 @@ app.post('/logout', logoutRoutes);
 
 // POST /search
 app.post('/search', searchRoutes);
+
+app.listen(PORT, () => {
+  console.log(`Resource Haven is listening on http://localhost:${PORT}/`);
+});
