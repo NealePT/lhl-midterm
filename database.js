@@ -115,7 +115,7 @@ exports.checkLike = checkLike;
 const getComments = resourceID => {
   const values = [resourceID];
   const query = `
-  SELECT name, comment
+  SELECT name AS commenter ,comment
   FROM users
   JOIN resource_comments ON owner_id = users.id
   WHERE resource_id = $1
