@@ -1,20 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Temp Document</title>
+  <title>User's Profile</title>
+
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/profile_header.css" type="text/css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
+
 <body>
-  <h1>temp_users_index.ejs</h1>
-  <a href="/collections">GET /collections</a><br><br>
-  <a href="/collections/new">GET /collections/new</a><br><br>
-  <a href="/collections/user123">GET /collections/:id</a><br><br>
-  <a href="/collections/user123/update">GET /collections/:id/update</a><br><br>
-  <a href="/users/user123">GET /users/:id</a><br><br>
-  <a href="/search/lemons">GET /search/:id</a><br><br>
-  <a href="/register">GET /register</a><br><br>
-  <a href="/login ">GET /login</a><br><br>
+  <%- include('partials/_header') %>
+
+    <!-- <div class="container user-profile">
+      <div class="profile-img">
+      </div>
+      <div class="user-name">
+        <p>Tony Stark</p>
+      </div>
+    </div> -->
+
+    <section>
+      <div class="recent-likes">
+        <h2>Recent Likes</h2>
+      </div>
+      <div class="card-deck">
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+            <a href="/collections/<%= resourceID %>/update">
+              <button type="submit" class="btn btn-outline-light">Edit</button>
+            </a>
+          </div>
+        </div>
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+            <a href="/collections/<%= resourceID %>/update">
+              <button type="button" class="btn btn-outline-light">Edit</button>
+            </a>
+          </div>
+        </div>
+        <div class=" card text-white bg-dark mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.
+            </p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+            <a href="/collections/<%= resourceID %>/update">
+              <button type="submit" class="btn btn-outline-light">Edit</button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="user-collection">
+        <h2>User's Collection</h2>
+      </div>
+      <div class="card-deck">
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+            <a href="/collections/<%= resourceID %>/update">
+              <button type="submit" class="btn btn-outline-light">Edit</button>
+            </a>
+          </div>
+        </div>
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+            <a href="/collections/<%= resourceID %>/update">
+              <button type="submit" class="btn btn-outline-light">Edit</button>
+            </a>
+          </div>
+        </div>
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+            <a href="/collections/<%= resourceID %>/update">
+              <button type="submit" class="btn btn-outline-light">Edit</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
 </body>
+
 </html>
