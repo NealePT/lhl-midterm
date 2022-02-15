@@ -16,5 +16,12 @@
   <a href="/search/lemons">GET /search/:id</a><br><br>
   <a href="/register">GET /register</a><br><br>
   <a href="/login ">GET /login</a><br><br>
+
+
+  <% for (const result of searchResults) { %>
+    <p><%= result.title %></p>
+    <p><%= result.url %></p>
+  <% } %>
+
 </body>
 </html>
