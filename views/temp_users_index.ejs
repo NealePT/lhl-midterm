@@ -75,11 +75,17 @@
       <div class="card-deck">
         <div class="card text-white bg-dark mb-3">
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <h5 class="card-title">
+              <%= title %>
+            </h5>
+            <p class="card-text">
+              <%= description %>
+            </p>
           </div>
           <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
+            <small class="text-muted">
+              <%= date_created %>
+            </small>
             <a href="/collections/<%= resourceID %>/update">
               <button type="submit" class="btn btn-outline-light">Edit</button>
             </a>
