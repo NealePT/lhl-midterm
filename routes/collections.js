@@ -36,13 +36,14 @@ router.get('/collections/new', (req, res) => {
 
   // If there is a session cookie, pass the cookie and matching user name before rendering the page.
   if (!sessionID) {
-    res.render('collections_new', { sessionID: null });
+    return res.status(404).send(`
+      Please <a href="/login">login</a> to view this page.
+    `);
   } else {
     database.getNameByUserID(sessionID)
     .then(data => {
       resParams.name = data.name;
       resParams.sessionID = sessionID;
-      console.log('resParams =', resParams) // Need to remove.
     })
     .then(() => res.render('collections_new', resParams));
   }
@@ -51,11 +52,13 @@ router.get('/collections/new', (req, res) => {
 
 // 3. GET /collections/:id - The end-user wants to see a particular resource.
 router.get('/collections/:id', (req, res) => {
+  const sessionID = req.session.user_id; // sessionID = userID
   const resourcesID = req.params.id;
-  const userID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
+
+  // const userID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
   const resParams = {
     resourceID: resourcesID,
-    userID: userID
+    userID: sessionID
   };
 
   // Get most of the relevant properties from the resources & users tables.
@@ -80,7 +83,7 @@ router.get('/collections/:id', (req, res) => {
   .then(data => resParams.avgRating = data.rating)
 
   // Get the user's rating.
-  .then(() => database.checkRating(userID, resourcesID))
+  .then(() => database.checkRating(sessionID, resourcesID))
   .then(data => data ? resParams.userRating = data.rating : resParams.userRating = 0)
 
   // Get the total number of likes.
@@ -88,7 +91,7 @@ router.get('/collections/:id', (req, res) => {
   .then(data => resParams.likes = data.likes)
 
   // Check if the user has already liked the page
-  .then(() => database.checkLike(resourcesID, userID))
+  .then(() => database.checkLike(resourcesID, sessionID))
   .then(data => data ? resParams.checkLike = true : resParams.checkLike = false)
 
   // Get all the comments.
