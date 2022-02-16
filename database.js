@@ -1,5 +1,6 @@
 // Dependencies
 const { Pool } = require("pg");
+const { database } = require("pg/lib/defaults");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 
@@ -263,5 +264,64 @@ const getAllLikedResources = (resourceID) => {
 
   return db.query(query, value).then((res) => res.rows);
 };
-
 exports.getAllLikedResources = getAllLikedResources;
+
+const getRandomVideoResources = limit => {
+  const values = [limit];
+  const query = `
+  SELECT resources.*, name
+  FROM resources
+  JOIN users ON users.id = owner_id
+  WHERE category = 'video'
+  ORDER BY RANDOM()
+  LIMIT $1;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows);
+}
+exports.getRandomVideoResources = getRandomVideoResources;
+
+const getRandomBlogResources = limit => {
+  const values = [limit];
+  const query = `
+  SELECT resources.*, name
+  FROM resources
+  JOIN users ON users.id = owner_id
+  WHERE category = 'blog'
+  ORDER BY RANDOM()
+  LIMIT $1;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows);
+}
+exports.getRandomBlogResources = getRandomBlogResources;
+
+const getRandomTutorialResources = limit => {
+  const values = [limit];
+  const query = `
+  SELECT resources.*, name
+  FROM resources
+  JOIN users ON users.id = owner_id
+  WHERE category = 'tutorial'
+  ORDER BY RANDOM()
+  LIMIT $1;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows);
+}
+exports.getRandomTutorialResources = getRandomTutorialResources;
+
+const getRandomNewsResources = limit => {
+  const values = [limit];
+  const query = `
+  SELECT resources.*, name
+  FROM resources
+  JOIN users ON users.id = owner_id
+  WHERE category = 'news'
+  ORDER BY RANDOM()
+  LIMIT $1;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows);
+}
+exports.getRandomNewsResources = getRandomNewsResources;
