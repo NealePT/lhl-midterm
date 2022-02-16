@@ -66,39 +66,23 @@
             </span>
           </header>
           <section class="resultMain">
-            <a href="/collections/<%= result.id %>">
-              <h4 class="resultTitle">
-                <%= result.title %>
-              </h4>
-            </a>
-            <a class="resultURL" href="<%= result.url %>">
-              <%= result.url%>
-            </a>
-          </section>
-          <footer class="resultFooter">
-            <div class="footDiv" class="likes">
-              <i id="heart" class="fas fa-heart"></i>
-              <p>Likes: </p>
-              <p>
-                <%= result.numlikes %>
-              </p>
-
+            <div class="mainLeft">
+              <a href="/collections/<%= result.id %>">
+                <h4 class="resultTitle">
+                  <%= result.title %>
+                </h4>
+              </a>
+              <a class="resultURL" href="<%= result.url %>">
+                <%= result.url%>
+              </a>
             </div>
-            <div class="footDiv" class="comments">
-              <i id="comments" class="fas fa-comments"></i>
-              <p>Comments: </p>
-              <p>
-                <%= result.numcomments %>
-              </p>
-            </div>
-            <div class="footDiv" class="rating">
+            <div class="mainRight" class="rating">
               <i id="star" class="fas fa-star"></i>
-              <p>Rating: </p>
               <p>
                 <%= result.avgrating %>
               </p>
             </div>
-          </footer>
+          </section>
         </article>
         <% } %>
     </div>

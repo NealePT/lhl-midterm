@@ -12,14 +12,14 @@ router.get('/search', (req, res) => {
     res.render('defaultSearchPage', { sessionID: null });
   } else {
     database.getNameByUserID(sessionID)
-    .then(data => {
-      resParams.username = data.name;
-      resParams.sessionID = sessionID;
-    })
+      .then(data => {
+        resParams.username = data.name;
+        resParams.sessionID = sessionID;
+      })
 
     // REMINDER: Remove test code
-    .then(() => console.log('GET /search =', resParams))
-    .then(() => res.render('login', resParams));
+      .then(() => console.log('GET /search =', resParams))
+      .then(() => res.render('login', resParams));
   }
 
   // REMINDER: Need to rename to search_index.

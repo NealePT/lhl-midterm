@@ -33,28 +33,20 @@ h2 {
 .resultMain {
   margin-left: 2.5%;
   margin-right: 4%;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   overflow-wrap: break-word;
-}
-
-.resultFooter {
-  border-top: 2px solid #545149;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
   display: flex;
-  align-items: center;
-  height: 3em;
+  justify-content: space-between;
 }
 
-.resultFooter p {
-  font-size: 0.65em;
-  margin-left: 1.5%;
-  margin-top: 10px;
-
+.mainRight {
+  display: flex;
 }
 
-.footDiv i {
+.mainRight i {
   margin: 0px 10px 0px 20px;
+  font-size: 25px;
+  color: gold;
 }
 
 .result {
@@ -66,17 +58,6 @@ h2 {
   transition: box-shadow .3s;
   background-color: white;
 }
-
-.footDiv {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#heart {
-  margin-left: 3px;
-}
-
 
 .defaultSearch {
   margin-left: 2.5%;
