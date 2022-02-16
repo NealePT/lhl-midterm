@@ -30,8 +30,8 @@
       <section class="article-bodies">
         <% for (const trend of trendingResources) { %>
           <a style="text-decoration: none; color: inherit" href="/collections/<%= trend.id %>">
-            <div class="card-trending">
-              <div class="card-background"></div>
+            <div class="card_body">
+              <div class="trending-background"></div>
               <div class="card-details">
                 <div class="card_title">
                   <span><%= trend.title %></span>
@@ -42,7 +42,9 @@
                   <span><%= trend['public_date_created'] %></span>
                 </div>
               </div>
-            </div> <!-- </div class="card-trending"> -->
+
+
+            </div> <!-- </div class="card_body"> -->
           </a>
         <% } %>
       </section> <!-- </section class="article-bodies"> -->
@@ -56,8 +58,8 @@
       <section class="article-bodies">
         <% for (const video of videoResources) { %>
           <a style="text-decoration: none; color: inherit" href="/collections/<%= video.id %>">
-            <div class="card-trending">
-              <div class="card-background"></div>
+            <div class="card_body">
+              <div class="videos-background"></div>
               <div class="card-details">
                 <div class="card_title">
                   <span><%= video.title %></span>
@@ -68,7 +70,7 @@
                   <span><%= video['public_date_created'] %></span>
                 </div>
               </div>
-            </div> <!-- </div class="card-trending"> -->
+            </div> <!-- </div class="card_body"> -->
           </a>
         <% } %>
       </section> <!-- </section class="article-bodies"> -->
@@ -81,8 +83,8 @@
       <section class="article-bodies">
         <% for (const blog of blogResources) { %>
           <a style="text-decoration: none; color: inherit" href="/collections/<%= blog.id %>">
-            <div class="card-trending">
-              <div class="card-background"></div>
+            <div class="card_body">
+              <div class="blogs-background"></div>
               <div class="card-details">
                 <div class="card_title">
                   <span><%= blog.title %></span>
@@ -93,7 +95,7 @@
                   <span><%= blog['public_date_created'] %></span>
                 </div>
               </div>
-            </div> <!-- </div class="card-trending"> -->
+            </div> <!-- </div class="card_body"> -->
           </a>
         <% } %>
       </section> <!-- </section class="article-bodies"> -->
@@ -106,8 +108,8 @@
       <section class="article-bodies">
         <% for (const tutorial of blogResources) { %>
           <a style="text-decoration: none; color: inherit" href="/collections/<%= tutorial.id %>">
-            <div class="card-trending">
-              <div class="card-background"></div>
+            <div class="card_body">
+              <div class="tutorials-background"></div>
               <div class="card-details">
                 <div class="card_title">
                   <span><%= tutorial.title %></span>
@@ -118,7 +120,7 @@
                   <span><%= tutorial['public_date_created'] %></span>
                 </div>
               </div>
-            </div> <!-- </div class="card-trending"> -->
+            </div> <!-- </div class="card_body"> -->
           </a>
         <% } %>
       </section> <!-- </section class="article-bodies"> -->
@@ -132,8 +134,8 @@
 
         <% for (const news of newsResources) { %>
           <a style="text-decoration: none; color: inherit" href="/collections/<%= news.id %>">
-            <div class="card-trending">
-              <div class="card-background"></div>
+            <div class="card_body">
+              <div class="news-background"></div>
               <div class="card-details">
                 <div class="card_title">
                   <span><%= news.title %></span>
@@ -144,7 +146,7 @@
                   <span><%= news['public_date_created'] %></span>
                 </div>
               </div>
-            </div> <!-- </div class="card-trending"> -->
+            </div> <!-- </div class="card_body"> -->
           </a>
         <% } %>
 
