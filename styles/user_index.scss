@@ -1,23 +1,25 @@
 .user-profile {
-  margin-top: 100px;
-  background-color: black;
-  color: #fff;
+  margin-top: 50px;
+  background-color: #fff;
+  color: black;
   height: 200px;
-  max-width: 100%;
+  width: 100vw;
 }
 
 .card-deck {
-  display: inline-block;
-  // flex-direction: column-reverse;
+  display: inline-flex;
+  flex-direction: row;
+  // align-items: flex-start;
   justify-content: space-evenly;
 }
 
-div #resources-deck {
-  display: flex;
-  flex-direction: row !important;
-}
+// div #resources-deck {
+//   display: flex;
+//   flex-direction: row !important;
+// }
 
 .card {
+  // flex-direction: row;
   max-width: 375px;
   max-height: 300px;
 }
