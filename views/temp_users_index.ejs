@@ -8,7 +8,6 @@
   <title>User's Profile</title>
 
   <link rel="stylesheet" href="/styles/user_index.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/profile_header.css" type="text/css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
@@ -29,26 +28,29 @@
         <h2>Recent Likes</h2>
       </div>
       <% for (const like of likesResourceID) { %>
-        <div class="card-deck">
-          <div class="card text-white bg-dark mb-3">
-            <div class="card-body">
-              <h5 class="card-title">
-                <%= like.title %>
-              </h5>
-              <p class="card-text">
-                <%= like.description %>
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">
-                <%= like.date_created %>
-              </small>
-              <a href="/collections/<%= resourceID %>/update">
-                <button type="submit" class="btn btn-outline-light">Edit</button>
-              </a>
+        <div class="row row-cols-1">
+          <div class="col">
+            <div class="card text-white bg-dark mb-3">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= like.title %>
+                </h5>
+                <p class="card-text">
+                  <%= like.description %>
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">
+                  <%= like.date_created %>
+                </small>
+                <a href="/collections/<%= resourceID %>/update">
+                  <button type="submit" class="btn btn-outline-light">Edit</button>
+                </a>
+              </div>
             </div>
           </div>
         </div>
+
         <% } %>
 
 
