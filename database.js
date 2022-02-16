@@ -4,7 +4,7 @@ const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 
 // Get all properties from the resources & users tables for a specific resources id.
-const getResourceDetails = resourceID => {
+const getResourceDetails = (resourceID) => {
   const values = [resourceID];
   const query = `
   SELECT * FROM resources
@@ -17,7 +17,7 @@ const getResourceDetails = resourceID => {
 exports.getResourceDetails = getResourceDetails;
 
 // Get the two dates from the resources table in (Mon dd, yyyy) format for a specific resources id.
-const getResourceDates = resourceID => {
+const getResourceDates = (resourceID) => {
   const values = [resourceID];
   const query = `
   SELECT TO_CHAR(date_created, 'Mon dd, yyyy') AS date_created,
@@ -31,7 +31,7 @@ const getResourceDates = resourceID => {
 exports.getResourceDates = getResourceDates;
 
 // Get the average rating from the resource_ratings table for a specifc resources id.
-const getRating = resourceID => {
+const getRating = (resourceID) => {
   const values = [resourceID];
   const query = `
   SELECT ROUND(AVG(rating), 1) AS rating
@@ -66,7 +66,7 @@ const checkRating = (ownerID, resourceID) => {
 exports.checkRating = checkRating;
 
 // Get the total number of likes from the resource_likes table for a specific resources id.
-const getLikes = resourceID => {
+const getLikes = (resourceID) => {
   const values = [resourceID];
   const query = `
   SELECT COUNT(*) AS likes
@@ -112,10 +112,10 @@ const checkLike = (resourceID, ownerID) => {
 exports.checkLike = checkLike;
 
 // Get all the comments from the resource_comments table for a specific resource id.
-const getComments = resourceID => {
+const getComments = (resourceID) => {
   const values = [resourceID];
   const query = `
-  SELECT name, comment
+  SELECT name AS commenter ,comment
   FROM users
   JOIN resource_comments ON owner_id = users.id
   WHERE resource_id = $1
@@ -153,7 +153,13 @@ const addResource = (ownerID, title, description, url, category) => {
 };
 exports.addResource = addResource;
 
-const updateResource = (resourceID, newTitle, newDescription, newCategory, newURL) => {
+const updateResource = (
+  resourceID,
+  newTitle,
+  newDescription,
+  newCategory,
+  newURL
+) => {
   const values = [resourceID, newTitle, newDescription, newCategory, newURL];
   const query = `
   UPDATE resources
@@ -168,7 +174,7 @@ const updateResource = (resourceID, newTitle, newDescription, newCategory, newUR
 };
 exports.updateResource = updateResource;
 
-const deleteResource = resourceID => {
+const deleteResource = (resourceID) => {
   const values = [resourceID];
   const query = `
   DELETE FROM resources
@@ -189,8 +195,8 @@ const getUserByEmail = (email) => {
 };
 exports.getUserByEmail = getUserByEmail;
 
-const getNameBySessionID = sessionID => {
-  const values = [sessionID];
+const getNameByUserID = userID => {
+  const values = [userID];
   const query = `
   SELECT name FROM users
   WHERE id = $1;
@@ -198,7 +204,7 @@ const getNameBySessionID = sessionID => {
   return db.query(query, values)
     .then(res => res.rows[0]);
 };
-exports.getNameBySessionID = getNameBySessionID;
+exports.getNameByUserID = getNameByUserID;
 
 const getSearchResults = searchPhrase => {
   const values = [searchPhrase];
@@ -222,17 +228,40 @@ const getSearchResults = searchPhrase => {
 };
 exports.getSearchResults = getSearchResults;
 
+const addUser = (name, email, hashedPassword) => {
+  const values = [name, email, hashedPassword];
+  const query = `
+  INSERT INTO users (name, email, password)
+  VALUES ($1, $2, $3)
+  RETURNING *;
+  `;
 
-/*
-  SELECT resources.id as id, title, url, category, description, TO_CHAR(date_created, 'Mon dd, yyyy') AS date_created, TO_CHAR(date_modified, 'Mon dd, yyyy') AS date_modified, ROUND( AVG(resource_ratings.rating)::numeric, 1 ) as avgrating,
-  (SELECT count(resource_likes.id) FROM resource_likes GROUP BY owner_id) as numlikes,
-  (SELECT count(users.id) FROM users JOIN resource_comments ON owner_id = users.id GROUP BY users.id) as numcomments
+  return db.query(query, values)
+    .then(res => res.rows[0]);
+};
+exports.addUser = addUser;
+// get all of a user's resources
+const getAllResources = (resourceID) => {
+  const value = [resourceID];
+  const query = `
+  SELECT title, description, TO_CHAR(date_created, 'Mon dd, yyyy') AS date_created
   FROM resources
-  LEFT JOIN users ON owner_id = users.id
-  LEFT JOIN resource_ratings ON resources.id = resource_ratings.resource_id
-  LEFT JOIN resource_likes ON resources.id = resource_likes.resource_id
-  LEFT JOIN resource_comments ON resources.id = resource_comments.resource_id
-  GROUP BY title, url, description, date_created, category, users.name, date_modified, date_created, resources.id
-  ORDER BY title
-  LIMIT 10;
-*/
+  WHERE owner_id = $1;`;
+  return db.query(query, value).then((res) => res.rows);
+};
+
+exports.getAllResources = getAllResources;
+
+// gets all of a user's liked resources
+const getAllLikedResources = (resourceID) => {
+  const value = [resourceID];
+  const query = `
+  SELECT users.name, title, description, TO_CHAR(date_created, 'Mon dd, yyyy') AS date_created FROM resources
+  JOIN resource_likes ON resource_id = resources.id
+  JOIN users ON users.id = resources.owner_id
+  WHERE resources.owner_id = $1;`;
+
+  return db.query(query, value).then((res) => res.rows);
+};
+
+exports.getAllLikedResources = getAllLikedResources;
