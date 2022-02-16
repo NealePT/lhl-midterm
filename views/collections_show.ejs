@@ -32,7 +32,11 @@
         <div>
           <span>Posted by <%= publisher %> | </span>
           <span><%= date_created %><%= date_modified ? ` (Edited: ${date_modified})`: ''  %></span>
-          <span><a href="/collections/<%= resourceID %>/update">Update</a></span>
+          <% if (sessionID === publisherID) { %>
+            <span>
+              <a href="/collections/<%= resourceID %>/update">Update</a>
+            </span>
+          <% } %>
         </div>
         <div>
           <% if(!checkLike) { %>
@@ -77,121 +81,123 @@
       <!-- Ratings section -->
       <section id="rating-buttons">
 
-        <% if(!userRating) { %>
-          <span id="rating-title">Rate This Page</span>
-          <div>
-            <form action="/collections/<%= resourceID  %>/rating" method="POST">
-              <button id="star-button-1" class="star-buttons" name="rating" type="submit" value="1">
-                <i id="jQuery-star-1" class="fa-solid fa-star"></i>
-              </button>
-              <button id="star-button-2" class="star-buttons" name="rating" type="submit" value="2">
-                <i id="jQuery-star-2" class="fa-solid fa-star"></i>
-              </button>
-              <button id="star-button-3" class="star-buttons" name="rating" type="submit" value="3">
-                <i id="jQuery-star-3" class="fa-solid fa-star"></i>
-              </button>
-              <button id="star-button-4" class="star-buttons" name="rating" type="submit" value="4">
-                <i id="jQuery-star-4" class="fa-solid fa-star"></i>
-              </button>
-              <button id="star-button-5" class="star-buttons" name="rating" type="submit" value="5">
-                <i id="jQuery-star-5" class="fa-solid fa-star"></i>
-              </button>
-            </form>
-        <% } else { %>
-          <span id="rating-title">Your Rating</span>
+        <% if (sessionID !== publisherID) { %>
+            <% if(!userRating) { %>
+              <span id="rating-title">Rate This Page</span>
+              <div>
+                <form action="/collections/<%= resourceID  %>/rating" method="POST">
+                <button id="star-button-1" class="star-buttons" name="rating" type="submit" value="1">
+                  <i id="jQuery-star-1" class="fa-solid fa-star"></i>
+                </button>
+                <button id="star-button-2" class="star-buttons" name="rating" type="submit" value="2">
+                  <i id="jQuery-star-2" class="fa-solid fa-star"></i>
+                </button>
+                <button id="star-button-3" class="star-buttons" name="rating" type="submit" value="3">
+                  <i id="jQuery-star-3" class="fa-solid fa-star"></i>
+                </button>
+                <button id="star-button-4" class="star-buttons" name="rating" type="submit" value="4">
+                  <i id="jQuery-star-4" class="fa-solid fa-star"></i>
+                </button>
+                <button id="star-button-5" class="star-buttons" name="rating" type="submit" value="5">
+                  <i id="jQuery-star-5" class="fa-solid fa-star"></i>
+                </button>
+              </form>
+              <% } else { %>
+            <span id="rating-title">Your Rating</span>
 
-          <div>
-          <% if (userRating === 1) { %>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star"></i>
-            </button>
-          <% } %>
+            <div>
+              <% if (userRating === 1) { %>
+                <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <% } %>
 
-          <% if (userRating === 2) { %>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star"></i>
-            </button>
-          <% } %>
+              <% if (userRating === 2) { %>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <% } %>
 
-          <% if (userRating === 3) { %>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star"></i>
-            </button>
-          <% } %>
+            <% if (userRating === 3) { %>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star"></i>
+              </button>
+            <% } %>
 
-          <% if (userRating === 4) { %>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star"></i>
-            </button>
-          <% } %>
+            <% if (userRating === 4) { %>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star"></i>
+              </button>
+            <% } %>
 
-          <% if (userRating === 5) { %>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-            <button class="star-buttons" value="1">
-              <i class="fa-solid fa-star" style="color: gold;"></i>
-            </button>
-          <% } %>
+            <% if (userRating === 5) { %>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+              <button class="star-buttons" value="1">
+                <i class="fa-solid fa-star" style="color: gold;"></i>
+              </button>
+            <% } %>
           </div>
 
+          <% } %>
         <% } %>
       </section>
 
