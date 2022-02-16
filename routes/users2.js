@@ -19,19 +19,49 @@ router.get('/users/:id', (req, res) => {
   // get the resource details from the user's resources
   database.getAllResources(resourceID)
     .then(data => {
+      console.log("ALL resources", data);
       resParams.resourceID = data;
-      // console.log("ALL resources", resParams.resourceID);
-      // console.log("params", resParams);
+      // resParams.allTitles = data.title;
+      // resParams.allDesc = data.description;
+      // resParams.allDate_Created = data.date_created;
+      // console.log(data[0].title);
     })
 
-  database.getAllLikedResources(likesResourceID)
+    .then(() => database.getAllLikedResources(likesResourceID))
     .then(data => {
-      // console.log("LIKED", data);
+      resParams.name = data[0].name;
+      console.log(resParams.name);
+    })
+    // get all of a user's liked resources
+    .then(() => database.getAllLikedResources(likesResourceID))
+    .then(data => {
+      console.log("LIKED", data);
       resParams.likesResourceID = data;
+      // resParams.likedTitles = data.title;
+      // resParams.likedDesc = data.description;
+      // resParams.likedDate_Created = data.date_created;
     })
 
-    // pass our resParams data and render the user's index page
+    //pass our resParams data and render the user's index page
     .then(() => res.render('temp_users_index', resParams));
+  console.log(resParams);
+
+
+
+  // database.getAllResources(resourceID)
+  //   .then(data => {
+  //     resParams.resourceID = data;
+  //     resParams.title = data[0].title;
+  //     console.log("TITLE", data[0].title);
+  //     console.log("DATA", data);
+  //   })
+
+  // database.getAllLikedResources(likesResourceID)
+  //   .then(data => {
+  //     // console.log("LIKED", data);
+  //     resParams.likesResourceID = data;
+  //   })
+  // .then(() => res.render('temp_users_index', resParams));
 });
 
 module.exports = router;
