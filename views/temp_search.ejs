@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    type="text/css">
   <!-- CSS stylings -->
   <link rel="stylesheet" href="/styles/search.css" type="text/css" />
 
@@ -19,7 +21,8 @@
   <!-- Nav bar without search: -->
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #A7C7E7">
     <a class="navbar-brand" href="/">Resource Haven</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -46,46 +49,60 @@
     </div>
   </nav>
 
-<main>
-  <form class="searchBar" action="/search" method="POST" class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="search" name="search-phrase"  placeholder="Search" aria-label="Search">
-    <button class="btn btn-light" type="submit">Search</button>
-  </form>
-  <h2>Search Results: </h2>
-  <div class="resultsContainer">
-    <% for (const result of searchResults) { %>
-    <article class="result">
-      <header class="resultHeader">
-        <span>Posted by <%= result.username %> | </span>
-        <span><%= result['date_created'] %><%= result['date_modified'] ? ` (Edited: ${result['date_modified']})`: ''  %></span>
-      </header>
-      <section class="resultMain">
-        <a href="/collections/<%= result.id %>">
-        <h4 class="resultTitle"><%= result.title %></h4>
-        </a>
-        <a class="resultURL" href="<%= result.url %>"><%= result.url%></a>
-      </section>
-      <footer class="resultFooter">
-        <div class="footDiv" class="likes">
-          <i id="heart" class="fas fa-heart"></i>
-          <p>Likes: </p>
-          <p><%= result.numlikes %></p>
+  <main>
+    <form class="searchBar" action="/search" method="POST" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" name="search-phrase" placeholder="Search" aria-label="Search">
+      <button class="btn btn-light" type="submit">Search</button>
+    </form>
+    <h2>Search Results: </h2>
+    <div class="resultsContainer">
+      <% for (const result of searchResults) { %>
+        <article class="result">
+          <header class="resultHeader">
+            <span>Posted by <%= result.username %> | </span>
+            <span>
+              <%= result['date_created'] %>
+                <%= result['date_modified'] ? ` (Edited: ${result['date_modified']})`: '' %>
+            </span>
+          </header>
+          <section class="resultMain">
+            <a href="/collections/<%= result.id %>">
+              <h4 class="resultTitle">
+                <%= result.title %>
+              </h4>
+            </a>
+            <a class="resultURL" href="<%= result.url %>">
+              <%= result.url%>
+            </a>
+          </section>
+          <footer class="resultFooter">
+            <div class="footDiv" class="likes">
+              <i id="heart" class="fas fa-heart"></i>
+              <p>Likes: </p>
+              <p>
+                <%= result.numlikes %>
+              </p>
 
-        </div>
-        <div class="footDiv" class="comments">
-          <i id="comments" class="fas fa-comments"></i>
-          <p>Comments: </p>
-          <p><%= result.numcomments %></p>
-        </div>
-        <div class="footDiv" class="rating">
-          <i id="star" class="fas fa-star"></i>
-          <p>Rating: </p>
-          <p><%= result.avgrating %></p>
-        </div>
-      </footer>
-    </article>
-    <% } %>
-  </div>
-</main>
+            </div>
+            <div class="footDiv" class="comments">
+              <i id="comments" class="fas fa-comments"></i>
+              <p>Comments: </p>
+              <p>
+                <%= result.numcomments %>
+              </p>
+            </div>
+            <div class="footDiv" class="rating">
+              <i id="star" class="fas fa-star"></i>
+              <p>Rating: </p>
+              <p>
+                <%= result.avgrating %>
+              </p>
+            </div>
+          </footer>
+        </article>
+        <% } %>
+    </div>
+  </main>
 </body>
+
 </html>
