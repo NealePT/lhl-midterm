@@ -70,6 +70,7 @@ router.get('/collections/:id', (req, res) => {
     resParams.category = data.category;
     resParams.url = data.url;
     resParams.publisher = data.name;
+    resParams.publisherID = data['owner_id'];
   })
 
   // If there is a session cookie, pass the cookie and matching user name before rendering the page.
