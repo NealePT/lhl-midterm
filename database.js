@@ -359,5 +359,7 @@ const getTrendingResources = limit => {
   ORDER BY likes DESC
   LIMIT $1;
   `;
+  return db.query(query, values)
+  .then(res => res.rows);
 };
 exports.getTrendingResources = getTrendingResources;
