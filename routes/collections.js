@@ -10,24 +10,58 @@ router.get('/collections', (req, res) => {
   const sessionID = req.session.user_id;
   const resParams = {};
 
-  // If there is a session cookie, pass the cookie and matching user name before rendering the page.
-  if (!sessionID) {
+  // Get individual resource details.
+  database.getTrendingResources(4)
+  .then(data => {
+    resParams.trendingResources = data;
+    const resources = resParams.trendingResources;
+    database.shortenResourceText(resources, 95);
+  })
+  .then(() => database.getRandomVideoResources(4))
+  .then(data => {
+    resParams.videoResources = data;
+    const resources = resParams.videoResources;
+    database.shortenResourceText(resources, 95);
+  })
+  .then(() => database.getRandomBlogResources(4))
+  .then(data => {
+    resParams.blogResources = data;
+    const resources = resParams.blogResources;
+    database.shortenResourceText(resources, 95);
+  })
+  .then(() => database.getRandomTutorialResources(4))
+  .then(data => {
+    resParams.tutorialResources = data;
+    const resources = resParams.tutorialResources;
+    database.shortenResourceText(resources, 95);
+  })
+  .then(() => database.getRandomNewsResources(4))
+  .then(data => {
+    resParams.newsResources = data;
+    const resources = resParams.newsResources;
+    database.shortenResourceText(resources, 95);
+  })
 
-    // REMINDER: Need to eventually replace with collections_index.
-    res.render('collections_index2', { sessionID: null });
-  } else {
-    database.getNameByUserID(sessionID)
-    .then(data => {
-      resParams.username = data.name;
-      resParams.sessionID = sessionID;
-    })
+  .then(() => {
 
-    // REMINDER: Remove test code
-    .then(() => console.log('GET /collections =', resParams))
+    // If there is a session cookie, pass the cookie and matching user name before rendering the page.
+    if (!sessionID) {
+      resParams.sessionID = null;
 
-    // REMINDER: Need to eventually replace with collections_index.
-    .then(() => res.render('collections_index2', resParams));
-  }
+      // REMINDER: Need to eventually replace with collections_index.
+      res.render('collections_index2', resParams);
+    } else {
+      database.getNameByUserID(sessionID)
+      .then(data => {
+        resParams.username = data.name;
+        resParams.sessionID = sessionID;
+      })
+
+      // REMINDER: Need to eventually replace with collections_index.
+      .then(() => res.render('collections_index2', resParams));
+    }
+  })
+
 });
 
 

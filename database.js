@@ -1,5 +1,6 @@
 // Dependencies
 const { Pool } = require("pg");
+const { database } = require("pg/lib/defaults");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 
@@ -263,5 +264,110 @@ const getAllLikedResources = (resourceID) => {
 
   return db.query(query, value).then((res) => res.rows);
 };
-
 exports.getAllLikedResources = getAllLikedResources;
+
+const getRandomVideoResources = limit => {
+  const values = [limit];
+  // id, title, description, name
+  const query = `
+  SELECT resources.id,
+    title,
+    description,
+    name,
+    TO_CHAR(date_created, 'Mon dd, yyyy') AS public_date_created
+  FROM resources
+  JOIN users ON users.id = owner_id
+  WHERE category = 'video'
+  ORDER BY RANDOM()
+  LIMIT $1;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows);
+};
+exports.getRandomVideoResources = getRandomVideoResources;
+
+const getRandomBlogResources = limit => {
+  const values = [limit];
+  const query = `
+  SELECT resources.id,
+    title,
+    description,
+    name,
+    TO_CHAR(date_created, 'Mon dd, yyyy') AS public_date_created
+  FROM resources
+  JOIN users ON users.id = owner_id
+  WHERE category = 'blog'
+  ORDER BY RANDOM()
+  LIMIT $1;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows);
+};
+exports.getRandomBlogResources = getRandomBlogResources;
+
+const getRandomTutorialResources = limit => {
+  const values = [limit];
+  const query = `
+  SELECT resources.id,
+    title,
+    description,
+    name,
+    TO_CHAR(date_created, 'Mon dd, yyyy') AS public_date_created
+  FROM resources
+  JOIN users ON users.id = owner_id
+  WHERE category = 'tutorial'
+  ORDER BY RANDOM()
+  LIMIT $1;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows);
+};
+exports.getRandomTutorialResources = getRandomTutorialResources;
+
+const getRandomNewsResources = limit => {
+  const values = [limit];
+  const query = `
+  SELECT resources.id,
+    title,
+    description,
+    name,
+    TO_CHAR(date_created, 'Mon dd, yyyy') AS public_date_created
+  FROM resources
+  JOIN users ON users.id = owner_id
+  WHERE category = 'news'
+  ORDER BY RANDOM()
+  LIMIT $1;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows);
+};
+exports.getRandomNewsResources = getRandomNewsResources;
+
+const getTrendingResources = limit => {
+  const values = [limit];
+  const query = `
+  SELECT resources.id,
+    title,
+    description,
+    name,
+    TO_CHAR(date_created, 'Mon dd, yyyy') AS public_date_created,
+    COUNT(resource_likes) AS likes
+  FROM resources
+  JOIN users ON users.id = resources.owner_id
+  JOIN resource_likes ON resource_likes.resource_id = resources.id
+  GROUP BY resources.id, name
+  ORDER BY likes DESC
+  LIMIT $1;
+  `;
+  return db.query(query, values)
+  .then(res => res.rows);
+};
+exports.getTrendingResources = getTrendingResources;
+
+const shortenResourceText = (resources, maxLength) => {
+  for (const resource of resources) {
+    resource.description.length > maxLength ? resource.description = resource.description.slice(0, maxLength) + '...' : null;
+    resource.title.length > maxLength ? resource.title = resource.title.slice(0, maxLength) + '...' : null;
+  }
+}
+exports.shortenResourceText = shortenResourceText;

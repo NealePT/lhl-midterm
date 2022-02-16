@@ -8,8 +8,6 @@
   flex-direction: column;
 }
 
-
-
 body {
   // border: 5px solid red; // Testing - Need to remove.
   background-color: rgb(175, 175, 175) !important;
@@ -43,23 +41,56 @@ article {
   // color: black;
 }
 
-.card-trending {
+.card_body {
   border: 3px solid black;
   border-radius: 5px;
   @include flex-column();
   justify-content: center;
   align-items: center;
   width: 405px;
-  height: 200px;
+  height: 225px;
   margin: 5px 0 5px 0;
 }
 
-.card-background {
+.trending-background {
   // border: 1px solid red; // Testing - Need to remove.
   width: inherit;
   height: 40%;
   background-color: #94a3c2;
   background-image: url("https://www.transparenttextures.com/patterns/argyle.png");
+  z-index: -1;
+}
+
+.videos-background {
+  width: inherit;
+  height: 40%;
+  background-color: #d97975;
+  background-image: url("https://www.transparenttextures.com/patterns/black-thread.png");
+  z-index: -1;
+}
+
+.blogs-background {
+  width: inherit;
+  height: 40%;
+  background-color: #afe6ba;
+  background-image: url("https://www.transparenttextures.com/patterns/my-little-plaid-dark.png");
+  z-index: -1;
+}
+
+.tutorials-background {
+  width: inherit;
+  height: 40%;
+  background-color: #ac80ed;
+  background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
+  z-index: -1;
+
+}
+
+.news-background {
+  width: inherit;
+  height: 40%;
+  background-color: #4b5454;
+  background-image: url("https://www.transparenttextures.com/patterns/circles.png");
   z-index: -1;
 }
 
@@ -76,14 +107,14 @@ article {
 
 .card_title {
   // border: 1px solid magenta; // Testing - Need to remove.
-  width: 98%;
+  width: 97%;
   height: 45%;
   font-weight: bold;
 }
 
 .card-description {
   // border: 1px solid magenta; // Testing - Need to remove.
-  width: 98%;
+  width: 95%;
   height: 35%;
 }
 
@@ -92,7 +123,7 @@ article {
   @include flex-row();
   justify-content: space-between;
   align-items: center;
-  width: 98%;
+  width: 97%;
   height: 20%;
   font-size: 14px;
 }

@@ -1,5 +1,5 @@
 INSERT INTO users (name, email, password)
-VALUES ('Guest', 'guest@gmail.com', 'password'),
+VALUES ('Henry Cavill', 'hcavill@gmail.com', 'password'),
 ('Neale Taylor', 'ntaylor@gmail.com', 'password'),
 ('John Ngai', 'jngai@gmail.com', 'password'),
 ('Vivian Zhang', 'vzhang@gmail.com', 'password'),
