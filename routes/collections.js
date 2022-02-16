@@ -15,31 +15,31 @@ router.get('/collections', (req, res) => {
   .then(data => {
     resParams.trendingResources = data;
     const resources = resParams.trendingResources;
-    database.shortenResourceText(resources, 95);
+    database.shortenResourceText(resources, 90);
   })
   .then(() => database.getRandomVideoResources(4))
   .then(data => {
     resParams.videoResources = data;
     const resources = resParams.videoResources;
-    database.shortenResourceText(resources, 95);
+    database.shortenResourceText(resources, 90);
   })
   .then(() => database.getRandomBlogResources(4))
   .then(data => {
     resParams.blogResources = data;
     const resources = resParams.blogResources;
-    database.shortenResourceText(resources, 95);
+    database.shortenResourceText(resources, 90);
   })
   .then(() => database.getRandomTutorialResources(4))
   .then(data => {
     resParams.tutorialResources = data;
     const resources = resParams.tutorialResources;
-    database.shortenResourceText(resources, 95);
+    database.shortenResourceText(resources, 90);
   })
   .then(() => database.getRandomNewsResources(4))
   .then(data => {
     resParams.newsResources = data;
     const resources = resParams.newsResources;
-    database.shortenResourceText(resources, 95);
+    database.shortenResourceText(resources, 90);
   })
 
   .then(() => {
