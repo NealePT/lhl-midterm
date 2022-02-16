@@ -27,41 +27,45 @@
       <div class="recent-likes">
         <h2>Recent Likes</h2>
       </div>
-      <% for (const like of likesResourceID) { %>
-        <div class="row row-cols-1">
-          <div class="col">
-            <div class="card text-white bg-dark mb-3">
-              <div class="card-body">
-                <h5 class="card-title">
-                  <%= like.title %>
-                </h5>
-                <p class="card-text">
-                  <%= like.description %>
-                </p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">
-                  <%= like.date_created %>
-                </small>
-                <a href="/collections/<%= resourceID %>/update">
-                  <button type="submit" class="btn btn-outline-light">Edit</button>
-                </a>
+      <div class="card-deck">
+        <div class="row row-cols-1 row-cols-md-3">
+          <% for (const like of likesResourceID) { %>
+            <div class="col">
+              <div class="card text-white bg-dark mb-3">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <%= like.title %>
+                  </h5>
+                  <p class="card-text">
+                    <%= like.description %>
+                  </p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">
+                    <%= like.date_created %>
+                  </small>
+                  <a href="/collections/<%= resourceID %>/update">
+                    <button type="submit" class="btn btn-outline-light">Edit</button>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
+            <% } %>
         </div>
-
-        <% } %>
-
+      </div>
 
 
 
-          <div class="user-collection">
-            <h2>User's Collection</h2>
-          </div>
 
+
+
+      <div class="user-collection">
+        <h2>User's Collection</h2>
+      </div>
+      <div class="card-deck" id="resources-deck">
+        <div class="row row-cols-1 row-cols-md-3">
           <% for (const resource of resourceID) { %>
-            <div class="card-deck" id="resources-deck">
+            <div class="col">
               <div class="card text-white bg-dark mb-2">
                 <div class="card-body">
                   <h5 class="card-title">
@@ -82,6 +86,8 @@
               </div>
             </div>
             <% } %>
+        </div>
+      </div>
     </section>
 
 </body>
