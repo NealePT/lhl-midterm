@@ -23,138 +23,130 @@
 
   <main>
 
-    <article>
-      <!-- START - TRENDING ARTICLE -->
+    <article> <!-- START - TRENDING ARTICLE -->
       <section class="article-titles">
         <span>Trending Now</span>
       </section>
       <section class="article-bodies">
-
-        <!-- START - Card #1 -->
-        <a style="text-decoration: none; color: inherit" href="#">
-          <div class="card-trending">
-            <div class="card-background"></div>
-            <div class="card-details">
-              <div class="card_title">
-                <span>(Title)</span>
+        <% for (const trend of trendingResources) { %>
+          <a style="text-decoration: none; color: inherit" href="/collections/<%= trend.id %>">
+            <div class="card-trending">
+              <div class="card-background"></div>
+              <div class="card-details">
+                <div class="card_title">
+                  <span><%= trend.title %></span>
+                </div>
+                <div class="card-description"><%= trend.description %></div>
+                <div class="publisher-details">
+                  <span><%= trend.name %></span>
+                  <span><%= trend['public_date_created'] %></span>
+                </div>
               </div>
-              <div class="card-description">(Description)</div>
-              <div class="publisher-details">
-                <span>(Publiser)</span>
-                <span>(MMM DD, YYYY)</span>
-              </div>
-            </div>
-          </div> <!-- </div class="card-trending"> -->
-        </a> <!-- END - Card #1 -->
-
+            </div> <!-- </div class="card-trending"> -->
+          </a>
+        <% } %>
       </section> <!-- </section class="article-bodies"> -->
     </article> <!-- END - TRENDING ARTICLE -->
 
     <article>
       <!-- START - VIDEOS ARTICLE -->
       <section class="article-titles">
-        <span>Video</span>
+        <span>Videos</span>
       </section>
-
       <section class="article-bodies">
-
-        <!-- START - Card #1 -->
-        <a style="text-decoration: none; color: inherit" href="#">
-          <div class="card-trending">
-            <div class="card-background"></div>
-            <div class="card-details">
-              <div class="card_title">
-                <span>(Title)</span>
+        <% for (const video of videoResources) { %>
+          <a style="text-decoration: none; color: inherit" href="/collections/<%= video.id %>">
+            <div class="card-trending">
+              <div class="card-background"></div>
+              <div class="card-details">
+                <div class="card_title">
+                  <span><%= video.title %></span>
+                </div>
+                <div class="card-description"><%= video.description %></div>
+                <div class="publisher-details">
+                  <span><%= video.name %></span>
+                  <span><%= video['public_date_created'] %></span>
+                </div>
               </div>
-              <div class="card-description">(Description)</div>
-              <div class="publisher-details">
-                <span>(Publiser)</span>
-                <span>(MMM DD, YYYY)</span>
-              </div>
-            </div>
-          </div> <!-- </div class="card-trending"> -->
-        </a> <!-- END - Card #1 -->
-
+            </div> <!-- </div class="card-trending"> -->
+          </a>
+        <% } %>
       </section> <!-- </section class="article-bodies"> -->
     </article> <!-- END - VIDEOS ARTICLE -->
 
-    <article>
-      <!-- START - BLOGS ARTICLE -->
+    <article> <!-- START - BLOGS ARTICLE -->
       <section class="article-titles">
         <span>Blogs</span>
       </section>
       <section class="article-bodies">
-
-        <!-- START - Card #1 -->
-        <a style="text-decoration: none; color: inherit" href="#">
-          <div class="card-trending">
-            <div class="card-background"></div>
-            <div class="card-details">
-              <div class="card_title">
-                <span>(Title)</span>
+        <% for (const blog of blogResources) { %>
+          <a style="text-decoration: none; color: inherit" href="/collections/<%= blog.id %>">
+            <div class="card-trending">
+              <div class="card-background"></div>
+              <div class="card-details">
+                <div class="card_title">
+                  <span><%= blog.title %></span>
+                </div>
+                <div class="card-description"><%= blog.description %></div>
+                <div class="publisher-details">
+                  <span><%= blog.name %></span>
+                  <span><%= blog['public_date_created'] %></span>
+                </div>
               </div>
-              <div class="card-description">(Description)</div>
-              <div class="publisher-details">
-                <span>(Publiser)</span>
-                <span>(MMM DD, YYYY)</span>
-              </div>
-            </div>
-          </div> <!-- </div class="card-trending"> -->
-        </a> <!-- END - Card #1 -->
-
+            </div> <!-- </div class="card-trending"> -->
+          </a>
+        <% } %>
       </section> <!-- </section class="article-bodies"> -->
     </article> <!-- END - BLOGS ARTICLE -->
 
-    <article>
-      <!-- START - TUTORIAL ARTICLE -->
+    <article> <!-- START - TUTORIAL ARTICLE -->
       <section class="article-titles">
         <span>Tutorials</span>
       </section>
       <section class="article-bodies">
-
-        <!-- START - Card #1 -->
-        <a style="text-decoration: none; color: inherit" href="#">
-          <div class="card-trending">
-            <div class="card-background"></div>
-            <div class="card-details">
-              <div class="card_title">
-                <span>(Title)</span>
+        <% for (const tutorial of blogResources) { %>
+          <a style="text-decoration: none; color: inherit" href="/collections/<%= tutorial.id %>">
+            <div class="card-trending">
+              <div class="card-background"></div>
+              <div class="card-details">
+                <div class="card_title">
+                  <span><%= tutorial.title %></span>
+                </div>
+                <div class="card-description"><%= tutorial.description %></div>
+                <div class="publisher-details">
+                  <span><%= tutorial.name %></span>
+                  <span><%= tutorial['public_date_created'] %></span>
+                </div>
               </div>
-              <div class="card-description">(Description)</div>
-              <div class="publisher-details">
-                <span>(Publiser)</span>
-                <span>(MMM DD, YYYY)</span>
-              </div>
-            </div>
-          </div> <!-- </div class="card-trending"> -->
-        </a> <!-- END - Card #1 -->
-
+            </div> <!-- </div class="card-trending"> -->
+          </a>
+        <% } %>
       </section> <!-- </section class="article-bodies"> -->
     </article> <!-- END - TUTORIAL ARTICLE -->
 
-    <article>
-      <!-- START - NEWS ARTICLE -->
+    <article> <!-- START - NEWS ARTICLE -->
       <section class="article-titles">
         <span>News</span>
       </section>
       <section class="article-bodies">
 
-        <!-- START - Card #1 -->
-        <a style="text-decoration: none; color: inherit" href="#">
-          <div class="card-trending">
-            <div class="card-background"></div>
-            <div class="card-details">
-              <div class="card_title">
-                <span>(Title)</span>
+        <% for (const news of newsResources) { %>
+          <a style="text-decoration: none; color: inherit" href="/collections/<%= news.id %>">
+            <div class="card-trending">
+              <div class="card-background"></div>
+              <div class="card-details">
+                <div class="card_title">
+                  <span><%= news.title %></span>
+                </div>
+                <div class="card-description"><%= news.description %></div>
+                <div class="publisher-details">
+                  <span><%= news.name %></span>
+                  <span><%= news['public_date_created'] %></span>
+                </div>
               </div>
-              <div class="card-description">(Description)</div>
-              <div class="publisher-details">
-                <span>(Publiser)</span>
-                <span>(MMM DD, YYYY)</span>
-              </div>
-            </div>
-          </div> <!-- </div class="card-trending"> -->
-        </a> <!-- END - Card #1 -->
+            </div> <!-- </div class="card-trending"> -->
+          </a>
+        <% } %>
 
       </section> <!-- </section class="article-bodies"> -->
     </article> <!-- END - NEWS ARTICLE -->
