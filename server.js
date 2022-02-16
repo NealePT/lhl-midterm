@@ -95,14 +95,6 @@ app.post('/login', loginRoutes);
 app.get('/search', searchRoutes);
 app.get('/search/:id', searchRoutes);
 
-<<<<<<< HEAD
-
-app.listen(PORT, () => {
-  console.log(`Resource Haven is listening on http://localhost:${PORT}/`);
-});
-
-=======
->>>>>>> sessionID_john
 // POST /register
 app.post('/register', registerRoutes);
 
