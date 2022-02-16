@@ -1,0 +1,98 @@
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+body {
+  // border: 5px solid red; // Testing - Need to remove.
+  background-color: rgb(175, 175, 175) !important;
+  min-height: 1000px;
+}
+
+main {
+  // border: 5px solid black; // Testing - Need to remove.
+  margin: 75px auto 0 auto;
+  width: 1700px;
+}
+
+article {
+  // border: 1px solid red; // Testing - Need to remove.
+  @include flex-column();
+  margin: 10px 0 10px 0;
+}
+
+.article-titles {
+  // border: 1px solid red; // Testing - Need to remove.
+  margin: 0 5px 0 5px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.article-bodies {
+  // border: 1px solid red; // Testing - Need to remove.
+  @include flex-row();
+  justify-content: space-between;
+  margin: 0 5px 0 5px;
+  // color: black;
+}
+
+.card-trending {
+  border: 3px solid black;
+  border-radius: 5px;
+  @include flex-column();
+  justify-content: center;
+  align-items: center;
+  width: 405px;
+  height: 200px;
+  margin: 5px 0 5px 0;
+}
+
+.card-background {
+  // border: 1px solid red; // Testing - Need to remove.
+  width: inherit;
+  height: 40%;
+  background-color: #94a3c2;
+  background-image: url("https://www.transparenttextures.com/patterns/argyle.png");
+  z-index: -1;
+}
+
+.card-details {
+  // border: 1px solid red; // Testing - Need to remove.
+  @include flex-column();
+  justify-content: center;
+  align-items: center;
+  width: inherit;
+  height: 60%;
+  background-color: rgb(230, 230, 230);
+  z-index: -1;
+}
+
+.card_title {
+  // border: 1px solid magenta; // Testing - Need to remove.
+  width: 98%;
+  height: 45%;
+  font-weight: bold;
+}
+
+.card-description {
+  // border: 1px solid magenta; // Testing - Need to remove.
+  width: 98%;
+  height: 35%;
+}
+
+.publisher-details {
+  // border: 1px solid magenta; // Testing - Need to remove.
+  @include flex-row();
+  justify-content: space-between;
+  align-items: center;
+  width: 98%;
+  height: 20%;
+  font-size: 14px;
+}
