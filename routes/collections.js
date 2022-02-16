@@ -14,7 +14,7 @@ router.get('/collections', (req, res) => {
   if (!sessionID) {
 
     // REMINDER: Need to eventually replace with collections_index.
-    res.render('collections_index', { sessionID: null });
+    res.render('collections_index2', { sessionID: null });
   } else {
     database.getNameByUserID(sessionID)
     .then(data => {
@@ -26,7 +26,7 @@ router.get('/collections', (req, res) => {
     .then(() => console.log('GET /collections =', resParams))
 
     // REMINDER: Need to eventually replace with collections_index.
-    .then(() => res.render('collections_index', resParams));
+    .then(() => res.render('collections_index2', resParams));
   }
 });
 
