@@ -268,8 +268,13 @@ exports.getAllLikedResources = getAllLikedResources;
 
 const getRandomVideoResources = limit => {
   const values = [limit];
+  // id, title, description, name
   const query = `
-  SELECT resources.*, name
+  SELECT resources.id,
+    title,
+    description,
+    name,
+    TO_CHAR(date_created, 'Mon dd, yyyy') AS public_date_created
   FROM resources
   JOIN users ON users.id = owner_id
   WHERE category = 'video'
@@ -278,13 +283,17 @@ const getRandomVideoResources = limit => {
   `;
   return db.query(query, values)
   .then(res => res.rows);
-}
+};
 exports.getRandomVideoResources = getRandomVideoResources;
 
 const getRandomBlogResources = limit => {
   const values = [limit];
   const query = `
-  SELECT resources.*, name
+  SELECT resources.id,
+    title,
+    description,
+    name,
+    TO_CHAR(date_created, 'Mon dd, yyyy') AS public_date_created
   FROM resources
   JOIN users ON users.id = owner_id
   WHERE category = 'blog'
@@ -293,13 +302,17 @@ const getRandomBlogResources = limit => {
   `;
   return db.query(query, values)
   .then(res => res.rows);
-}
+};
 exports.getRandomBlogResources = getRandomBlogResources;
 
 const getRandomTutorialResources = limit => {
   const values = [limit];
   const query = `
-  SELECT resources.*, name
+  SELECT resources.id,
+    title,
+    description,
+    name,
+    TO_CHAR(date_created, 'Mon dd, yyyy') AS public_date_created
   FROM resources
   JOIN users ON users.id = owner_id
   WHERE category = 'tutorial'
@@ -308,13 +321,17 @@ const getRandomTutorialResources = limit => {
   `;
   return db.query(query, values)
   .then(res => res.rows);
-}
+};
 exports.getRandomTutorialResources = getRandomTutorialResources;
 
 const getRandomNewsResources = limit => {
   const values = [limit];
   const query = `
-  SELECT resources.*, name
+  SELECT resources.id,
+    title,
+    description,
+    name,
+    TO_CHAR(date_created, 'Mon dd, yyyy') AS public_date_created
   FROM resources
   JOIN users ON users.id = owner_id
   WHERE category = 'news'
@@ -323,5 +340,24 @@ const getRandomNewsResources = limit => {
   `;
   return db.query(query, values)
   .then(res => res.rows);
-}
+};
 exports.getRandomNewsResources = getRandomNewsResources;
+
+const getTrendingResources = limit => {
+  const values = [limit];
+  const query = `
+  SELECT resources.id,
+    title,
+    description,
+    name,
+    TO_CHAR(date_created, 'Mon dd, yyyy') AS public_date_created,
+    COUNT(resource_likes) AS likes
+  FROM resources
+  JOIN users ON users.id = resources.owner_id
+  JOIN resource_likes ON resource_likes.resource_id = resources.id
+  GROUP BY resources.id, name
+  ORDER BY likes DESC
+  LIMIT $1;
+  `;
+};
+exports.getTrendingResources = getTrendingResources;
