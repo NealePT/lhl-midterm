@@ -30,14 +30,15 @@
   justify-content: space-evenly;
 }
 
-// div #resources-deck {
-//   display: flex;
-//   flex-direction: row !important;
-// }
-
 .card {
   max-width: 375px;
   max-height: 300px;
+}
+
+a:link,
+a:hover {
+  text-decoration: none;
+  color: inherit;
 }
 
 .recent-likes,

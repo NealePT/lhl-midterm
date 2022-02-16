@@ -36,9 +36,11 @@
             <div class="col">
               <div class="card text-white bg-dark mb-3">
                 <div class="card-body">
-                  <h5 class="card-title">
-                    <%= like.title %>
-                  </h5>
+                  <a href="<%= like.url %>">
+                    <h5 class="card-title">
+                      <%= like.title %>
+                    </h5>
+                  </a>
                   <p class="card-text">
                     <%= like.description %>
                   </p>
@@ -65,15 +67,17 @@
       <div class="user-collection">
         <h2>User's Collection</h2>
       </div>
-      <div class="card-deck" id="resources-deck">
+      <div class="card-deck">
         <div class="row row-cols-1 row-cols-md-3">
           <% for (const resource of resourceID) { %>
             <div class="col">
               <div class="card text-white bg-dark mb-2">
                 <div class="card-body">
-                  <h5 class="card-title">
-                    <%= resource.title %>
-                  </h5>
+                  <a href="<%= resource.url %>">
+                    <h5 class="card-title">
+                      <%= resource.title %>
+                    </h5>
+                  </a>
                   <p class="card-text">
                     <%= resource.description %>
                   </p>
