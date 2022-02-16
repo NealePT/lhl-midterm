@@ -215,10 +215,10 @@ const getSearchResults = searchPhrase => {
   LEFT JOIN resource_ratings ON resources.id = resource_ratings.resource_id
   LEFT JOIN resource_likes ON resources.id = resource_likes.resource_id
   LEFT JOIN resource_comments ON resources.id = resource_comments.resource_id
-  WHERE title LIKE '%' || $1 || '%'
-    OR description LIKE '%' || $1 || '%'
-    OR category LIKE '%' || $1 || '%'
-    OR url LIKE '%' || $1 || '%'
+  WHERE UPPER(title) LIKE '%' || UPPER($1) || '%'
+    OR UPPER(description) LIKE '%' || UPPER($1) || '%'
+    OR UPPER(category) LIKE '%' || UPPER($1) || '%'
+    OR UPPER(url) LIKE '%' || UPPER($1) || '%'
   GROUP BY title, url, description, date_created, category, users.name, date_modified, date_created, resources.id
   ORDER BY title
   LIMIT 10;
