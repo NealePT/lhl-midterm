@@ -13,24 +13,33 @@ router.get('/users/:id', (req, res) => {
   const likesResourceID = resourceID;
   const userID = 1;
   const resParams = { resourceID: resourceID, likesResourceID: likesResourceID, userID: userID };
-  // console.log("resourceID", resourceID);
-  // console.log("LIKES", likesResourceID);
 
   // get the resource details from the user's resources
   database.getAllResources(resourceID)
     .then(data => {
-      resParams.resourceID = data;
-      // console.log("ALL resources", resParams.resourceID);
-      // console.log("params", resParams);
+      resParams.user_id = data[0].owner_id;
+      // console.log("USERID:", resParams.user_id);
     })
 
-  database.getAllLikedResources(likesResourceID)
+    .then(() => database.getAllResources(resourceID))
+    .then(data => {
+      // console.log("ALL resources", data);
+      resParams.resourceID = data;
+    })
+
+    .then(() => database.getAllLikedResources(likesResourceID))
+    .then(data => {
+      resParams.name = data[0].name;
+      // console.log(resParams.name);
+    })
+    // get all of a user's liked resources
+    .then(() => database.getAllLikedResources(likesResourceID))
     .then(data => {
       // console.log("LIKED", data);
       resParams.likesResourceID = data;
     })
 
-    // pass our resParams data and render the user's index page
+    //pass our resParams data and render the user's index page
     .then(() => res.render('temp_users_index', resParams));
 });
 

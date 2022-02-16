@@ -242,7 +242,7 @@ exports.addUser = addUser;
 const getAllResources = (resourceID) => {
   const value = [resourceID];
   const query = `
-  SELECT title, description, TO_CHAR(date_created, 'Mon dd, yyyy') AS date_created
+  SELECT owner_id, title, description, url, TO_CHAR(date_created, 'Mon dd, yyyy') AS date_created
   FROM resources
   WHERE owner_id = $1;`;
   return db.query(query, value).then((res) => res.rows);
@@ -254,7 +254,7 @@ exports.getAllResources = getAllResources;
 const getAllLikedResources = (resourceID) => {
   const value = [resourceID];
   const query = `
-  SELECT users.name, title, description, TO_CHAR(date_created, 'Mon dd, yyyy') AS date_created FROM resources
+  SELECT users.name, title, description, url, TO_CHAR(date_created, 'Mon dd, yyyy') AS date_created FROM resources
   JOIN resource_likes ON resource_id = resources.id
   JOIN users ON users.id = resources.owner_id
   WHERE resources.owner_id = $1;`;

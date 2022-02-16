@@ -1,27 +1,44 @@
 .user-profile {
-  margin-top: 50px;
+  margin-top: 70px;
+  text-align: center;
   background-color: #fff;
   color: black;
   height: 200px;
   width: 100vw;
 }
 
+.profile-img {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.profile-img img {
+  width: auto;
+  height: 100%;
+  margin-left: -40px;
+}
+
 .card-deck {
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
-  // align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   justify-content: space-evenly;
 }
 
-// div #resources-deck {
-//   display: flex;
-//   flex-direction: row !important;
-// }
-
 .card {
-  // flex-direction: row;
   max-width: 375px;
   max-height: 300px;
+}
+
+a:link,
+a:hover {
+  text-decoration: none;
+  color: inherit;
 }
 
 .recent-likes,

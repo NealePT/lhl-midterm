@@ -8,7 +8,6 @@
   <title>User's Profile</title>
 
   <link rel="stylesheet" href="/styles/user_index.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/profile_header.css" type="text/css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
@@ -18,9 +17,12 @@
 
     <div class="container user-profile">
       <div class="profile-img">
+        <img src="https://terrigen-cdn-dev.marvel.com/content/prod/1x/002irm_ons_inl_06_0.jpg" alt="user-img" />
       </div>
       <div class="user-name">
-        <h2>Tony Stark</h2>
+        <h2>
+          <%= name %>
+        </h2>
       </div>
     </div>
 
@@ -28,43 +30,54 @@
       <div class="recent-likes">
         <h2>Recent Likes</h2>
       </div>
-      <% for (const like of likesResourceID) { %>
-        <div class="card-deck">
-          <div class="card text-white bg-dark mb-3">
-            <div class="card-body">
-              <h5 class="card-title">
-                <%= like.title %>
-              </h5>
-              <p class="card-text">
-                <%= like.description %>
-              </p>
+      <div class="card-deck">
+        <div class="row row-cols-1 row-cols-md-3">
+          <% for (const like of likesResourceID) { %>
+            <div class="col">
+              <div class="card text-white bg-dark mb-3">
+                <div class="card-body">
+                  <a href="<%= like.url %>">
+                    <h5 class="card-title">
+                      <%= like.title %>
+                    </h5>
+                  </a>
+                  <p class="card-text">
+                    <%= like.description %>
+                  </p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">
+                    <%= like.date_created %>
+                  </small>
+                  <a href="/collections/<%= user_id %>/update">
+                    <button type="submit" class="btn btn-outline-light">Edit</button>
+                  </a>
+                </div>
+              </div>
             </div>
-            <div class="card-footer">
-              <small class="text-muted">
-                <%= like.date_created %>
-              </small>
-              <a href="/collections/<%= resourceID %>/update">
-                <button type="submit" class="btn btn-outline-light">Edit</button>
-              </a>
-            </div>
-          </div>
+            <% } %>
         </div>
-        <% } %>
+      </div>
 
 
 
 
-          <div class="user-collection">
-            <h2>User's Collection</h2>
-          </div>
 
+
+      <div class="user-collection">
+        <h2>User's Collection</h2>
+      </div>
+      <div class="card-deck">
+        <div class="row row-cols-1 row-cols-md-3">
           <% for (const resource of resourceID) { %>
-            <div class="card-deck" id="resources-deck">
+            <div class="col">
               <div class="card text-white bg-dark mb-2">
                 <div class="card-body">
-                  <h5 class="card-title">
-                    <%= resource.title %>
-                  </h5>
+                  <a href="<%= resource.url %>">
+                    <h5 class="card-title">
+                      <%= resource.title %>
+                    </h5>
+                  </a>
                   <p class="card-text">
                     <%= resource.description %>
                   </p>
@@ -73,13 +86,15 @@
                   <small class="text-muted">
                     Created on <%= resource.date_created %>
                   </small>
-                  <a href="/collections/<%= resource.resourceID %>/update">
+                  <a href="/collections/<%= user_id %>/update">
                     <button type="submit" class="btn btn-outline-light">Edit</button>
                   </a>
                 </div>
               </div>
             </div>
             <% } %>
+        </div>
+      </div>
     </section>
 
 </body>
