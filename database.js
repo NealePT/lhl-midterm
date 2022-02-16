@@ -194,7 +194,7 @@ const getAllLikedResources = (resourceID) => {
   SELECT title, description, TO_CHAR(date_created, 'Mon dd, yyyy') AS date_created FROM resources
   JOIN resource_likes ON resource_id = resources.id
   JOIN users ON users.id = resources.owner_id
-  WHERE resources.owner_id = 2;`;
+  WHERE resources.owner_id = $1;`;
 
   return db.query(query, value).then((res) => res.rows);
 };
