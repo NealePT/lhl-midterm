@@ -19,6 +19,9 @@ router.get('/login', (req, res) => {
       resParams.sessionID = sessionID;
       console.log('resParams =', resParams) // Remove test code.
     })
+
+    // REMINDER: Remove test code
+    .then(() => console.log('GET /login =', resParams))
     .then(() => res.render('login', resParams));
   }
 

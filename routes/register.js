@@ -18,6 +18,9 @@ router.get('/register', (req, res) => {
       resParams.username = data.name;
       resParams.sessionID = sessionID;
     })
+
+    // REMINDER: Remove test code
+    .then(() => console.log('GET /register =', resParams))
     .then(() => res.render('register', resParams));
   }
 });
