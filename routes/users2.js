@@ -20,13 +20,13 @@ router.get('/users/:id', (req, res) => {
   database.getAllResources(resourceID)
     .then(data => {
       resParams.resourceID = data;
-      console.log("ALL resources", resParams.resourceID);
+      // console.log("ALL resources", resParams.resourceID);
       // console.log("params", resParams);
     })
 
   database.getAllLikedResources(likesResourceID)
     .then(data => {
-      console.log("LIKED", data);
+      // console.log("LIKED", data);
       resParams.likesResourceID = data;
     })
 
