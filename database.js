@@ -221,3 +221,18 @@ const getSearchResults = searchPhrase => {
     .then(res => res.rows);
 };
 exports.getSearchResults = getSearchResults;
+
+
+/*
+  SELECT resources.id as id, title, url, category, description, TO_CHAR(date_created, 'Mon dd, yyyy') AS date_created, TO_CHAR(date_modified, 'Mon dd, yyyy') AS date_modified, ROUND( AVG(resource_ratings.rating)::numeric, 1 ) as avgrating,
+  (SELECT count(resource_likes.id) FROM resource_likes GROUP BY owner_id) as numlikes,
+  (SELECT count(users.id) FROM users JOIN resource_comments ON owner_id = users.id GROUP BY users.id) as numcomments
+  FROM resources
+  LEFT JOIN users ON owner_id = users.id
+  LEFT JOIN resource_ratings ON resources.id = resource_ratings.resource_id
+  LEFT JOIN resource_likes ON resources.id = resource_likes.resource_id
+  LEFT JOIN resource_comments ON resources.id = resource_comments.resource_id
+  GROUP BY title, url, description, date_created, category, users.name, date_modified, date_created, resources.id
+  ORDER BY title
+  LIMIT 10;
+*/
