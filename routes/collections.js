@@ -47,6 +47,7 @@ router.get('/collections', (req, res) => {
     // If there is a session cookie, pass the cookie and matching user name before rendering the page.
     if (!sessionID) {
       resParams.sessionID = null;
+
       // REMINDER: Need to eventually replace with collections_index.
       res.render('collections_index2', resParams);
     } else {
