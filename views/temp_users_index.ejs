@@ -46,7 +46,7 @@
                   <small class="text-muted">
                     <%= like.date_created %>
                   </small>
-                  <a href="/collections/<%= like.id %>/update">
+                  <a href="/collections/<%= user_id %>/update">
                     <button type="submit" class="btn btn-outline-light">Edit</button>
                   </a>
                 </div>
@@ -81,7 +81,7 @@
                   <small class="text-muted">
                     Created on <%= resource.date_created %>
                   </small>
-                  <a href="/collections/<%= resource.id %>/update">
+                  <a href="/collections/<%= user_id %>/update">
                     <button type="submit" class="btn btn-outline-light">Edit</button>
                   </a>
                 </div>

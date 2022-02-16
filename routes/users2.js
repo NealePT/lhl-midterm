@@ -19,12 +19,17 @@ router.get('/users/:id', (req, res) => {
   // get the resource details from the user's resources
   database.getAllResources(resourceID)
     .then(data => {
+      resParams.user_id = data[0].owner_id;
+      console.log("USERID:", resParams.user_id);
+    })
+
+    .then(() => database.getAllResources(resourceID))
+    .then(data => {
       console.log("ALL resources", data);
       resParams.resourceID = data;
       // resParams.allTitles = data.title;
       // resParams.allDesc = data.description;
       // resParams.allDate_Created = data.date_created;
-      // console.log(data[0].title);
     })
 
     .then(() => database.getAllLikedResources(likesResourceID))
