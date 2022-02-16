@@ -12,15 +12,35 @@ router.get('/collections', (req, res) => {
 
   // Get individual resource details.
   database.getTrendingResources(4)
-  .then(data => resParams.trendingResources = data)
+  .then(data => {
+    resParams.trendingResources = data;
+    const resources = resParams.trendingResources;
+    database.shortenResourceText(resources, 95);
+  })
   .then(() => database.getRandomVideoResources(4))
-  .then(data => resParams.videoResources = data)
+  .then(data => {
+    resParams.videoResources = data;
+    const resources = resParams.videoResources;
+    database.shortenResourceText(resources, 95);
+  })
   .then(() => database.getRandomBlogResources(4))
-  .then(data => resParams.blogResources = data)
+  .then(data => {
+    resParams.blogResources = data;
+    const resources = resParams.blogResources;
+    database.shortenResourceText(resources, 95);
+  })
   .then(() => database.getRandomTutorialResources(4))
-  .then(data => resParams.tutorialResources = data)
+  .then(data => {
+    resParams.tutorialResources = data;
+    const resources = resParams.tutorialResources;
+    database.shortenResourceText(resources, 95);
+  })
   .then(() => database.getRandomNewsResources(4))
-  .then(data => resParams.newsResources = data)
+  .then(data => {
+    resParams.newsResources = data;
+    const resources = resParams.newsResources;
+    database.shortenResourceText(resources, 95);
+  })
 
   .then(() => {
 
@@ -35,9 +55,6 @@ router.get('/collections', (req, res) => {
         resParams.username = data.name;
         resParams.sessionID = sessionID;
       })
-
-      // Remove test code.
-      .then(() => console.log('resParams =', resParams))
 
       // REMINDER: Need to eventually replace with collections_index.
       .then(() => res.render('collections_index2', resParams));

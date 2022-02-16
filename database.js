@@ -363,3 +363,11 @@ const getTrendingResources = limit => {
   .then(res => res.rows);
 };
 exports.getTrendingResources = getTrendingResources;
+
+const shortenResourceText = (resources, maxLength) => {
+  for (const resource of resources) {
+    resource.description.length > maxLength ? resource.description = resource.description.slice(0, maxLength) + '...' : null;
+    resource.title.length > maxLength ? resource.title = resource.title.slice(0, maxLength) + '...' : null;
+  }
+}
+exports.shortenResourceText = shortenResourceText;
