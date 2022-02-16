@@ -1,39 +1,66 @@
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #A7C7E7">
+<nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #A7C7E7">
   <a class="navbar-brand" href="/collections">Resource Haven</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/collections">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/users/1">My Collections</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/collections/new">Add to Collection</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/collections/2">Random</a>
-      </li>
-    </ul>
 
-    <form action="/search" method="POST" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" name="search-phrase" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <% if(sessionID) { %>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/collections">Home <span
+              class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/1">My Collections</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/collections/new">Add to Collection</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/collections/2">Random</a>
+        </li>
+      </ul>
 
+      <label class="login-display text-center" style="margin: auto 5px;"> Logged in as: <%= username %></label>
+      <form action="/search" method="POST" class="d-flex form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" name="search-phrase" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+      </form>
 
-    <form action="/login" method="GET" style="margin: auto 5px;">
-      <button type="submit" class="btn btn-outline-secondary">Login</button>
-    </form>
-    <form action="/logout" method="POST" style="margin: auto 5px;">
-      <button type="submit" class="btn btn-outline-secondary">Logout</button>
-    </form>
-    <form action="/register" method="GET">
-      <button type="submit" class="btn btn-outline-primary">Register</button>
-    </form>
+      <form action="/logout" method="POST" style="margin: auto 5px;">
+        <button type="submit" class="btn btn-outline-secondary">Logout</button>
+      </form>
+
+      <% } else { %>
+
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/collections">Home <span
+                class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/collections/new">Add to Collection</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/collections/2">Random</a>
+          </li>
+        </ul>
+
+        <form action="/search" method="POST" class="d-flex form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" name="search-phrase" placeholder="Search"
+            aria-label="Search">
+          <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+        <form action="/login" method="GET" style="margin: auto 5px;">
+          <button type="submit" class="btn btn-outline-secondary">Login</button>
+        </form>
+        <form action="/register" method="GET">
+          <button type="submit" class="btn btn-outline-primary">Register</button>
+        </form>
+
+        <% } %>
   </div>
 </nav>

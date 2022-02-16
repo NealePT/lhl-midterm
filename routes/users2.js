@@ -8,11 +8,25 @@ const database = require('../database'); //contains all SQL query functions
 // 5. GET /users/:id - The end-user wants to see the collection for a specific profile.
 router.get('/users/:id', (req, res) => {
   // REMINDER: Need to replace with users_index.
-
+  const sessionID = req.session.user_id;
   const resourceID = req.params.id;
   const likesResourceID = resourceID;
-  const userID = 1;
-  const resParams = { resourceID: resourceID, likesResourceID: likesResourceID, userID: userID };
+  const resParams = { resourceID: resourceID, likesResourceID: likesResourceID };
+
+  //If there is a session cookie, pass the cookie and matching user name before rendering the page
+  if (!sessionID) {
+    res.render('users_index', resParams);
+  } else {
+    database.getNameByUserID(sessionID)
+      .then(data => {
+        resParams.username = data.name;
+        resParams.sessionID = sessionID;
+      })
+
+      // REMOVE TEST CODE
+      .then(() => console.log('GET /users/:id =', resParams));
+  }
+
 
   // get the resource details from the user's resources
   database.getAllResources(resourceID)
