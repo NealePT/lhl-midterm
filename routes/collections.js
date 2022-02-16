@@ -89,7 +89,15 @@ router.get('/collections/new', (req, res) => {
   }
 });
 
+// GET /collections/random
+router.get('/collections/random', (req, res) => {
+  let resourceID = '';
+  database.getRandomResourceID()
+  .then(data => resourceID = data)
+  .then(() => res.redirect(`/collections/${resourceID}`));
+});
 
+// WARNING: Route should be GET /collections/u/:id instead.
 // 3. GET /collections/:id - The end-user wants to see a particular resource.
 router.get('/collections/:id', (req, res) => {
   const sessionID = req.session.user_id;
