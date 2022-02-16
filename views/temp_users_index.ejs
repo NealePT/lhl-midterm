@@ -19,7 +19,9 @@
       <div class="profile-img">
       </div>
       <div class="user-name">
-        <h2>Tony Stark</h2>
+        <h2>
+          <%= name %>
+        </h2>
       </div>
     </div>
 
@@ -44,7 +46,7 @@
                   <small class="text-muted">
                     <%= like.date_created %>
                   </small>
-                  <a href="/collections/<%= resourceID %>/update">
+                  <a href="/collections/<%= like.id %>/update">
                     <button type="submit" class="btn btn-outline-light">Edit</button>
                   </a>
                 </div>
@@ -79,7 +81,7 @@
                   <small class="text-muted">
                     Created on <%= resource.date_created %>
                   </small>
-                  <a href="/collections/<%= resource.resourceID %>/update">
+                  <a href="/collections/<%= resource.id %>/update">
                     <button type="submit" class="btn btn-outline-light">Edit</button>
                   </a>
                 </div>
