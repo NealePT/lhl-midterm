@@ -1,9 +1,25 @@
 .user-profile {
-  margin-top: 50px;
+  margin-top: 70px;
+  text-align: center;
   background-color: #fff;
   color: black;
   height: 200px;
   width: 100vw;
+}
+
+.profile-img {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.profile-img img {
+  width: auto;
+  height: 100%;
+  margin-left: -40px;
 }
 
 .card-deck {
