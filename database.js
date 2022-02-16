@@ -115,7 +115,7 @@ exports.checkLike = checkLike;
 const getComments = resourceID => {
   const values = [resourceID];
   const query = `
-  SELECT name, comment
+  SELECT name AS commenter ,comment
   FROM users
   JOIN resource_comments ON owner_id = users.id
   WHERE resource_id = $1
@@ -189,8 +189,8 @@ const getUserByEmail = (email) => {
 };
 exports.getUserByEmail = getUserByEmail;
 
-const getNameBySessionID = sessionID => {
-  const values = [sessionID];
+const getNameByUserID = userID => {
+  const values = [userID];
   const query = `
   SELECT name FROM users
   WHERE id = $1;
@@ -198,7 +198,7 @@ const getNameBySessionID = sessionID => {
   return db.query(query, values)
     .then(res => res.rows[0]);
 };
-exports.getNameBySessionID = getNameBySessionID;
+exports.getNameByUserID = getNameByUserID;
 
 const getSearchResults = searchPhrase => {
   const values = [searchPhrase];
@@ -221,3 +221,16 @@ const getSearchResults = searchPhrase => {
     .then(res => res.rows);
 };
 exports.getSearchResults = getSearchResults;
+
+const addUser = (name, email, hashedPassword) => {
+  const values = [name, email, hashedPassword];
+  const query = `
+  INSERT INTO users (name, email, password)
+  VALUES ($1, $2, $3)
+  RETURNING *;
+  `;
+
+  return db.query(query, values)
+  .then(res => res.rows[0]);
+};
+exports.addUser = addUser;
