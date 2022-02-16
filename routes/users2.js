@@ -35,7 +35,7 @@ router.get('/users/:id', (req, res) => {
     // get all of a user's liked resources
     .then(() => database.getAllLikedResources(likesResourceID))
     .then(data => {
-      console.log("LIKED", data);
+      // console.log("LIKED", data);
       resParams.likesResourceID = data;
     })
 
