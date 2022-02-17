@@ -246,7 +246,7 @@ const getAllResources = (resourceID) => {
   SELECT resources.id AS id, owner_id, title, description, url, TO_CHAR(date_created, 'Mon dd, yyyy') AS date_created
   FROM resources
   WHERE owner_id = $1
-  LIMIT 4;`;
+  LIMIT 6;`;
   return db.query(query, value).then((res) => res.rows);
 };
 
@@ -260,7 +260,7 @@ const getAllLikedResources = (resourceID) => {
   FROM resource_likes
   JOIN resources ON resources.id = resource_id
   WHERE resource_likes.owner_id = $1
-  LIMIT 3;`;
+  LIMIT 6;`;
 
   return db.query(query, value).then((res) => res.rows);
 };
