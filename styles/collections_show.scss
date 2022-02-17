@@ -128,7 +128,6 @@ header {
 }
 
 #comment-textbox {
-  // border: 1px solid red; // Remove test code.
   @include flex-column();
   justify-content: center;
 }
@@ -175,4 +174,3 @@ header {
 .comment-body {
   margin: -15px 10px 0 10px;
 }
-////////// Comments Section - END //////////
