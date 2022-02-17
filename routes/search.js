@@ -30,7 +30,7 @@ router.get('/search/:id', (req, res) => {
   const sessionID = req.session.user_id;
   const resParams = {};
   if (!sessionID) {
-    res.render('defaultSearchPage', { sessionID: null });
+    res.render('temp_search', { sessionID: null });
   } else {
     database.getNameByUserID(sessionID)
       .then(data => {
