@@ -383,3 +383,13 @@ const getRandomResourceID = () => {
     .then(res => res.rows[0].id);
 }
 exports.getRandomResourceID = getRandomResourceID;
+
+// get a single user from the database given the id
+const getUserWithID = (id) => {
+  const query = `
+  SELECT * FROM users WHERE id = $1;`
+
+  return db.query(query, [id])
+    .then(res => res.rows[0]);
+}
+exports.getUserWithID = getUserWithID;
