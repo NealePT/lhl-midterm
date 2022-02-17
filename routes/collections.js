@@ -232,16 +232,30 @@ router.post('/collections/:id/update', (req, res) => {
   .then(() => res.redirect(`/collections/${resourceID}`));
 });
 
+// Possibly change to router.delete('/collections/:id/delete')?
 // POST /collections/:id/delete
 router.post('/collections/:id/delete', (req, res) => {
-
-  // IMPORTANT: Add conditional to prevent access through curl unless logged in AND publisher.
-
-  const userID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
   const resourceID = req.params.id;
+  const sessionID = req.session.user_id;
 
-  database.deleteResource(resourceID)
-  .then(() => res.redirect(`/users/${userID}`))
+  if (!sessionID) {
+    return res.status(404).send(`
+      Error 404: Please login to access this page.
+    `);
+  }
+
+  database.getResourceDetails(resourceID)
+  .then(data => {
+    const publisherID = data['owner_id'];
+    if (sessionID !== publisherID) {
+      return res.status(404).send(`
+      Error 404: Permission Denied - You do not own this resource page.
+    `);
+    } else {
+      database.deleteResource(resourceID)
+      .then(() => res.redirect(`/users/${sessionID}`))
+    }
+  })
 });
 
 // POST /collections/:id/like
