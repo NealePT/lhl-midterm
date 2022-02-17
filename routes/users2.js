@@ -16,7 +16,6 @@ router.get('/users/:id', (req, res) => {
   //If there is a session cookie, pass the cookie and matching user name before rendering the page
   if (!sessionID) {
     return res.status(400).send(`Please <a href="/login">login</a> first to view this page!`);
-    // res.render('users_index', resParams);
   } else {
 
     database.getUserWithID(userID)
@@ -35,14 +34,6 @@ router.get('/users/:id', (req, res) => {
       })
     // get the resource details from the user's resources
     database.getAllResources(userID)
-      // .then(data => {
-      //   let creatorID = data[0].owner_id;
-      //   console.log("creator", creatorID);
-      //   console.log("sessionID", sessionID);
-
-      //   // if the creatorID isn't the same as the sessionID then user will be denied access to the user's index page
-
-      // })
       .then(data => {
         // console.log("DATA", data);
         resParams.user_id = userID;
@@ -70,16 +61,6 @@ router.get('/users/:id', (req, res) => {
       //pass our resParams data and render the user's index page
       .then(() => res.render('temp_users_index', resParams));
   }
-
-
-  //pass our resParams data and render the user's index page
-  // .then(() => res.render('temp_users_index', resParams));
-
-  // .then(() => database.getAllResources(resourceID))
-  // .then(data => {
-  //   // console.log("ALL resources", data);
-  //   resParams.resourceID = data;
-  // })
 });
 
 module.exports = router;
