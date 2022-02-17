@@ -47,9 +47,13 @@
             </div>
             <div class="mainRight" class="rating">
               <i id="star" class="fas fa-star"></i>
-              <p>
-                <%= result.avgrating %>
-              </p>
+              <% if(result.avgrating) { %>
+                <p>
+                  <%= result.avgrating %>
+                </p>
+                <% } else { %>
+                  <p>N/A</p>
+              <% } %>
             </div>
           </section>
         </article>
