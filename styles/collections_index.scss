@@ -42,7 +42,7 @@ article {
 }
 
 .card_body {
-  border: 3px solid black;
+  border: 2px solid black;
   border-radius: 5px;
   @include flex-column();
   justify-content: center;
@@ -50,6 +50,11 @@ article {
   width: 405px;
   height: 225px;
   margin: 5px 0 5px 0;
+  transition-duration: 0.3s;
+}
+
+.card_body:hover {
+  box-shadow: 2px 2px 3px 0.5px black;
 }
 
 .trending-background {
