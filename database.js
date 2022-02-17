@@ -218,6 +218,7 @@ const getSearchResults = searchPhrase => {
     OR UPPER(description) LIKE '%' || UPPER($1) || '%'
     OR UPPER(category) LIKE '%' || UPPER($1) || '%'
     OR UPPER(url) LIKE '%' || UPPER($1) || '%'
+    OR UPPER(users.name) LIKE '%' || UPPER($1) || '%'
   GROUP BY title, url, description, date_created, category, users.name, date_modified, date_created, resources.id
   ORDER BY avgrating DESC NULLS LAST
   LIMIT 10;
@@ -370,7 +371,7 @@ const shortenResourceText = (resources, maxLength) => {
     resource.description.length > maxLength ? resource.description = resource.description.slice(0, maxLength) + '...' : null;
     resource.title.length > maxLength ? resource.title = resource.title.slice(0, maxLength) + '...' : null;
   }
-}
+};
 exports.shortenResourceText = shortenResourceText;
 
 const getRandomResourceID = () => {
@@ -381,7 +382,7 @@ const getRandomResourceID = () => {
   `;
   return db.query(query)
     .then(res => res.rows[0].id);
-}
+};
 exports.getRandomResourceID = getRandomResourceID;
 
 // get a single user from the database given the id

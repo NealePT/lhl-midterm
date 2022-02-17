@@ -20,8 +20,8 @@ router.get('/users/:id', (req, res) => {
     database.getUserWithID(userID)
       .then(data => {
         let creatorID = data.id;
-        console.log("CREATOR", creatorID);
-        console.log("SESSIONID", sessionID);
+        // console.log("CREATOR", creatorID);
+        // console.log("SESSIONID", sessionID);
 
         // check if the user is the same as the sessionID
         if (creatorID !== sessionID) {
@@ -48,7 +48,7 @@ router.get('/users/:id', (req, res) => {
       // get all of a user's liked resources
       .then(() => database.getAllLikedResources(userLikesID))
       .then(data => {
-        console.log("LIKED", data);
+        // console.log("LIKED", data);
         resParams.userLikes = data;
         const resources = resParams.userLikes;
         database.shortenResourceText(resources, 90);
