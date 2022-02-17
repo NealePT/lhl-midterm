@@ -19,26 +19,29 @@ router.get('/search', (req, res) => {
 
     // REMINDER: Remove test code
       .then(() => console.log('GET /search =', resParams))
-      .then(() => res.render('login', resParams));
+      .then(() => res.render('defaultSearchPage', resParams));
   }
-
-  // REMINDER: Need to rename to search_index.
-  res.render('defaultSearchPage');
 });
 
 
 // 8. GET /search/:id - The end-user wants to find a resource using a specific search phrase.
 router.get('/search/:id', (req, res) => {
   const searchPhrase = req.params.id;
+  const sessionID = req.session.user_id;
   const resParams = {};
-
-  database.getSearchResults(searchPhrase)
-    .then(data => {
-      resParams.searchResults = data;
-    })
-
+  if (!sessionID) {
+    res.render('defaultSearchPage', { sessionID: null });
+  } else {
+    database.getNameByUserID(sessionID)
+      .then(data => {
+        resParams.username = data.name;
+        resParams.sessionID = sessionID;
+      })
+      .then(() => database.getSearchResults(searchPhrase))
+      .then(data => resParams.searchResults = data)
     // REMINDER: Need to rename to search_show.
-    .then(() => res.render('temp_search', resParams));
+      .then(() => res.render('temp_search', resParams));
+  }
 });
 
 // POST /search
