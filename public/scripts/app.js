@@ -9,7 +9,7 @@ $( document ).ready(function() {
     const $comment = `
     <span class="comment-details">
       <p class="user-name"><b>${newComment.commenter}</b></p>
-      <p>${newComment.comment}</p>
+      <p class="comment-body">${newComment.comment}</p>
     </span>
     `;
     return $comment;
@@ -37,22 +37,21 @@ $( document ).ready(function() {
     // Get the value from collections_show.ejs <textarea id="comment-textarea">
     const payload = escape($( this ).serialize());
 
-    // if (payload.length > 13) {}
+    if (payload.length > 13) {
 
       // POST /collections/:id/comment
       $.post(`/collections/${resourceID}/comment`, payload)
       .then(function() {
         $.get(`/collections/${resourceID}/comment`)
         .then(function(data) {
-
           if (data.length > 0) {
             const newComment = data[data.length - 1];
             const $comment = createCommentElement(newComment);
             $( '#comments-all' ).prepend($comment);
           }
-
         })
       });
+    }
 
   });
 
@@ -60,7 +59,16 @@ $( document ).ready(function() {
   const loadComments = () => {
     $.get(`/collections/${resourceID}/comment`)
     .then(function(data) {
-      renderComments(data);
+
+      if (data.length === 0) {
+        /*$( '#comments-all' ).prepend(`
+        <span class="comment-details">
+          <p class="user-name"><b>Leave the first comment!</b></p>
+        </span>
+        `);*/
+      } else {
+        renderComments(data);
+      }
     });
   };
 
