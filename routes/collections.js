@@ -219,29 +219,56 @@ router.post('/collections', (req, res) => {
 
 // POST /collections/:id/update
 router.post('/collections/:id/update', (req, res) => {
-
-  // IMPORTANT: Add conditional to prevent access through curl unless logged in AND publisher.
-
   const resourceID = req.params.id;
-  const newTitle = req.body.title;
-  const newDescription = req.body.description;
-  const newCategory = req.body.category;
-  const newURL = req.body.url;
+  const sessionID = req.session.user_id;
 
-  database.updateResource(resourceID, newTitle, newDescription, newCategory, newURL)
-  .then(() => res.redirect(`/collections/${resourceID}`));
+  if (!sessionID) {
+    return res.status(404).send(`
+      Error 404: Please login to access this page.
+    `);
+  }
+
+  database.getResourceDetails(resourceID)
+  .then(data => {
+    const publisherID = data['owner_id'];
+    if (sessionID !== publisherID) {
+      return res.status(404).send(`
+      Error 404: Only the resource owner may delete this page.
+    `);
+    } else {
+      const newTitle = req.body.title;
+      const newDescription = req.body.description;
+      const newCategory = req.body.category;
+      const newURL = req.body.url;
+      database.updateResource(resourceID, newTitle, newDescription, newCategory, newURL)
+      .then(() => res.redirect(`/collections/${resourceID}`));
+    }
+  });
 });
 
 // POST /collections/:id/delete
 router.post('/collections/:id/delete', (req, res) => {
-
-  // IMPORTANT: Add conditional to prevent access through curl unless logged in AND publisher.
-
-  const userID = 4; // Table users id = 4 is Guest (for testing only and not an actual Guest account)
   const resourceID = req.params.id;
+  const sessionID = req.session.user_id;
 
-  database.deleteResource(resourceID)
-  .then(() => res.redirect(`/users/${userID}`))
+  if (!sessionID) {
+    return res.status(404).send(`
+      Error 404: Please login to access this page.
+    `);
+  }
+
+  database.getResourceDetails(resourceID)
+  .then(data => {
+    const publisherID = data['owner_id'];
+    if (sessionID !== publisherID) {
+      return res.status(404).send(`
+      Error 404: Only the resource owner may delete this page.
+    `);
+    } else {
+      database.deleteResource(resourceID)
+      .then(() => res.redirect(`/users/${sessionID}`))
+    }
+  })
 });
 
 // POST /collections/:id/like
