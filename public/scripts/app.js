@@ -42,6 +42,8 @@ $( document ).ready(function() {
       // POST /collections/:id/comment
       $.post(`/collections/${resourceID}/comment`, payload)
       .then(function() {
+        $( '#comment-textarea' ).val('');
+
         $.get(`/collections/${resourceID}/comment`)
         .then(function(data) {
           if (data.length > 0) {
