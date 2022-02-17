@@ -219,7 +219,7 @@ const getSearchResults = searchPhrase => {
     OR UPPER(category) LIKE '%' || UPPER($1) || '%'
     OR UPPER(url) LIKE '%' || UPPER($1) || '%'
   GROUP BY title, url, description, date_created, category, users.name, date_modified, date_created, resources.id
-  ORDER BY avgrating DESC
+  ORDER BY avgrating DESC NULLS LAST
   LIMIT 10;
   `;
   return db.query(query, values)
