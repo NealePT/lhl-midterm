@@ -9,13 +9,14 @@ const database = require('../database'); //contains all SQL query functions
 router.get('/users/:id', (req, res) => {
   // REMINDER: Need to replace with users_index.
   const sessionID = req.session.user_id;
-  const resourceID = req.params.id;
-  const likesResourceID = resourceID;
-  const resParams = { resourceID: resourceID, likesResourceID: likesResourceID };
+  const userID = req.params.id;
+  const userLikesID = userID;
+  const resParams = { userID: userID, userLikes: userLikesID };
 
   //If there is a session cookie, pass the cookie and matching user name before rendering the page
   if (!sessionID) {
-    res.render('users_index', resParams);
+    return res.status(400).send(`Please <a href="/login">login</a> first to view this page!`);
+    // res.render('users_index', resParams);
   } else {
     database.getNameByUserID(sessionID)
       .then(data => {
@@ -29,10 +30,10 @@ router.get('/users/:id', (req, res) => {
 
 
   // get the resource details from the user's resources
-  database.getAllResources(resourceID)
+  database.getAllResources(userID)
     .then(data => {
       console.log("DATA:", data);
-      resParams.user_id = resourceID;
+      resParams.user_id = userID;
       console.log("USERID:", resParams.user_id);
       resParams.resources = data;
       const resources = resParams.resources;
@@ -45,11 +46,11 @@ router.get('/users/:id', (req, res) => {
     // })
 
     // get all of a user's liked resources
-    .then(() => database.getAllLikedResources(likesResourceID))
+    .then(() => database.getAllLikedResources(userLikesID))
     .then(data => {
       console.log("LIKED", data);
-      resParams.likesResourceID = data;
-      const resources = resParams.likesResourceID;
+      resParams.userLikes = data;
+      const resources = resParams.userLikes;
       database.shortenResourceText(resources, 90);
     })
 
