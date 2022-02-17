@@ -243,7 +243,7 @@ exports.addUser = addUser;
 const getAllResources = (resourceID) => {
   const value = [resourceID];
   const query = `
-  SELECT owner_id, title, description, url, TO_CHAR(date_created, 'Mon dd, yyyy') AS date_created
+  SELECT resources.id AS id, owner_id, title, description, url, TO_CHAR(date_created, 'Mon dd, yyyy') AS date_created
   FROM resources
   WHERE owner_id = $1
   LIMIT 4;`;
@@ -383,3 +383,13 @@ const getRandomResourceID = () => {
     .then(res => res.rows[0].id);
 }
 exports.getRandomResourceID = getRandomResourceID;
+
+// get a single user from the database given the id
+const getUserWithID = (id) => {
+  const query = `
+  SELECT * FROM users WHERE id = $1;`
+
+  return db.query(query, [id])
+    .then(res => res.rows[0]);
+}
+exports.getUserWithID = getUserWithID;
