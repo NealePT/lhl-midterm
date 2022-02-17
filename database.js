@@ -120,7 +120,7 @@ const getComments = (resourceID) => {
   FROM users
   JOIN resource_comments ON owner_id = users.id
   WHERE resource_id = $1
-  ORDER BY date DESC
+  ORDER BY date
   LIMIT 10;
   `;
   return db.query(query, values)
