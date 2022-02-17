@@ -38,10 +38,9 @@ body {
   max-height: 300px;
 }
 
-a:link,
-a:hover {
+a:link {
   text-decoration: none;
-  color: inherit;
+  color: inherit !important;
 }
 
 .recent-likes,
