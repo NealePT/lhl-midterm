@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="../styles/collections_index.css" type="text/css" />
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
 </head>
@@ -23,7 +23,8 @@
 
   <main>
 
-    <article> <!-- START - TRENDING ARTICLE -->
+    <article>
+      <!-- START - TRENDING ARTICLE -->
       <section class="article-titles">
         <span>Trending Now</span>
       </section>
@@ -34,19 +35,27 @@
               <div class="trending-background"></div>
               <div class="card-details">
                 <div class="card_title">
-                  <span><%= trend.title %></span>
+                  <span>
+                    <%= trend.title %>
+                  </span>
                 </div>
-                <div class="card-description"><%= trend.description %></div>
+                <div class="card-description">
+                  <%= trend.description %>
+                </div>
                 <div class="publisher-details">
-                  <span><%= trend.name %></span>
-                  <span><%= trend['public_date_created'] %></span>
+                  <span>
+                    <%= trend.name %>
+                  </span>
+                  <span>
+                    <%= trend['public_date_created'] %>
+                  </span>
                 </div>
               </div>
 
 
             </div> <!-- </div class="card_body"> -->
           </a>
-        <% } %>
+          <% } %>
       </section> <!-- </section class="article-bodies"> -->
     </article> <!-- END - TRENDING ARTICLE -->
 
@@ -62,21 +71,30 @@
               <div class="videos-background"></div>
               <div class="card-details">
                 <div class="card_title">
-                  <span><%= video.title %></span>
+                  <span>
+                    <%= video.title %>
+                  </span>
                 </div>
-                <div class="card-description"><%= video.description %></div>
+                <div class="card-description">
+                  <%= video.description %>
+                </div>
                 <div class="publisher-details">
-                  <span><%= video.name %></span>
-                  <span><%= video['public_date_created'] %></span>
+                  <span>
+                    <%= video.name %>
+                  </span>
+                  <span>
+                    <%= video['public_date_created'] %>
+                  </span>
                 </div>
               </div>
             </div> <!-- </div class="card_body"> -->
           </a>
-        <% } %>
+          <% } %>
       </section> <!-- </section class="article-bodies"> -->
     </article> <!-- END - VIDEOS ARTICLE -->
 
-    <article> <!-- START - BLOGS ARTICLE -->
+    <article>
+      <!-- START - BLOGS ARTICLE -->
       <section class="article-titles">
         <span>Blogs</span>
       </section>
@@ -87,21 +105,30 @@
               <div class="blogs-background"></div>
               <div class="card-details">
                 <div class="card_title">
-                  <span><%= blog.title %></span>
+                  <span>
+                    <%= blog.title %>
+                  </span>
                 </div>
-                <div class="card-description"><%= blog.description %></div>
+                <div class="card-description">
+                  <%= blog.description %>
+                </div>
                 <div class="publisher-details">
-                  <span><%= blog.name %></span>
-                  <span><%= blog['public_date_created'] %></span>
+                  <span>
+                    <%= blog.name %>
+                  </span>
+                  <span>
+                    <%= blog['public_date_created'] %>
+                  </span>
                 </div>
               </div>
             </div> <!-- </div class="card_body"> -->
           </a>
-        <% } %>
+          <% } %>
       </section> <!-- </section class="article-bodies"> -->
     </article> <!-- END - BLOGS ARTICLE -->
 
-    <article> <!-- START - TUTORIAL ARTICLE -->
+    <article>
+      <!-- START - TUTORIAL ARTICLE -->
       <section class="article-titles">
         <span>Tutorials</span>
       </section>
@@ -112,21 +139,30 @@
               <div class="tutorials-background"></div>
               <div class="card-details">
                 <div class="card_title">
-                  <span><%= tutorial.title %></span>
+                  <span>
+                    <%= tutorial.title %>
+                  </span>
                 </div>
-                <div class="card-description"><%= tutorial.description %></div>
+                <div class="card-description">
+                  <%= tutorial.description %>
+                </div>
                 <div class="publisher-details">
-                  <span><%= tutorial.name %></span>
-                  <span><%= tutorial['public_date_created'] %></span>
+                  <span>
+                    <%= tutorial.name %>
+                  </span>
+                  <span>
+                    <%= tutorial['public_date_created'] %>
+                  </span>
                 </div>
               </div>
             </div> <!-- </div class="card_body"> -->
           </a>
-        <% } %>
+          <% } %>
       </section> <!-- </section class="article-bodies"> -->
     </article> <!-- END - TUTORIAL ARTICLE -->
 
-    <article> <!-- START - NEWS ARTICLE -->
+    <article>
+      <!-- START - NEWS ARTICLE -->
       <section class="article-titles">
         <span>News</span>
       </section>
@@ -138,17 +174,25 @@
               <div class="news-background"></div>
               <div class="card-details">
                 <div class="card_title">
-                  <span><%= news.title %></span>
+                  <span>
+                    <%= news.title %>
+                  </span>
                 </div>
-                <div class="card-description"><%= news.description %></div>
+                <div class="card-description">
+                  <%= news.description %>
+                </div>
                 <div class="publisher-details">
-                  <span><%= news.name %></span>
-                  <span><%= news['public_date_created'] %></span>
+                  <span>
+                    <%= news.name %>
+                  </span>
+                  <span>
+                    <%= news['public_date_created'] %>
+                  </span>
                 </div>
               </div>
             </div> <!-- </div class="card_body"> -->
           </a>
-        <% } %>
+          <% } %>
 
       </section> <!-- </section class="article-bodies"> -->
     </article> <!-- END - NEWS ARTICLE -->

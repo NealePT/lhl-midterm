@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,65 +14,68 @@
 
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
   <%- include('partials/_header') %>
 
-  <div class="newContainer">
-    <h2>Update Resource</h2>
-    <a href="http://localhost:8080/collections/<%= resourceID  %>">http://localhost:8080/collections/<%= resourceID  %></a>
+    <div class="newContainer">
+      <h2>Update Resource</h2>
+      <a href="http://localhost:8080/collections/<%= resourceID  %>">http://localhost:8080/collections/<%= resourceID %>
+          </a>
 
-    <!-- POST /collections/:id/update -->
-    <form action="/collections/<%= resourceID %>/update" method="POST">
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input name="title" type="text" class="form-control" value="<%= title %>">
-      </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea name="description" class="form-control" rows="3" ><%= description %></textarea>
-      </div>
-      <div class="form-group">
-        <label for="urlInput">URL</label>
-        <input name="url" type="text" class="form-control" value="<%= url %>">
-      </div>
-      <div class="form-group">
-        <label for="category">Category</label>
-        <select name="category" class="form-control" >
-          <% if (category === 'video') { %>
-            <option value="video" selected>Video</option>
-          <% } else { %>
-            <option value="video">Video</option>
-          <% } %>
+      <!-- POST /collections/:id/update -->
+      <form action="/collections/<%= resourceID %>/update" method="POST">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input name="title" type="text" class="form-control" value="<%= title %>">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea name="description" class="form-control" rows="3"><%= description %></textarea>
+        </div>
+        <div class="form-group">
+          <label for="urlInput">URL</label>
+          <input name="url" type="text" class="form-control" value="<%= url %>">
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select name="category" class="form-control">
+            <% if (category==='video' ) { %>
+              <option value="video" selected>Video</option>
+              <% } else { %>
+                <option value="video">Video</option>
+                <% } %>
 
-          <% if (category === 'blog') { %>
-            <option value="blog" selected>Blog</option>
-          <% } else { %>
-            <option value="blog">Blog</option>
-          <% } %>
+                  <% if (category==='blog' ) { %>
+                    <option value="blog" selected>Blog</option>
+                    <% } else { %>
+                      <option value="blog">Blog</option>
+                      <% } %>
 
-          <% if (category === 'tutorial') { %>
-            <option value="tutorial" selected>Tutorial</option>
-          <% } else { %>
-            <option value="tutorial">Tutorial</option>
-          <% } %>
+                        <% if (category==='tutorial' ) { %>
+                          <option value="tutorial" selected>Tutorial</option>
+                          <% } else { %>
+                            <option value="tutorial">Tutorial</option>
+                            <% } %>
 
-          <% if (category === 'news') { %>
-            <option value="news" selected>News</option>
-          <% } else { %>
-            <option value="news">News</option>
-          <% } %>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+                              <% if (category==='news' ) { %>
+                                <option value="news" selected>News</option>
+                                <% } else { %>
+                                  <option value="news">News</option>
+                                  <% } %>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
 
-    <br>
-    <form action="/collections/<%= resourceID %>/delete" method="POST">
-      <button type="submit" class="btn btn-primary">Delete</button>
-    </form>
-  </div>
+      <br>
+      <form action="/collections/<%= resourceID %>/delete" method="POST">
+        <button type="submit" class="btn btn-primary">Delete</button>
+      </form>
+    </div>
 </body>
+
 </html>
