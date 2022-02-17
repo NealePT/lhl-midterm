@@ -219,17 +219,31 @@ router.post('/collections', (req, res) => {
 
 // POST /collections/:id/update
 router.post('/collections/:id/update', (req, res) => {
-
-  // IMPORTANT: Add conditional to prevent access through curl unless logged in AND publisher.
-
   const resourceID = req.params.id;
-  const newTitle = req.body.title;
-  const newDescription = req.body.description;
-  const newCategory = req.body.category;
-  const newURL = req.body.url;
+  const sessionID = req.session.user_id;
 
-  database.updateResource(resourceID, newTitle, newDescription, newCategory, newURL)
-  .then(() => res.redirect(`/collections/${resourceID}`));
+  if (!sessionID) {
+    return res.status(404).send(`
+      Error 404: Please login to access this page.
+    `);
+  }
+
+  database.getResourceDetails(resourceID)
+  .then(data => {
+    const publisherID = data['owner_id'];
+    if (sessionID !== publisherID) {
+      return res.status(404).send(`
+      Error 404: Only the resource owner may delete this page.
+    `);
+    } else {
+      const newTitle = req.body.title;
+      const newDescription = req.body.description;
+      const newCategory = req.body.category;
+      const newURL = req.body.url;
+      database.updateResource(resourceID, newTitle, newDescription, newCategory, newURL)
+      .then(() => res.redirect(`/collections/${resourceID}`));
+    }
+  });
 });
 
 // Possibly change to router.delete('/collections/:id/delete')?
@@ -249,7 +263,7 @@ router.post('/collections/:id/delete', (req, res) => {
     const publisherID = data['owner_id'];
     if (sessionID !== publisherID) {
       return res.status(404).send(`
-      Error 404: Permission Denied - You do not own this resource page.
+      Error 404: Only the resource owner may delete this page.
     `);
     } else {
       database.deleteResource(resourceID)
