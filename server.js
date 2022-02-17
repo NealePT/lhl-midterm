@@ -76,6 +76,9 @@ app.get('/collections/new', collectionsRoutes);
 // 3. GET /collections/:id
 app.get('/collections/:id', collectionsRoutes);
 
+// GET /collections/random
+app.get('/collections/random', collectionsRoutes);
+
 // 4. GET /collections/:id/update
 app.get('/collections/:id/update', collectionsRoutes);
 

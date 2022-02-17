@@ -364,6 +364,7 @@ const getTrendingResources = limit => {
 };
 exports.getTrendingResources = getTrendingResources;
 
+// This function can probably be moved to some sort of helper function file.
 const shortenResourceText = (resources, maxLength) => {
   for (const resource of resources) {
     resource.description.length > maxLength ? resource.description = resource.description.slice(0, maxLength) + '...' : null;
@@ -371,3 +372,14 @@ const shortenResourceText = (resources, maxLength) => {
   }
 }
 exports.shortenResourceText = shortenResourceText;
+
+const getRandomResourceID = () => {
+  const query = `
+  SELECT id FROM resources
+  ORDER BY RANDOM()
+  LIMIT 1;
+  `;
+  return db.query(query)
+  .then(res => res.rows[0].id);
+}
+exports.getRandomResourceID = getRandomResourceID;
