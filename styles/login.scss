@@ -1,0 +1,33 @@
+.newContainer {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+.newContainer form {
+  width: 50vw;
+}
+
+
+body {
+  background-color: rgb(175, 175, 175) !important;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  border: 10px solid white;
+  background-color: white;
+  border-radius: 10px;
+  width: 60vw;
+  margin-bottom: 100px;
+}
+
+.form-control {
+  width: 50vw;
+}
