@@ -51,9 +51,6 @@
                   <small class="text-muted">
                     <%= like.date_created %>
                   </small>
-                  <a href="/collections/<%= user_id %>/update">
-                    <button type="submit" class="btn btn-outline-light">Edit</button>
-                  </a>
                 </div>
               </div>
             </div>
@@ -71,7 +68,7 @@
       </div>
       <div class="card-deck">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-          <% for (const resource of resourceID) { %>
+          <% for (const resource of resources) { %>
             <div class="col">
               <div class="card text-white bg-dark mb-2">
                 <div class="card-body">
@@ -88,7 +85,7 @@
                   <small class="text-muted">
                     Created on <%= resource.date_created %>
                   </small>
-                  <a href="/collections/<%= user_id %>/update">
+                  <a href="/collections/<%= resourceID %>/update">
                     <button type="submit" class="btn btn-outline-light">Edit</button>
                   </a>
                 </div>
