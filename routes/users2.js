@@ -17,17 +17,15 @@ router.get('/users/:id', (req, res) => {
   if (!sessionID) {
     return res.status(400).send(`Please <a href="/login">login</a> first to view this page!`);
   } else {
-
     database.getUserWithID(userID)
       .then(data => {
-        console.log("DATA", data);
-
         let creatorID = data.id;
         console.log("CREATOR", creatorID);
         console.log("SESSIONID", sessionID);
 
+        // check if the user is the same as the sessionID
         if (creatorID !== sessionID) {
-          console.log('TESTING GET /users/:id =', resParams);
+          // console.log('TESTING GET /users/:id =', resParams);
 
           return res.status(403).send("Access denied. This user page belongs to another user.")
         }
@@ -35,16 +33,15 @@ router.get('/users/:id', (req, res) => {
     // get the resource details from the user's resources
     database.getAllResources(userID)
       .then(data => {
-        // console.log("DATA", data);
         resParams.user_id = userID;
         // console.log("USERID:", resParams.user_id);
         resParams.resources = data;
         const resources = resParams.resources;
         database.shortenResourceText(resources, 90);
       })
+
       .then(() => database.getNameByUserID(sessionID))
       .then(data => {
-        // console.log(data);
         resParams.username = data.name;
         resParams.sessionID = sessionID;
       })
