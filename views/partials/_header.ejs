@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #A7C7E7">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #A7C7E7">
   <a class="navbar-brand" href="/collections">Resource Haven</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,11 +9,10 @@
     <% if(sessionID) { %>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/collections">Home <span
-              class="sr-only">(current)</span></a>
+          <a class="nav-link active" aria-current="page" href="/collections">Home </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/users/1">My Collections</a>
+          <a class="nav-link" href="/users/<%= sessionID %>">My Collections</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/collections/new">Add to Collection</a>
@@ -25,7 +24,8 @@
 
       <label class="login-display text-center" style="margin: auto 5px;"> Logged in as: <%= username %></label>
       <form action="/search" method="POST" class="d-flex form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" name="search-phrase" placeholder="Search" aria-label="Search">
+        <input class="form-control mr-sm-2" type="search" name="search-phrase" placeholder="Search"
+          style="margin: auto 5px;" aria-label="Search">
         <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
       </form>
 

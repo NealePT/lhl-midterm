@@ -8,8 +8,8 @@
   <title>User's Profile</title>
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <link rel="stylesheet" href="/styles/user_index.css" type="text/css" />
 </head>
@@ -51,9 +51,6 @@
                   <small class="text-muted">
                     <%= like.date_created %>
                   </small>
-                  <a href="/collections/<%= user_id %>/update">
-                    <button type="submit" class="btn btn-outline-light">Edit</button>
-                  </a>
                 </div>
               </div>
             </div>
@@ -71,11 +68,11 @@
       </div>
       <div class="card-deck">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-          <% for (const resource of resourceID) { %>
+          <% for (const resource of resources) { %>
             <div class="col">
               <div class="card text-white bg-dark mb-2">
                 <div class="card-body">
-                  <a href="<%= resource.url %>">
+                  <a href="<%= resource.url %>" style="text-decoration: none; color: inherit;">
                     <h6 class="card-title">
                       <%= resource.title %>
                     </h6>
@@ -88,7 +85,7 @@
                   <small class="text-muted">
                     Created on <%= resource.date_created %>
                   </small>
-                  <a href="/collections/<%= user_id %>/update">
+                  <a href="/collections/<%= resourceID %>/update">
                     <button type="submit" class="btn btn-outline-light">Edit</button>
                   </a>
                 </div>
