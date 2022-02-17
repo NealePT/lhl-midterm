@@ -177,8 +177,6 @@ router.get('/collections/:id/update', (req, res) => {
     database.getResourceDetails(resourceID)
     .then(data => {
       let publisherID = data['owner_id'];
-      console.log('publisherID =', publisherID);
-      console.log('sessionID =', sessionID);
       if (publisherID !== sessionID) {
         return res.status(403).send(`
         Access Denied: This resource belongs to someone else.

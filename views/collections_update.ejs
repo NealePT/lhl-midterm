@@ -42,30 +42,29 @@
         <div class="form-group">
           <label for="category">Category</label>
           <select name="category" class="form-control">
-
             <% if (category==='videos' ) { %>
               <option value="videos" selected>Video</option>
             <% } else { %>
               <option value="videos">Video</option>
             <% } %>
 
-                  <% if (category==='blogs' ) { %>
-                    <option value="blogs" selected>Blog</option>
-                    <% } else { %>
-                      <option value="blogs">Blog</option>
-                      <% } %>
+            <% if (category==='blogs' ) { %>
+              <option value="blogs" selected>Blog</option>
+            <% } else { %>
+              <option value="blogs">Blog</option>
+            <% } %>
 
-                        <% if (category==='tutorials' ) { %>
-                          <option value="tutorials" selected>Tutorial</option>
-                          <% } else { %>
-                            <option value="tutorials">Tutorial</option>
-                            <% } %>
+            <% if (category==='tutorials' ) { %>
+              <option value="tutorials" selected>Tutorial</option>
+            <% } else { %>
+              <option value="tutorials">Tutorial</option>
+            <% } %>
 
-                              <% if (category==='news' ) { %>
-                                <option value="news" selected>News</option>
-                                <% } else { %>
-                                  <option value="news">News</option>
-                                  <% } %>
+            <% if (category==='news' ) { %>
+              <option value="news" selected>News</option>
+            <% } else { %>
+              <option value="news">News</option>
+            <% } %>
           </select>
         </div>
         <div class="bottomButtons">
