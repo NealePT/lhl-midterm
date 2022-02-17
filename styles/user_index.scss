@@ -17,6 +17,7 @@ body {
   height: 200px;
   overflow: hidden;
   border-radius: 50%;
+  border: 2px solid white;
 }
 
 .profile-img img {
@@ -29,13 +30,13 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
   justify-content: space-evenly;
 }
 
 .card {
-  max-width: 375px;
-  max-height: 300px;
+  width: 350px;
+  height: 100%;
+  margin: 10px 10px;
 }
 
 a:link {

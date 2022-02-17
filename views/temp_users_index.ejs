@@ -33,11 +33,11 @@
       </div>
       <div class="card-deck">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-          <% for (const like of likesResourceID) { %>
+          <% for (const like of userLikes) { %>
             <div class="col">
               <div class="card text-white bg-dark mb-3">
                 <div class="card-body">
-                  <a href="<%= like.url %>">
+                  <a href="<%= like.url %>" style="text-decoration: none; color: inherit;">
                     <h6 class="card-title">
                       <%= like.title %>
                     </h6>
@@ -84,7 +84,7 @@
                   <small class="text-muted">
                     Created on <%= resource.date_created %>
                   </small>
-                  <a href="/collections/<%= resourceID %>/update">
+                  <a href="/collections/<%= resource.id %>/update">
                     <button type="submit" class="btn btn-outline-light">Edit</button>
                   </a>
                 </div>
