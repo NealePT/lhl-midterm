@@ -122,6 +122,9 @@ app.post('/collections/:id/rating', collectionsRoutes);
 // POST /collections/:id/comment
 app.post('/collections/:id/comment', collectionsRoutes);
 
+// GET /collections/:id/comment
+app.get('/collections/:id/comment', collectionsRoutes);
+
 // POST /login
 app.post('/login', loginRoutes);
 

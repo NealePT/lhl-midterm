@@ -21,6 +21,7 @@
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="/scripts/ratings.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
 
   <title>Resource Page</title>
 </head>
@@ -225,7 +226,6 @@
 
         <!-- Comments section -->
         <section id="comments-section">
-
           <div>
             <form id="comment-textbox" action="/collections/<%= resourceID  %>/comment" method="POST">
               <label for="comment-text"></label>
@@ -236,24 +236,7 @@
           </div>
 
           <div id="comments-all">
-            <% if (comments.length===0) { %>
-              <span class="comment-details">
-                <p class="comment-body">Leave the first comment!</p>
-              </span>
-              <% } %>
-
-                <% if (comments.length> 0) { %>
-                  <% for (const obj of comments) { %>
-                    <span class="comment-details">
-                      <p class="user-name"><b>
-                          <%= obj.commenter %>
-                        </b></p>
-                      <p class="comment-body">
-                        <%= obj.comment %>
-                      </p>
-                    </span>
-                    <% } %>
-                      <% } %>
+            <!-- Loaded using jQuery -->
           </div>
         </section>
 

@@ -152,11 +152,11 @@ router.get('/collections/:id', (req, res) => {
   .then(data => data ? resParams.checkLike = true : resParams.checkLike = false)
 
   // Get all the comments.
-  .then(() => database.getComments(resourcesID))
-  .then(data => resParams.comments = data)
+  // .then(() => database.getComments(resourcesID))
+  // .then(data => resParams.comments = data)
 
-  // REMINDER: Remove test code
-  .then(() => console.log('GET /collections/:id =', resParams))
+  // Remove test code:
+  // .then(() => console.log('GET /collections/:id =', resParams))
 
   // Pass in the relevant data (resParams) and render the page.
   .then(() => {res.render('collections_show', resParams)});
@@ -292,6 +292,7 @@ router.post('/collections/:id/rating' ,(req, res) => {
   .then(() => res.redirect(`/collections/${resourceID}`));
 });
 
+
 // POST /collections/:id/comment
 router.post('/collections/:id/comment', (req, res) => {
   const sessionID = req.session.user_id;
@@ -299,13 +300,24 @@ router.post('/collections/:id/comment', (req, res) => {
 
   if (!sessionID) {
     return res.status(403).send(`
-    Please <a href="/login">login</a> to comment on this page.
+    403 Error: Please login to comment on this page.
     `);
   }
 
   const comment = req.body['comment-text'];
   database.addComment(sessionID, resourceID, comment)
-  .then(() => res.redirect(`/collections/${resourceID}`));
+  .then(() => res.status(201).send());
+});
+
+
+// GET /collections/:id/comment
+router.get('/collections/:id/comment', function(req, res) {
+  const resourceID = req.params.id;
+
+  // Get all the comments.
+  database.getComments(resourceID)
+  .then(data => res.json(data));
+
 });
 
 module.exports = router;
