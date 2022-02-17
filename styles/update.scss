@@ -1,0 +1,34 @@
+.newContainer {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+.newContainer form {
+  width: 50vw;
+}
+
+
+body {
+  background-color: rgb(175, 175, 175) !important;
+  height: 80vh;
+}
+
+main {
+  border: 10px solid white;
+  background-color: white;
+  border-radius: 10px;
+  width: 60%;
+  margin: 100px auto 0 auto;
+
+}
+
+.bottomButtons {
+  display: flex;
+}
+
+#submit {
+  margin-right: 40px;
+}
