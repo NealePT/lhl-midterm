@@ -35,7 +35,8 @@ router.get('/users/:id', (req, res) => {
       resParams.user_id = resourceID;
       console.log("USERID:", resParams.user_id);
       resParams.resources = data;
-      console.log("resourceID", data);
+      const resources = resParams.resources;
+      database.shortenResourceText(resources, 90);
     })
     // .then(() => database.getAllResources(resourceID))
     // .then(data => {
@@ -48,6 +49,8 @@ router.get('/users/:id', (req, res) => {
     .then(data => {
       console.log("LIKED", data);
       resParams.likesResourceID = data;
+      const resources = resParams.likesResourceID;
+      database.shortenResourceText(resources, 90);
     })
 
     //pass our resParams data and render the user's index page
