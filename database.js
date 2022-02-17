@@ -277,7 +277,7 @@ const getRandomVideoResources = limit => {
     TO_CHAR(date_created, 'Mon dd, yyyy') AS public_date_created
   FROM resources
   JOIN users ON users.id = owner_id
-  WHERE category = 'video'
+  WHERE category = 'videos'
   ORDER BY RANDOM()
   LIMIT $1;
   `;
@@ -296,7 +296,7 @@ const getRandomBlogResources = limit => {
     TO_CHAR(date_created, 'Mon dd, yyyy') AS public_date_created
   FROM resources
   JOIN users ON users.id = owner_id
-  WHERE category = 'blog'
+  WHERE category = 'blogs'
   ORDER BY RANDOM()
   LIMIT $1;
   `;
@@ -315,7 +315,7 @@ const getRandomTutorialResources = limit => {
     TO_CHAR(date_created, 'Mon dd, yyyy') AS public_date_created
   FROM resources
   JOIN users ON users.id = owner_id
-  WHERE category = 'tutorial'
+  WHERE category = 'tutorials'
   ORDER BY RANDOM()
   LIMIT $1;
   `;
