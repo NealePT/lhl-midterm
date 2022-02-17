@@ -28,14 +28,14 @@ body {
 .card-deck {
   display: flex;
   flex-direction: row;
-  // align-items: center;
-  // justify-content: center;
+  align-items: center;
   justify-content: space-evenly;
 }
 
 .card {
   width: 350px;
-  max-height: 300px;
+  height: 100%;
+  margin: 10px 10px;
 }
 
 a:link {
