@@ -3,6 +3,3 @@ public/styles
 .env
 *.log
 *.sqlite3
-
-notes.md
-notes_jQuery.js
