@@ -128,6 +128,7 @@ header {
 }
 
 #comment-textbox {
+  // border: 1px solid red; // Remove test code.
   @include flex-column();
   justify-content: center;
 }
