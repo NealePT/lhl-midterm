@@ -246,7 +246,6 @@ router.post('/collections/:id/update', (req, res) => {
   });
 });
 
-// Possibly change to router.delete('/collections/:id/delete')?
 // POST /collections/:id/delete
 router.post('/collections/:id/delete', (req, res) => {
   const resourceID = req.params.id;
