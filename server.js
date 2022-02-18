@@ -44,7 +44,7 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require('./routes/users');
-const users2Routes = require('./routes/users2'); // TEMPORARY: Need to merge with './routes/users'.
+const usersRoutes2 = require('./routes/users2');
 const widgetsRoutes = require('./routes/widgets');
 const collectionsRoutes = require('./routes/collections');
 const searchRoutes = require('./routes/search');
@@ -83,7 +83,7 @@ app.get('/collections/random', collectionsRoutes);
 app.get('/collections/:id/update', collectionsRoutes);
 
 // 5. GET /users/:id
-app.get('/users/:id', users2Routes);
+app.get('/users/:id', usersRoutes2);
 
 // 6. GET /register
 app.get('/register', registerRoutes);

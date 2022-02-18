@@ -47,18 +47,14 @@ router.get('/collections', (req, res) => {
     // If there is a session cookie, pass the cookie and matching user name before rendering the page.
     if (!sessionID) {
       resParams.sessionID = null;
-
-      // REMINDER: Need to eventually replace with collections_index.
-      res.render('collections_index2', resParams);
+      res.render('collections_index', resParams);
     } else {
       database.getNameByUserID(sessionID)
       .then(data => {
         resParams.username = data.name;
         resParams.sessionID = sessionID;
       })
-
-      // REMINDER: Need to eventually replace with collections_index.
-      .then(() => res.render('collections_index2', resParams));
+      .then(() => res.render('collections_index', resParams));
     }
   })
 
@@ -151,12 +147,8 @@ router.get('/collections/:id', (req, res) => {
   .then(() => database.checkLike(resourcesID, sessionID))
   .then(data => data ? resParams.checkLike = true : resParams.checkLike = false)
 
-  // Get all the comments.
-  // .then(() => database.getComments(resourcesID))
-  // .then(data => resParams.comments = data)
-
   // Remove test code:
-  // .then(() => console.log('GET /collections/:id =', resParams))
+  .then(() => console.log('GET /collections/:id =', resParams))
 
   // Pass in the relevant data (resParams) and render the page.
   .then(() => {res.render('collections_show', resParams)});

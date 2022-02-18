@@ -34,7 +34,9 @@
       <header>
         <div id="publication-info">
           <div>
-            <span>Posted by <%= publisher %> | </span>
+            <span>
+              Posted by <a href="/users/<%= publisherID %>"><%= publisher %></a> |
+            </span>
             <span>
               <%= date_created %>
                 <%= date_modified ? ` (Edited: ${date_modified})`: '' %>

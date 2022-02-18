@@ -9,7 +9,7 @@ router.get('/search', (req, res) => {
   const resParams = {};
 
   if (!sessionID) {
-    res.render('defaultSearchPage', { sessionID: null });
+    res.render('search_index', { sessionID: null });
   } else {
     database.getNameByUserID(sessionID)
       .then(data => {
@@ -19,7 +19,7 @@ router.get('/search', (req, res) => {
 
     // REMINDER: Remove test code
       .then(() => console.log('GET /search =', resParams))
-      .then(() => res.render('defaultSearchPage', resParams));
+      .then(() => res.render('search_index', resParams));
   }
 });
 
@@ -29,8 +29,13 @@ router.get('/search/:id', (req, res) => {
   const searchPhrase = req.params.id;
   const sessionID = req.session.user_id;
   const resParams = {};
+
+  // Test code
+  // console.log('sessionID =', sessionID);
+
   if (!sessionID) {
-    res.render('temp_search', { sessionID: null });
+    res.render('search_show', { sessionID: null });
+
   } else {
     database.getNameByUserID(sessionID)
       .then(data => {
@@ -39,8 +44,10 @@ router.get('/search/:id', (req, res) => {
       })
       .then(() => database.getSearchResults(searchPhrase))
       .then(data => resParams.searchResults = data)
-    // REMINDER: Need to rename to search_show.
-      .then(() => res.render('temp_search', resParams));
+
+      .then(() => console.log('resParams =', resParams))
+
+      .then(() => res.render('search_show', resParams));
   }
 });
 
