@@ -6,22 +6,22 @@ Resource Haven allows learners to save learning resources (i.e. urls) like tutor
 
 ## Final Product
 
-!["Main page"](https://github.com/NealePT/lhl-midterm/blob/master/docs/main-page.png)
+!["Main page"]()
 
-!["Resource page"](https://github.com/NealePT/lhl-midterm/blob/master/docs/resource-page.png)
+!["Resource page"]()
 
-!["User profile page"](https://github.com/NealePT/lhl-midterm/blob/master/docs/user-profile-page.png)
+!["User profile page"]()
 
-!["Search results page"](https://github.com/NealePT/lhl-midterm/blob/master/docs/search-results-page.png)
+!["Search results page"]()
 
-!["Add new resource page"](https://github.com/NealePT/lhl-midterm/blob/master/docs/add-new-resource-page.png)
+!["Add new resource page"]()
 
 ## Getting Started
 
 1. Install all dependencies using the `npm install` command.
-2. Start the web server using the `npm start` command.
-3. Setup Local PG Database.
-4. Create all the table schemas (/db/schema) and add the seeds (/db/seeds).
+2. Setup Local PG Database.
+3. Create all the table schemas (/db/schema) and add the seeds (/db/seeds).
+4. Start the web server using the `npm start` command.
 5. Go to <http://localhost:8080/> in your browser.
 
 ## Dependencies
