@@ -1,6 +1,6 @@
 # Midterm Project - Resource Wall (a.k.a Resource Haven)
 
-Created By Neale Taylor, Vivian Zhang, John Ngai
+Created By Neale Taylor, Vivian Zhang, John Ming Ngai
 
 Resource Haven allows learners to save learning resources (i.e. urls) like tutorials, blogs and videos in a central place that is publicly available to any user.
 
