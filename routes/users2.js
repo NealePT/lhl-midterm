@@ -20,7 +20,14 @@ router.get('/users/:id', (req, res) => {
         const resources = resParams.resources;
         database.shortenResourceText(resources, 90);
       })
+
       .then(() => database.getNameByUserID(userID))
+      .then(data => {
+        resParams.userProfileName = data.name;
+        resParams.sessionID = sessionID;
+      })
+
+      .then(() => database.getNameByUserID(sessionID))
       .then(data => {
         resParams.username = data.name;
         resParams.sessionID = sessionID;
