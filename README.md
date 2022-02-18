@@ -6,15 +6,15 @@ Resource Haven allows learners to save learning resources (i.e. urls) like tutor
 
 ## Final Product
 
-!["Main page"]()
+!["Main page"](https://github.com/NealePT/lhl-midterm/blob/master/docs/main-page.png)
 
-!["Resource page"]()
+!["Resource page"](https://github.com/NealePT/lhl-midterm/blob/master/docs/resource-page.png)
 
-!["User profile page"]()
+!["User profile page"](https://github.com/NealePT/lhl-midterm/blob/master/docs/user-profile-page.png)
 
-!["Search results page"]()
+!["Search results page"](https://github.com/NealePT/lhl-midterm/blob/master/docs/search-results-page.png)
 
-!["Add new resource page"]()
+!["Add new resource page"](https://github.com/NealePT/lhl-midterm/blob/master/docs/add-new-resource-page.png)
 
 ## Getting Started
 
